@@ -51,15 +51,15 @@ namespace _2Y_2324_MidtermProject
     partial void InsertStaffStatus(StaffStatus instance);
     partial void UpdateStaffStatus(StaffStatus instance);
     partial void DeleteStaffStatus(StaffStatus instance);
-    partial void InsertSupply(Supply instance);
-    partial void UpdateSupply(Supply instance);
-    partial void DeleteSupply(Supply instance);
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
     partial void InsertPet(Pet instance);
     partial void UpdatePet(Pet instance);
     partial void DeletePet(Pet instance);
+    partial void InsertSupply(Supply instance);
+    partial void UpdateSupply(Supply instance);
+    partial void DeleteSupply(Supply instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -148,14 +148,6 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		public System.Data.Linq.Table<Supply> Supplies
-		{
-			get
-			{
-				return this.GetTable<Supply>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Order> Orders
 		{
 			get
@@ -169,6 +161,14 @@ namespace _2Y_2324_MidtermProject
 			get
 			{
 				return this.GetTable<Pet>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Supply> Supplies
+		{
+			get
+			{
+				return this.GetTable<Supply>();
 			}
 		}
 	}
@@ -500,9 +500,9 @@ namespace _2Y_2324_MidtermProject
 		
 		private string _Avail_Desc;
 		
-		private EntitySet<Supply> _Supplies;
-		
 		private EntitySet<Pet> _Pets;
+		
+		private EntitySet<Supply> _Supplies;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -516,8 +516,8 @@ namespace _2Y_2324_MidtermProject
 		
 		public Avail()
 		{
-			this._Supplies = new EntitySet<Supply>(new Action<Supply>(this.attach_Supplies), new Action<Supply>(this.detach_Supplies));
 			this._Pets = new EntitySet<Pet>(new Action<Pet>(this.attach_Pets), new Action<Pet>(this.detach_Pets));
+			this._Supplies = new EntitySet<Supply>(new Action<Supply>(this.attach_Supplies), new Action<Supply>(this.detach_Supplies));
 			OnCreated();
 		}
 		
@@ -561,19 +561,6 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avail_Supply", Storage="_Supplies", ThisKey="Avail_ID", OtherKey="Avail_ID")]
-		public EntitySet<Supply> Supplies
-		{
-			get
-			{
-				return this._Supplies;
-			}
-			set
-			{
-				this._Supplies.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avail_Pet", Storage="_Pets", ThisKey="Avail_ID", OtherKey="Avail_ID")]
 		public EntitySet<Pet> Pets
 		{
@@ -584,6 +571,19 @@ namespace _2Y_2324_MidtermProject
 			set
 			{
 				this._Pets.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avail_Supply", Storage="_Supplies", ThisKey="Avail_ID", OtherKey="Avail_ID")]
+		public EntitySet<Supply> Supplies
+		{
+			get
+			{
+				return this._Supplies;
+			}
+			set
+			{
+				this._Supplies.Assign(value);
 			}
 		}
 		
@@ -607,18 +607,6 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		private void attach_Supplies(Supply entity)
-		{
-			this.SendPropertyChanging();
-			entity.Avail = this;
-		}
-		
-		private void detach_Supplies(Supply entity)
-		{
-			this.SendPropertyChanging();
-			entity.Avail = null;
-		}
-		
 		private void attach_Pets(Pet entity)
 		{
 			this.SendPropertyChanging();
@@ -626,6 +614,18 @@ namespace _2Y_2324_MidtermProject
 		}
 		
 		private void detach_Pets(Pet entity)
+		{
+			this.SendPropertyChanging();
+			entity.Avail = null;
+		}
+		
+		private void attach_Supplies(Supply entity)
+		{
+			this.SendPropertyChanging();
+			entity.Avail = this;
+		}
+		
+		private void detach_Supplies(Supply entity)
 		{
 			this.SendPropertyChanging();
 			entity.Avail = null;
@@ -1496,233 +1496,6 @@ namespace _2Y_2324_MidtermProject
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Supplies")]
-	public partial class Supply : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Supply_ID;
-		
-		private string _Avail_ID;
-		
-		private string _Supply_Type;
-		
-		private string _Supply_Name;
-		
-		private int _Supply_Quantity;
-		
-		private EntitySet<Order> _Orders;
-		
-		private EntityRef<Avail> _Avail;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnSupply_IDChanging(string value);
-    partial void OnSupply_IDChanged();
-    partial void OnAvail_IDChanging(string value);
-    partial void OnAvail_IDChanged();
-    partial void OnSupply_TypeChanging(string value);
-    partial void OnSupply_TypeChanged();
-    partial void OnSupply_NameChanging(string value);
-    partial void OnSupply_NameChanged();
-    partial void OnSupply_QuantityChanging(int value);
-    partial void OnSupply_QuantityChanged();
-    #endregion
-		
-		public Supply()
-		{
-			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
-			this._Avail = default(EntityRef<Avail>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Supply_ID
-		{
-			get
-			{
-				return this._Supply_ID;
-			}
-			set
-			{
-				if ((this._Supply_ID != value))
-				{
-					this.OnSupply_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Supply_ID = value;
-					this.SendPropertyChanged("Supply_ID");
-					this.OnSupply_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avail_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Avail_ID
-		{
-			get
-			{
-				return this._Avail_ID;
-			}
-			set
-			{
-				if ((this._Avail_ID != value))
-				{
-					if (this._Avail.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAvail_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Avail_ID = value;
-					this.SendPropertyChanged("Avail_ID");
-					this.OnAvail_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_Type", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Supply_Type
-		{
-			get
-			{
-				return this._Supply_Type;
-			}
-			set
-			{
-				if ((this._Supply_Type != value))
-				{
-					this.OnSupply_TypeChanging(value);
-					this.SendPropertyChanging();
-					this._Supply_Type = value;
-					this.SendPropertyChanged("Supply_Type");
-					this.OnSupply_TypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Supply_Name
-		{
-			get
-			{
-				return this._Supply_Name;
-			}
-			set
-			{
-				if ((this._Supply_Name != value))
-				{
-					this.OnSupply_NameChanging(value);
-					this.SendPropertyChanging();
-					this._Supply_Name = value;
-					this.SendPropertyChanged("Supply_Name");
-					this.OnSupply_NameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_Quantity", DbType="Int NOT NULL")]
-		public int Supply_Quantity
-		{
-			get
-			{
-				return this._Supply_Quantity;
-			}
-			set
-			{
-				if ((this._Supply_Quantity != value))
-				{
-					this.OnSupply_QuantityChanging(value);
-					this.SendPropertyChanging();
-					this._Supply_Quantity = value;
-					this.SendPropertyChanged("Supply_Quantity");
-					this.OnSupply_QuantityChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Orders", ThisKey="Supply_ID", OtherKey="Supply_ID")]
-		public EntitySet<Order> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avail_Supply", Storage="_Avail", ThisKey="Avail_ID", OtherKey="Avail_ID", IsForeignKey=true)]
-		public Avail Avail
-		{
-			get
-			{
-				return this._Avail.Entity;
-			}
-			set
-			{
-				Avail previousValue = this._Avail.Entity;
-				if (((previousValue != value) 
-							|| (this._Avail.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Avail.Entity = null;
-						previousValue.Supplies.Remove(this);
-					}
-					this._Avail.Entity = value;
-					if ((value != null))
-					{
-						value.Supplies.Add(this);
-						this._Avail_ID = value.Avail_ID;
-					}
-					else
-					{
-						this._Avail_ID = default(string);
-					}
-					this.SendPropertyChanged("Avail");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supply = this;
-		}
-		
-		private void detach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Supply = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
 	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1745,9 +1518,9 @@ namespace _2Y_2324_MidtermProject
 		
 		private EntityRef<Staff> _Staff;
 		
-		private EntityRef<Supply> _Supply;
-		
 		private EntityRef<Pet> _Pet;
+		
+		private EntityRef<Supply> _Supply;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1771,8 +1544,8 @@ namespace _2Y_2324_MidtermProject
 		{
 			this._Customer = default(EntityRef<Customer>);
 			this._Staff = default(EntityRef<Staff>);
-			this._Supply = default(EntityRef<Supply>);
 			this._Pet = default(EntityRef<Pet>);
+			this._Supply = default(EntityRef<Supply>);
 			OnCreated();
 		}
 		
@@ -1980,40 +1753,6 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Supply", ThisKey="Supply_ID", OtherKey="Supply_ID", IsForeignKey=true)]
-		public Supply Supply
-		{
-			get
-			{
-				return this._Supply.Entity;
-			}
-			set
-			{
-				Supply previousValue = this._Supply.Entity;
-				if (((previousValue != value) 
-							|| (this._Supply.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Supply.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Supply.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Supply_ID = value.Supply_ID;
-					}
-					else
-					{
-						this._Supply_ID = default(string);
-					}
-					this.SendPropertyChanged("Supply");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Pet", ThisKey="Pet_ID", OtherKey="Pet_ID", IsForeignKey=true)]
 		public Pet Pet
 		{
@@ -2044,6 +1783,40 @@ namespace _2Y_2324_MidtermProject
 						this._Pet_ID = default(string);
 					}
 					this.SendPropertyChanged("Pet");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Supply", ThisKey="Supply_ID", OtherKey="Supply_ID", IsForeignKey=true)]
+		public Supply Supply
+		{
+			get
+			{
+				return this._Supply.Entity;
+			}
+			set
+			{
+				Supply previousValue = this._Supply.Entity;
+				if (((previousValue != value) 
+							|| (this._Supply.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Supply.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Supply.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Supply_ID = value.Supply_ID;
+					}
+					else
+					{
+						this._Supply_ID = default(string);
+					}
+					this.SendPropertyChanged("Supply");
 				}
 			}
 		}
@@ -2365,6 +2138,233 @@ namespace _2Y_2324_MidtermProject
 		{
 			this.SendPropertyChanging();
 			entity.Pet = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Supplies")]
+	public partial class Supply : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Supply_ID;
+		
+		private string _Avail_ID;
+		
+		private string _Supply_Type;
+		
+		private string _Supply_Name;
+		
+		private int _Supply_Quantity;
+		
+		private EntitySet<Order> _Orders;
+		
+		private EntityRef<Avail> _Avail;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSupply_IDChanging(string value);
+    partial void OnSupply_IDChanged();
+    partial void OnAvail_IDChanging(string value);
+    partial void OnAvail_IDChanged();
+    partial void OnSupply_TypeChanging(string value);
+    partial void OnSupply_TypeChanged();
+    partial void OnSupply_NameChanging(string value);
+    partial void OnSupply_NameChanged();
+    partial void OnSupply_QuantityChanging(int value);
+    partial void OnSupply_QuantityChanged();
+    #endregion
+		
+		public Supply()
+		{
+			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
+			this._Avail = default(EntityRef<Avail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Supply_ID
+		{
+			get
+			{
+				return this._Supply_ID;
+			}
+			set
+			{
+				if ((this._Supply_ID != value))
+				{
+					this.OnSupply_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Supply_ID = value;
+					this.SendPropertyChanged("Supply_ID");
+					this.OnSupply_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avail_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Avail_ID
+		{
+			get
+			{
+				return this._Avail_ID;
+			}
+			set
+			{
+				if ((this._Avail_ID != value))
+				{
+					if (this._Avail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAvail_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Avail_ID = value;
+					this.SendPropertyChanged("Avail_ID");
+					this.OnAvail_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_Type", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Supply_Type
+		{
+			get
+			{
+				return this._Supply_Type;
+			}
+			set
+			{
+				if ((this._Supply_Type != value))
+				{
+					this.OnSupply_TypeChanging(value);
+					this.SendPropertyChanging();
+					this._Supply_Type = value;
+					this.SendPropertyChanged("Supply_Type");
+					this.OnSupply_TypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Supply_Name
+		{
+			get
+			{
+				return this._Supply_Name;
+			}
+			set
+			{
+				if ((this._Supply_Name != value))
+				{
+					this.OnSupply_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Supply_Name = value;
+					this.SendPropertyChanged("Supply_Name");
+					this.OnSupply_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_Quantity", DbType="Int NOT NULL")]
+		public int Supply_Quantity
+		{
+			get
+			{
+				return this._Supply_Quantity;
+			}
+			set
+			{
+				if ((this._Supply_Quantity != value))
+				{
+					this.OnSupply_QuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Supply_Quantity = value;
+					this.SendPropertyChanged("Supply_Quantity");
+					this.OnSupply_QuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Orders", ThisKey="Supply_ID", OtherKey="Supply_ID")]
+		public EntitySet<Order> Orders
+		{
+			get
+			{
+				return this._Orders;
+			}
+			set
+			{
+				this._Orders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avail_Supply", Storage="_Avail", ThisKey="Avail_ID", OtherKey="Avail_ID", IsForeignKey=true)]
+		public Avail Avail
+		{
+			get
+			{
+				return this._Avail.Entity;
+			}
+			set
+			{
+				Avail previousValue = this._Avail.Entity;
+				if (((previousValue != value) 
+							|| (this._Avail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Avail.Entity = null;
+						previousValue.Supplies.Remove(this);
+					}
+					this._Avail.Entity = value;
+					if ((value != null))
+					{
+						value.Supplies.Add(this);
+						this._Avail_ID = value.Avail_ID;
+					}
+					else
+					{
+						this._Avail_ID = default(string);
+					}
+					this.SendPropertyChanged("Avail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supply = this;
+		}
+		
+		private void detach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Supply = null;
 		}
 	}
 }

@@ -56,10 +56,12 @@
             <ImageBrush ImageSource="/Images/bg.png"/>
         </Grid.Background>
         
-        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="visible">
+        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="Collapsed">
             <Image Source="/Images/Animalexpress Logo.png" Margin="0" Width="385" Height="224"/>
-            <TextBox x:Name="txtUser" Text="Username" Margin="0 5 0 0" Style="{StaticResource TxtBoxStyle}"/>
-            <TextBox x:Name="txtPass" Text="Password" Margin="0 10 0 0" Style="{StaticResource TxtBoxStyle}"/>
+            <TextBlock Text="Username" FontSize="15" Margin="0 -15 115 -5" Width="77" HorizontalAlignment="Center" FontFamily="verdana" />
+            <TextBox x:Name="txtUser" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontFamily="verdana" FontSize="13" Margin="0 5 0 0" Style="{StaticResource TxtBoxStyle}"/>
+            <TextBlock Text="Password" FontSize="15" Margin="0 5 115 -10" Width="77" HorizontalAlignment="Center" FontFamily="verdana" />
+            <TextBox x:Name="txtPass" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontFamily="verdana" FontSize="13"  Margin="0 10 0 0" Style="{StaticResource TxtBoxStyle}"/>
             <Button x:Name="btnLogin" Content="Login" Margin="0 20 0 0" Style="{StaticResource BtnStyle}" Click="btnLogin_Click"/>
         </StackPanel>
 
@@ -71,38 +73,58 @@
                 <Button x:Name="btnLogout" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFA7171" Content="Logout" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
             </StackPanel>
             <StackPanel Margin="50 10 50 10" Orientation="Horizontal">
-                <Button Margin="55 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}">
+                <Button x:Name="btnPuppy" Margin="55 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnPuppy_Click" >
                     <Image Source="/Images/Dog.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
-                <Button  Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" >
+                <Button x:Name="btnDog" Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnDog_Click" >
                     <Image Source="/Images/DogAdult.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
-                <Button  Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" >
+                <Button x:Name="btnDogSupply" Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnDogSupply_Click" >
                     <Image Source="/Images/DogFood.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
             </StackPanel>
             
             <StackPanel Margin="50 10 50 10" Orientation="Horizontal">
-                <Button  Margin="55 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" >
+                <Button x:Name="btnKitten" Margin="55 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnKitten_Click" >
                     <Image Source="/Images/Kitten.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
-                <Button  Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}">
+                <Button x:Name="btnCat" Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnCat_Click">
                     <Image Source="/Images/Cat.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
-                <Button  Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}">
+                <Button x:Name="btnCatSupply" Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnCatSupply_Click">
                     <Image Source="/Images/CatFood.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
             </StackPanel>
         </StackPanel>
 
 
-        <StackPanel x:Name="List" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlInventory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Inventory" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
-                <Button Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}"/>
+                <Button x:Name="btnBack" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack_Click"/>
             </StackPanel>
+            <ListView x:Name="lvPets" Margin="0,0,0,0" Width="406" Height="310" Visibility="Visible" MouseDoubleClick="lvPets_MouseDoubleClick" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
+                        <GridViewColumn Header="Age" Width="100" DisplayMemberBinding="{Binding Column2}" />
+                        <GridViewColumn Header="Breed" Width="100" DisplayMemberBinding="{Binding Column3}" />
+                        <GridViewColumn Header="Gender" Width="100" DisplayMemberBinding="{Binding Column4}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <ListView x:Name="lvSupplies" Margin="0,0,0,0" Width="304" Height="310" Visibility="Collapsed" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
+                        <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Column2}" />
+                        <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Column3}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
+        
 
         <StackPanel x:Name="Information" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
