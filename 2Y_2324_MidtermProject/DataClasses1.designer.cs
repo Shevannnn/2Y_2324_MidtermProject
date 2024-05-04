@@ -33,6 +33,9 @@ namespace _2Y_2324_MidtermProject
     partial void InsertPet(Pet instance);
     partial void UpdatePet(Pet instance);
     partial void DeletePet(Pet instance);
+    partial void InsertLogin(Login instance);
+    partial void UpdateLogin(Login instance);
+    partial void DeleteLogin(Login instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -70,6 +73,14 @@ namespace _2Y_2324_MidtermProject
 			get
 			{
 				return this.GetTable<Pet>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Login> Logins
+		{
+			get
+			{
+				return this.GetTable<Login>();
 			}
 		}
 	}
@@ -255,6 +266,116 @@ namespace _2Y_2324_MidtermProject
 					this._Pet_Gender = value;
 					this.SendPropertyChanged("Pet_Gender");
 					this.OnPet_GenderChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Login")]
+	public partial class Login : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Login_ID;
+		
+		private string _Login_Name;
+		
+		private string _Login_Pass;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLogin_IDChanging(string value);
+    partial void OnLogin_IDChanged();
+    partial void OnLogin_NameChanging(string value);
+    partial void OnLogin_NameChanged();
+    partial void OnLogin_PassChanging(string value);
+    partial void OnLogin_PassChanged();
+    #endregion
+		
+		public Login()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Login_ID
+		{
+			get
+			{
+				return this._Login_ID;
+			}
+			set
+			{
+				if ((this._Login_ID != value))
+				{
+					this.OnLogin_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Login_ID = value;
+					this.SendPropertyChanged("Login_ID");
+					this.OnLogin_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Login_Name
+		{
+			get
+			{
+				return this._Login_Name;
+			}
+			set
+			{
+				if ((this._Login_Name != value))
+				{
+					this.OnLogin_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Login_Name = value;
+					this.SendPropertyChanged("Login_Name");
+					this.OnLogin_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_Pass", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Login_Pass
+		{
+			get
+			{
+				return this._Login_Pass;
+			}
+			set
+			{
+				if ((this._Login_Pass != value))
+				{
+					this.OnLogin_PassChanging(value);
+					this.SendPropertyChanging();
+					this._Login_Pass = value;
+					this.SendPropertyChanged("Login_Pass");
+					this.OnLogin_PassChanged();
 				}
 			}
 		}
