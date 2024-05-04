@@ -47,12 +47,10 @@ namespace _2Y_2324_MidtermProject
                         {
                             string messageString = $"Login complete.";
                             messageString += $" Welcome {s.Login_Name}!";
-                            //if (s.LoginDate == null)
-
-                            //else
-                            //    messageString += $" Welcome back {s.LoginName}! Havent seen you since {s.LoginDate}";
 
                             MessageBox.Show(messageString);
+                            //Log tlog = new Log();
+                            //tlog.
                             //s.LoginDate = DateTime.Now;
 
                             //tblLog tlog = new tblLog();
