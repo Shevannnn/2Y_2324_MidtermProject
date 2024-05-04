@@ -180,10 +180,13 @@ namespace _2Y_2324_MidtermProject
             if (lvPets.SelectedItem != null)
             {
                 dynamic selectedItem = lvPets.SelectedItem;
-                string column1Value = selectedItem.Column1;
-                // Retrieve other column values similarly
+                string name = selectedItem.Column1;
 
-                MessageBox.Show($"You double-clicked on: {column1Value}");
+                IQueryable<Pet> selectResults = from s in _dbConn.Pets
+                                                   where s.Pet_Name == name
+                                                   select s;
+
+                MessageBox.Show($"You double-clicked on: {name}");
             }
         }
     }
