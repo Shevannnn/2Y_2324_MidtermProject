@@ -66,11 +66,12 @@
         </StackPanel>
 
 
-        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
-                <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Categories" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
-                <Button x:Name="btnLogout" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFA7171" Content="Logout" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
+                <TextBlock Margin="0 20 115 0" Width="110" Height="30" Text="Categories" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
+                <Button x:Name="btnCustomer" Margin="0 -2 0 0" Width="70" Height="25" Background="#FF80DFFF" Content="Customer" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
+                <Button x:Name="btnLogout" Margin="5 -2 0 0" Width="70" Height="25" Background="#FFFA7171" Content="Logout" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
             </StackPanel>
             <StackPanel Margin="50 10 50 10" Orientation="Horizontal">
                 <Button x:Name="btnPuppy" Margin="55 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnPuppy_Click" >
@@ -96,7 +97,6 @@
                 </Button>
             </StackPanel>
         </StackPanel>
-
 
         <StackPanel x:Name="pnlInventory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
@@ -125,18 +125,63 @@
             </ListView>
         </StackPanel>
         
-
-        <StackPanel x:Name="Information" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
+        <StackPanel x:Name="pnlPetInfo" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Profile" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
+                <Button x:Name="btnBack2Cat" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}"  />
+            </StackPanel>
+            
+            <StackPanel Margin="0 40 0 0" Orientation="Horizontal" >
+                <Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>
+                <StackPanel Margin= "50 0 0 0"  Orientation="Vertical" >
+                    <TextBlock Margin="0 -10 0 0" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="#FFD2EBFF"  />
+                    <TextBox x:Name="txtPetName" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20"  />
+                    <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                        <TextBlock Margin="34 0 0 0" HorizontalAlignment="Center" Text="Type" FontFamily="verdana" Background="#FFD2EBFF"  />
+                        <TextBlock Margin="79 0 0 0" HorizontalAlignment="Center" Text="Age" FontFamily="verdana" Background="#FFD2EBFF"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cbPetType" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  >
+                            <ComboBoxItem Content="Dog"/>
+                            <ComboBoxItem Content="Cat"/>
+                        </ComboBox>
+                        <TextBox x:Name="txtPetAge" Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
+                    </StackPanel>
+                    <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Breed" FontFamily="verdana" Background="#FFD2EBFF"  />
+                    <ComboBox x:Name="cbPetBreed" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20">
+                        <ComboBoxItem Content="Labrador"/>
+                        <ComboBoxItem Content="Shih Tzu"/>
+                        <ComboBoxItem Content="Siamese"/>
+                        <ComboBoxItem Content="Persian"/>
+                    </ComboBox>
+                    <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
+                        <TextBlock Margin="27 0 0 0" HorizontalAlignment="Center" Text="Gender" FontFamily="verdana" Background="#FFD2EBFF"  />
+                        <TextBlock Margin="44 0 0 0" HorizontalAlignment="Center" Text="Date of Birth" FontFamily="verdana" Background="#FFD2EBFF"  />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="cbPetSex" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20" >
+                            <ComboBoxItem Content="Male"/>
+                            <ComboBoxItem Content="Female"/>
+                        </ComboBox>
+                        <TextBox x:Name="txtPetDob" Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
+                    </StackPanel>
+                    <Button Margin="0 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+<!--asd-->
+        <StackPanel x:Name="pnlCustomer" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 150 0" Width="100" Height="43"/>
+                <TextBlock Margin="0 20 130 0" Width="225" Height="30" Text="Customer Information" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
                 <Button Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}" 
-                        BorderBrush="{TemplateBinding BorderBrush}" 
-                        BorderThickness="{TemplateBinding BorderThickness}" 
-                        CornerRadius="10">
+                         BorderBrush="{TemplateBinding BorderBrush}" 
+                         BorderThickness="{TemplateBinding BorderThickness}" 
+                         CornerRadius="10">
                                 <!-- Adjust the CornerRadius as needed -->
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
@@ -144,42 +189,62 @@
                     </Button.Template>
                 </Button>
             </StackPanel>
-
-            <StackPanel Margin="0 40 0 0" Orientation="Horizontal" >
-                <Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>
-                <StackPanel Margin= "50 0 0 0"  Orientation="Vertical" >
-                    <TextBlock Margin="0 -10 0 0" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="#FFD2EBFF"  />
-                    <TextBox Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20"  />
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Margin="120 40 0 0" Orientation="Vertical">
+                    <TextBlock Margin="0 -10 0 0" FontSize="15" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="Transparent"  />
+                    <TextBox Margin="0 0 0 0" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
-                        <TextBlock Margin="34 0 0 0" HorizontalAlignment="Center" Text="Type" FontFamily="verdana" Background="#FFD2EBFF"  />
-                        <TextBlock Margin="79 0 0 0" HorizontalAlignment="Center" Text="Age" FontFamily="verdana" Background="#FFD2EBFF"  />
+                        <TextBlock Margin="20 0 0 0" FontSize="15" HorizontalAlignment="Center" Text="Gender" FontFamily="verdana" Background="Transparent"  />
+                        <TextBlock Margin="63 0 0 0" FontSize="15" HorizontalAlignment="Center" Text="Age" FontFamily="verdana" Background="Transparent"  />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
-                        <TextBox Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
+                        <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="94" Height="20"  />
+                        <TextBox Margin="12 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="94" Height="20"  />
                     </StackPanel>
-                    <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Breed" FontFamily="verdana" Background="#FFD2EBFF"  />
-                    <TextBox Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20"  />
-                    <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
-                        <TextBlock Margin="27 0 0 0" HorizontalAlignment="Center" Text="Gender" FontFamily="verdana" Background="#FFD2EBFF"  />
-                        <TextBlock Margin="44 0 0 0" HorizontalAlignment="Center" Text="Date of Birth" FontFamily="verdana" Background="#FFD2EBFF"  />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
-                        <TextBox Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
-                    </StackPanel>
+                    <TextBlock Margin="0 5 0 0" FontSize="15" HorizontalAlignment="Center" Text="Contact Number" FontFamily="verdana" Background="Transparent"  />
+                    <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
+                    <TextBlock Margin="0 5 0 0" FontSize="15" HorizontalAlignment="Center" Text="Email Address" FontFamily="verdana" Background="Transparent"  />
+                    <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"/>
+                    <Button Margin="0 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
 
-                    <StackPanel Margin="0 15 0 0" Orientation="Horizontal">
-                        <Button Margin="13 0 0 0" Content="Edit" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25"  >
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                        <Button Margin="35 0 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25"  >
+                <StackPanel Orientation="Vertical">
+                    <ListView Name="Purchases" Margin="40,30,0,0" Width="205" Height="150" Visibility="Visible" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Purchases" Width="200" DisplayMemberBinding="{Binding Column1}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <StackPanel>
+                        <TextBlock Text="Category" FontFamily="verdana" Margin="115 7 0 0"  />
+                        <ComboBox Margin="42 3 0 0" Width="150" >
+                        </ComboBox>
+                        <StackPanel x:Name="petType" Visibility="Collapsed">
+                            <TextBlock Margin="130 3 0 0" Text="Type" />
+                            <ComboBox Margin="42 3 0 0" Width="150" >
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel x:Name="supplyType" Orientation="Vertical" Visibility="Collapsed" >
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Text="Type" Margin="83 3 0 0"/>
+                                <TextBlock Text="Qty"  Margin="69 3 0 0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"  >
+                                <ComboBox Margin="56 3 0 0" Width="80"  >
+                                </ComboBox>
+                                <TextBox Margin="12 3 0 0" FontFamily="verdana" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" />
+                            </StackPanel>
+                        </StackPanel>
+                        <Button x:Name="purchase" Margin="43 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Visibility="Collapsed" >
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
@@ -190,13 +255,8 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-
-
             </StackPanel>
-
         </StackPanel>
-
-
 
     </Grid>
 </Window>

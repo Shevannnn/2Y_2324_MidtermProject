@@ -186,8 +186,54 @@ namespace _2Y_2324_MidtermProject
                                                    where s.Pet_Name == name
                                                    select s;
 
-                MessageBox.Show($"You double-clicked on: {name}");
+                pnlInventory.Visibility = Visibility.Collapsed;
+                lvPets.Visibility = Visibility.Collapsed;
+                pnlPetInfo.Visibility = Visibility.Visible;
+
+                foreach (Pet p in selectResults)
+                {
+                    txtPetName.Text = p.Pet_Name;
+                    txtPetAge.Text = p.Pet_Age.ToString();
+                    txtPetDob.Text = p.Pet_DOB.ToString();
+
+                    switch(p.Pet_Type)
+                    {
+                        case "Dog":
+                            cbPetType.SelectedIndex = 0;
+                            break;
+                        case "Cat":
+                            cbPetType.SelectedIndex = 1;
+                            break;
+                    }
+
+                    switch(p.Pet_Breed)
+                    {
+                        case "Labrador":
+                            cbPetBreed.SelectedIndex = 0;
+                            break;
+                        case "Shih Tzu":
+                            cbPetBreed.SelectedIndex = 1;
+                            break;
+                        case "Siamese":
+                            cbPetBreed.SelectedIndex = 2;
+                            break;
+                        case "Persian":
+                            cbPetBreed.SelectedIndex = 3;
+                            break;
+                    }
+
+                    switch(p.Pet_Gender)
+                    {
+                        case "Male":
+                            cbPetSex.SelectedIndex = 0;
+                            break;
+                        case "Female":
+                            cbPetSex.SelectedIndex = 1;
+                            break;
+                    }
+                }
             }
         }
+
     }
 }
