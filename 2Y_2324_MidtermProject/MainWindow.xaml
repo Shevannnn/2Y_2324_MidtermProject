@@ -34,7 +34,8 @@
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Background" Value="#FF80DFFF"/>
-        <Setter Property="Template">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border Background="{TemplateBinding Background}"
@@ -55,7 +56,7 @@
             <ImageBrush ImageSource="/Images/bg.png"/>
         </Grid.Background>
         
-        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="Visible">
+        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="visible">
             <Image Source="/Images/Animalexpress Logo.png" Margin="0" Width="385" Height="224"/>
             <TextBox x:Name="txtUser" Text="Username" Margin="0 5 0 0" Style="{StaticResource TxtBoxStyle}"/>
             <TextBox x:Name="txtPass" Text="Password" Margin="0 10 0 0" Style="{StaticResource TxtBoxStyle}"/>
@@ -99,19 +100,7 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Inventory" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
-                <Button Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="10">
-                                <!-- Adjust the CornerRadius as needed -->
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                <Button Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}"/>
             </StackPanel>
         </StackPanel>
 
