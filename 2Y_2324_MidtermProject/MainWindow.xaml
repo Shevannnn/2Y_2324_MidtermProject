@@ -9,7 +9,7 @@
     
     <Window.Resources>
         <Style x:Key="TxtBoxStyle" TargetType="TextBox">
-            <Setter Property="Width" Value="200"/>
+            <Setter Property="Width" Value="201"/>
             <Setter Property="Height" Value="30"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="BorderThickness" Value="2"/>
