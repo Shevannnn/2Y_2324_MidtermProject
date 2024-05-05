@@ -37,8 +37,8 @@ namespace _2Y_2324_MidtermProject
             if (txtUser.Text.Length > 0 && txtPass.Text.Length > 0)
             {
                 IQueryable<Login> selectResults = from s in _dbConn.Logins
-                                                     where s.Login_ID == txtUser.Text
-                                                     select s;
+                                                  where s.Login_ID == txtUser.Text
+                                                  select s;
 
                 if (selectResults.Count() == 1)
                 {
@@ -75,6 +75,7 @@ namespace _2Y_2324_MidtermProject
                 txtPass.Text = null;
                 txtUser.Text = null;
             }
+
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -186,8 +187,8 @@ namespace _2Y_2324_MidtermProject
                 string name = selectedItem.Column1;
 
                 IQueryable<Pet> selectResults = from s in _dbConn.Pets
-                                                   where s.Pet_Name == name
-                                                   select s;
+                                                where s.Pet_Name == name
+                                                select s;
 
                 pnlInventory.Visibility = Visibility.Collapsed;
                 lvPets.Visibility = Visibility.Collapsed;
@@ -200,7 +201,7 @@ namespace _2Y_2324_MidtermProject
                     txtPetAge.Text = p.Pet_Age.ToString();
                     txtPetDob.Text = p.Pet_DOB.ToString();
 
-                    switch(p.Pet_Type)
+                    switch (p.Pet_Type)
                     {
                         case "Dog":
                             cbPetType.SelectedIndex = 0;
@@ -210,7 +211,7 @@ namespace _2Y_2324_MidtermProject
                             break;
                     }
 
-                    switch(p.Pet_Breed)
+                    switch (p.Pet_Breed)
                     {
                         case "Labrador":
                             cbPetBreed.SelectedIndex = 0;
@@ -226,7 +227,7 @@ namespace _2Y_2324_MidtermProject
                             break;
                     }
 
-                    switch(p.Pet_Gender)
+                    switch (p.Pet_Gender)
                     {
                         case "Male":
                             cbPetSex.SelectedIndex = 0;
@@ -249,8 +250,8 @@ namespace _2Y_2324_MidtermProject
                 string name = selectedItem.Column1;
 
                 IQueryable<Supply> selectResults = from s in _dbConn.Supplies
-                                                where s.Supply_Name == name
-                                                select s;
+                                                   where s.Supply_Name == name
+                                                   select s;
 
                 pnlInventory.Visibility = Visibility.Collapsed;
                 lvSupplies.Visibility = Visibility.Collapsed;
@@ -291,6 +292,107 @@ namespace _2Y_2324_MidtermProject
                     lvSupplies.Visibility = Visibility.Visible;
                     break;
             }
+        }
+
+        private int GetNum(TextBox txtbox)
+        {
+            bool isNum = false;
+            string uInput = "";
+            int num = 0;
+
+            uInput = txtbox.Text;
+            isNum = int.TryParse(uInput, out num);
+
+            if (!isNum)
+            {
+                MessageBox.Show($"{txtbox.Text} is not a number. Please try again.");
+                return -1;
+            }
+
+            return num;
+        }
+
+        private string GetPetID()
+        {
+            var highestPet = _dbConn.Pets.OrderByDescending(p => p.Pet_ID).FirstOrDefault();
+
+            return highestPet.Pet_ID;
+        }
+
+        private string GeneratePetID(string highestPetId)
+        {
+            int num = int.Parse(highestPetId.Substring(3)); 
+            num++; 
+            return "PET" + num.ToString("D3");
+        }
+
+        private void btnPetAdd_Click(object sender, RoutedEventArgs e)
+        {
+            pnlInformation.Visibility = Visibility.Visible;
+            pnlPetInfo.Visibility = Visibility.Visible;
+            pnlInventory.Visibility = Visibility.Collapsed;
+
+
+        }
+
+        private void btnNewPet_Click(object sender, RoutedEventArgs e)
+        {
+
+            Pet npet = new Pet();
+            npet.Pet_ID = GeneratePetID(GetPetID());
+            npet.Avail_ID = "AVL001";
+            npet.Pet_Name = txtPetName.Text;
+            npet.Pet_Age = GetNum(txtPetAge);
+            npet.Pet_DOB = txtPetDob.Text;
+
+            switch (cbPetType.SelectedIndex)
+            {
+                case 0:
+                    npet.Pet_Type = "Dog";
+                    break;
+                case 1:
+                    npet.Pet_Type = "Cat";
+                    break;
+                default:
+                    npet.Pet_Type = "None";
+                    break;
+            }
+
+            switch (cbPetBreed.SelectedIndex)
+            {
+                case 0:
+                    npet.Pet_Breed = "Labrador";
+                    break;
+                case 1:
+                    npet.Pet_Breed = "Shih Tzu";
+                    break;
+                case 2:
+                    npet.Pet_Breed = "Siamese";
+                    break;
+                case 3:
+                    npet.Pet_Breed = "Persian";
+                    break;
+                default:
+                    npet.Pet_Breed = "None";
+                    break;
+            }
+
+            switch (cbPetSex.SelectedIndex)
+            {
+                case 0:
+                    npet.Pet_Gender = "Male";
+                    break;
+                case 1:
+                    npet.Pet_Gender = "Female";
+                    break;
+                default:
+                    npet.Pet_Gender = "None";
+                    break;
+            }
+
+
+            _dbConn.Pets.InsertOnSubmit(npet);
+            _dbConn.SubmitChanges();
         }
     }
 }
