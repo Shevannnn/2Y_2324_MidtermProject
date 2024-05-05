@@ -332,6 +332,18 @@ namespace _2Y_2324_MidtermProject
             pnlPetInfo.Visibility = Visibility.Visible;
             pnlInventory.Visibility = Visibility.Collapsed;
 
+            ChoiceWindow customDialog = new ChoiceWindow();
+            bool? dialogResult = customDialog.ShowDialog();
+
+            if (dialogResult.HasValue && dialogResult.Value)
+            {
+                MessageBox.Show(" u choose pet");
+            }
+            else
+            {
+                MessageBox.Show(" u choose supply");
+            }
+
 
         }
 
