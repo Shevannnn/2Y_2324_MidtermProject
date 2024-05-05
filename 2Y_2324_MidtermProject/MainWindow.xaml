@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2Y_2324_MidtermProject"
         mc:Ignorable="d"
-        Title="Animal Express" Height="450" Width="700" MinHeight="450" MaxHeight="450" MinWidth="700" MaxWidth="450" Background="#FFD2EBFF">
+        Title="Animal Express" Height="500" Width="700" MinHeight="500" MaxHeight="500" MinWidth="700" MaxWidth="450" Background="#FFD2EBFF">
     
     <Window.Resources>
         <Style x:Key="TxtBoxStyle" TargetType="TextBox">
@@ -44,6 +44,50 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BtnStyle1" TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#FF62E09C"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BtnStyle2" TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="#FFFA7171"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -125,16 +169,43 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                <Button Margin="240 0 0 0" Width="80" Height="20" Content="Add" Style="{StaticResource BtnStyle1}" />
+                <Button Margin="20 0 0 0" Width="80" Height="20" Content="Delete" Style="{StaticResource BtnStyle2}" />
+            </StackPanel>
         </StackPanel>
-        
-        <StackPanel x:Name="pnlInformation" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
+
+        <StackPanel x:Name="pnlCustomerList" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
+                <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Customers" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
+                <Button x:Name="btnBack2Category2" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Category_Click" />
+            </StackPanel>
+            <ListView x:Name="lvCustomer" Margin="0,0,0,0" Width="406" Height="310"  MouseDoubleClick="lvPets_MouseDoubleClick" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
+                        <GridViewColumn Header="Contact Number" Width="100" DisplayMemberBinding="{Binding Column2}" />
+                        <GridViewColumn Header="Email Address" Width="100" DisplayMemberBinding="{Binding Column3}" />
+                        <GridViewColumn Header="Handled by" Width="100" DisplayMemberBinding="{Binding Column4}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                <Button Margin="240 0 0 0" Width="80" Height="20" Content="Add" Style="{StaticResource BtnStyle1}" />
+                <Button Margin="20 0 0 0" Width="80" Height="20" Content="Delete" Style="{StaticResource BtnStyle2}" />
+            </StackPanel>
+
+        </StackPanel>
+
+        <StackPanel x:Name="pnlInformation" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 180 0" Width="100" Height="43"/>
                 <TextBlock x:Name="txtInfoHead" Margin="-20 0 0 0" Width="200" Height="30" Text="insert text" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
                 <Button x:Name="btnBack2Inv" Margin="130 0 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Inv_Click"  />
             </StackPanel>
            
-            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Visible"  >
+            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed"  >
                 <StackPanel Orientation="Vertical" >
                     <TextBlock Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="White" Width="70"/>
                     <Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>
@@ -217,7 +288,7 @@
                     </Button.Template>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" >
+            <StackPanel Margin="0 30 0 0" Orientation="Horizontal" >
                 <StackPanel Margin="120 40 0 0" Orientation="Vertical">
                     <TextBlock Margin="0 -10 0 0" FontSize="15" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="Transparent"  />
                     <TextBox Margin="0 0 0 0" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
@@ -233,15 +304,8 @@
                     <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <TextBlock Margin="0 5 0 0" FontSize="15" HorizontalAlignment="Center" Text="Email Address" FontFamily="verdana" Background="Transparent"  />
                     <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"/>
-                    <Button Margin="0 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                    <Button Margin="0 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}"/>
+
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
@@ -272,15 +336,7 @@
                                 <TextBox Margin="12 3 0 0" FontFamily="verdana" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" />
                             </StackPanel>
                         </StackPanel>
-                        <Button x:Name="purchase" Margin="43 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Visibility="Collapsed" >
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
+                        <Button x:Name="purchase" Margin="43 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Visibility="Collapsed" Style="{StaticResource BtnStyle}" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
