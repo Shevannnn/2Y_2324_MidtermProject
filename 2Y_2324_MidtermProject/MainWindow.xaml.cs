@@ -23,6 +23,7 @@ namespace _2Y_2324_MidtermProject
     {
         DataClasses1DataContext _dbConn = null;
         bool flag = false;
+        string _selector;
 
         public MainWindow()
         {
@@ -117,7 +118,7 @@ namespace _2Y_2324_MidtermProject
             }
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+        private void btnBack2Category_Click(object sender, RoutedEventArgs e)
         {
             lvPets.Items.Clear();
             lvSupplies.Items.Clear();
@@ -177,6 +178,8 @@ namespace _2Y_2324_MidtermProject
 
         private void lvPets_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            _selector = "pet";
+            txtInfoHead.Text = "Pet Information";
             if (lvPets.SelectedItem != null)
             {
                 dynamic selectedItem = lvPets.SelectedItem;
@@ -188,6 +191,7 @@ namespace _2Y_2324_MidtermProject
 
                 pnlInventory.Visibility = Visibility.Collapsed;
                 lvPets.Visibility = Visibility.Collapsed;
+                pnlInformation.Visibility = Visibility.Visible;
                 pnlPetInfo.Visibility = Visibility.Visible;
 
                 foreach (Pet p in selectResults)
@@ -235,5 +239,58 @@ namespace _2Y_2324_MidtermProject
             }
         }
 
+        private void lvSupplies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _selector = "supply";
+            txtInfoHead.Text = "Supply Information";
+            if (lvSupplies.SelectedItem != null)
+            {
+                dynamic selectedItem = lvSupplies.SelectedItem;
+                string name = selectedItem.Column1;
+
+                IQueryable<Supply> selectResults = from s in _dbConn.Supplies
+                                                where s.Supply_Name == name
+                                                select s;
+
+                pnlInventory.Visibility = Visibility.Collapsed;
+                lvSupplies.Visibility = Visibility.Collapsed;
+                pnlInformation.Visibility = Visibility.Visible;
+                pnlSupplyInfo.Visibility = Visibility.Visible;
+
+                foreach (Supply s in selectResults)
+                {
+                    txtSupplyName.Text = s.Supply_Name;
+                    txtSupplyQty.Text = s.Supply_Quantity.ToString();
+
+                    switch (s.Supply_Type)
+                    {
+                        case "Dog Supply":
+                            cbSupplyType.SelectedIndex = 0;
+                            break;
+                        case "Cat Supply":
+                            cbSupplyType.SelectedIndex = 1;
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void btnBack2Inv_Click(object sender, RoutedEventArgs e)
+        {
+            pnlInventory.Visibility = Visibility.Visible;
+            pnlInformation.Visibility = Visibility.Collapsed;
+            pnlPetInfo.Visibility = Visibility.Collapsed;
+            pnlSupplyInfo.Visibility = Visibility.Collapsed;
+
+            switch (_selector)
+            {
+                case "pet":
+                    lvPets.Visibility = Visibility.Visible;
+                    break;
+                case "supply":
+                    lvSupplies.Visibility = Visibility.Visible;
+                    break;
+            }
+        }
     }
 }
