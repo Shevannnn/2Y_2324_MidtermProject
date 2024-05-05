@@ -133,15 +133,19 @@
                 <TextBlock x:Name="txtInfoHead" Margin="-20 0 0 0" Width="200" Height="30" Text="insert text" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
                 <Button x:Name="btnBack2Inv" Margin="130 0 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Inv_Click"  />
             </StackPanel>
-            
-            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed" >
-                <Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>
-                <StackPanel Margin= "50 0 0 0"  Orientation="Vertical" >
-                    <TextBlock Margin="0 -10 0 0" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="#FFD2EBFF"  />
+           
+            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Visible"  >
+                <StackPanel Orientation="Vertical" >
+                    <TextBlock Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="White" Width="70"/>
+                    <Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>
+                </StackPanel>
+         
+                <StackPanel Margin= "50 27 0 0"  Orientation="Vertical" >
+                    <TextBlock Margin="0 -10 0 0" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="Transparent"  />
                     <TextBox x:Name="txtPetName" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
-                        <TextBlock Margin="34 0 0 0" HorizontalAlignment="Center" Text="Type" FontFamily="verdana" Background="#FFD2EBFF"  />
-                        <TextBlock Margin="79 0 0 0" HorizontalAlignment="Center" Text="Age" FontFamily="verdana" Background="#FFD2EBFF"  />
+                        <TextBlock Margin="34 0 0 0" HorizontalAlignment="Center" Text="Type" FontFamily="verdana" Background="Transparent"  />
+                        <TextBlock Margin="79 0 0 0" HorizontalAlignment="Center" Text="Age" FontFamily="verdana" Background="Transparent"  />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <ComboBox x:Name="cbPetType" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  >
@@ -150,7 +154,7 @@
                         </ComboBox>
                         <TextBox x:Name="txtPetAge" Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
                     </StackPanel>
-                    <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Breed" FontFamily="verdana" Background="#FFD2EBFF"  />
+                    <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Breed" FontFamily="verdana" Background="Transparent"  />
                     <ComboBox x:Name="cbPetBreed" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20">
                         <ComboBoxItem Content="Labrador"/>
                         <ComboBoxItem Content="Shih Tzu"/>
@@ -158,8 +162,8 @@
                         <ComboBoxItem Content="Persian"/>
                     </ComboBox>
                     <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
-                        <TextBlock Margin="27 0 0 0" HorizontalAlignment="Center" Text="Gender" FontFamily="verdana" Background="#FFD2EBFF"  />
-                        <TextBlock Margin="44 0 0 0" HorizontalAlignment="Center" Text="Date of Birth" FontFamily="verdana" Background="#FFD2EBFF"  />
+                        <TextBlock Margin="27 0 0 0" HorizontalAlignment="Center" Text="Gender" FontFamily="verdana" Background="Transparent"  />
+                        <TextBlock Margin="44 0 0 0" HorizontalAlignment="Center" Text="Date of Birth" FontFamily="verdana" Background="Transparent"  />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <ComboBox x:Name="cbPetSex" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20" >
@@ -241,7 +245,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
-                    <ListView Name="Purchases" Margin="40,30,0,0" Width="205" Height="150" Visibility="Visible" >
+                    <ListView Name="Purchases" Margin="40,30,0,0" Width="205" Height="150"  >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Purchases" Width="200" DisplayMemberBinding="{Binding Column1}" />
