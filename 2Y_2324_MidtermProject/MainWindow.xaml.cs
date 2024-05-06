@@ -125,8 +125,12 @@ namespace _2Y_2324_MidtermProject
             lvSupplies.Items.Clear();
             pnlCategory.Visibility = Visibility.Visible;
             pnlInventory.Visibility = Visibility.Collapsed;
+            pnlInformation.Visibility = Visibility.Collapsed;
+            pnlPetInfo.Visibility = Visibility.Collapsed;
+            pnlSupplyInfo.Visibility = Visibility.Collapsed;
             lvPets.Visibility = Visibility.Collapsed;
             lvSupplies.Visibility = Visibility.Collapsed;
+
         }
 
         private void btnPuppy_Click(object sender, RoutedEventArgs e)
@@ -181,6 +185,8 @@ namespace _2Y_2324_MidtermProject
         {
             _selector = "pet";
             txtInfoHead.Text = "Pet Information";
+            btnBack2Inv.Visibility = Visibility.Visible;
+            btnBack2Category3.Visibility = Visibility.Collapsed;
             if (lvPets.SelectedItem != null)
             {
                 dynamic selectedItem = lvPets.SelectedItem;
@@ -213,7 +219,7 @@ namespace _2Y_2324_MidtermProject
 
                     switch (p.Pet_Breed)
                     {
-                        case "Labrador":
+                        case "Golden Retriever":
                             cbPetBreed.SelectedIndex = 0;
                             break;
                         case "Shih Tzu":
@@ -244,6 +250,8 @@ namespace _2Y_2324_MidtermProject
         {
             _selector = "supply";
             txtInfoHead.Text = "Supply Information";
+            btnBack2Inv.Visibility = Visibility.Visible;
+            btnBack2Category3.Visibility = Visibility.Collapsed;
             if (lvSupplies.SelectedItem != null)
             {
                 dynamic selectedItem = lvSupplies.SelectedItem;
@@ -319,43 +327,62 @@ namespace _2Y_2324_MidtermProject
             return highestPet.Pet_ID;
         }
 
-        private string GeneratePetID(string highestPetId)
+        private string GeneratePetID(string highestID)
         {
-            int num = int.Parse(highestPetId.Substring(3)); 
+            int num = int.Parse(highestID.Substring(3)); 
             num++; 
             return "PET" + num.ToString("D3");
         }
 
-        private void btnPetAdd_Click(object sender, RoutedEventArgs e)
+        private string GetSupplyID()
         {
-            pnlInformation.Visibility = Visibility.Visible;
-            pnlPetInfo.Visibility = Visibility.Visible;
-            pnlInventory.Visibility = Visibility.Collapsed;
+            var highestSupply = _dbConn.Supplies.OrderByDescending(p => p.Supply_ID).FirstOrDefault();
 
-            ChoiceWindow customDialog = new ChoiceWindow();
-            bool? dialogResult = customDialog.ShowDialog();
+            return highestSupply.Supply_ID;
+        }
+        private string GenerateSupplyID(string highestID)
+        {
+            int num = int.Parse(highestID.Substring(3));
+            num++;
+            return "SUP" + num.ToString("D3");
+        }
+
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            ChoiceWindow newWin = new ChoiceWindow();
+            bool? dialogResult = newWin.ShowDialog();
 
             if (dialogResult.HasValue && dialogResult.Value)
             {
-                MessageBox.Show(" u choose pet");
+                txtInfoHead.Text = "Pet Information";
+                pnlInformation.Visibility = Visibility.Visible;
+                pnlPetInfo.Visibility = Visibility.Visible;
+                pnlCategory.Visibility = Visibility.Collapsed;
             }
             else
             {
-                MessageBox.Show(" u choose supply");
+                txtInfoHead.Text = "Supply Information";
+                pnlInformation.Visibility = Visibility.Visible;
+                pnlSupplyInfo.Visibility = Visibility.Visible;
+                pnlCategory.Visibility = Visibility.Collapsed;
             }
-
-
+            btnBack2Inv.Visibility = Visibility.Collapsed;
+            btnBack2Category3.Visibility = Visibility.Visible;
         }
 
         private void btnNewPet_Click(object sender, RoutedEventArgs e)
         {
-
             Pet npet = new Pet();
             npet.Pet_ID = GeneratePetID(GetPetID());
             npet.Avail_ID = "AVL001";
             npet.Pet_Name = txtPetName.Text;
-            npet.Pet_Age = GetNum(txtPetAge);
             npet.Pet_DOB = txtPetDob.Text;
+
+            if (!string.IsNullOrWhiteSpace(txtPetAge.Text))
+            {
+                npet.Pet_Age = GetNum(txtPetAge);
+            }
 
             switch (cbPetType.SelectedIndex)
             {
@@ -373,7 +400,7 @@ namespace _2Y_2324_MidtermProject
             switch (cbPetBreed.SelectedIndex)
             {
                 case 0:
-                    npet.Pet_Breed = "Labrador";
+                    npet.Pet_Breed = "Golden Retriever";
                     break;
                 case 1:
                     npet.Pet_Breed = "Shih Tzu";
@@ -402,9 +429,69 @@ namespace _2Y_2324_MidtermProject
                     break;
             }
 
-
             _dbConn.Pets.InsertOnSubmit(npet);
-            _dbConn.SubmitChanges();
+
+            if (npet.Pet_Name != null)
+            {
+                if(npet.Pet_Age != -1)
+                {
+                    _dbConn.SubmitChanges();
+                    MessageBox.Show("Succesfully added pet!");
+                    ClearTBCB();
+                }
+            }
+        }
+
+        private void btnNewSupply_Click(object sender, RoutedEventArgs e)
+        {
+            Supply nsupply = new Supply();
+            nsupply.Supply_ID = GenerateSupplyID(GetSupplyID());
+            nsupply.Avail_ID = "AVL001";
+            nsupply.Supply_Name = txtSupplyName.Text;
+
+            if (!string.IsNullOrWhiteSpace(txtSupplyQty.Text))
+            {
+                nsupply.Supply_Quantity = GetNum(txtSupplyQty);
+            }
+
+            switch (cbSupplyType.SelectedIndex)
+            {
+                case 0:
+                    nsupply.Supply_Type = "Dog Supply";
+                    break;
+                case 1:
+                    nsupply.Supply_Type = "Cat Supply";
+                    break;
+                default:
+                    nsupply.Supply_Type = "None";
+                    break;
+            }
+
+            _dbConn.Supplies.InsertOnSubmit(nsupply);
+
+            if (nsupply.Supply_Name != null)
+            {
+                if (nsupply.Supply_Quantity != -1)
+                {
+                    _dbConn.SubmitChanges();
+                    MessageBox.Show("Succesfully added supply!");
+                    ClearTBCB();
+                }
+            }
+        }
+
+        private void ClearTBCB()
+        {
+            txtPetName.Text = "";
+            txtPetAge.Text = "";
+            txtPetDob.Text = "";
+            cbPetType.SelectedIndex = -1;
+            cbPetBreed.SelectedIndex = -1;
+            cbPetSex.SelectedIndex = -1;
+
+            txtSupplyName.Text = "";
+            txtSupplyQty.Text = "";
+            cbSupplyType.SelectedIndex = -1;
         }
     }
 }
