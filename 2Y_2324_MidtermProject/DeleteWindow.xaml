@@ -1,11 +1,11 @@
-﻿<Window x:Class="_2Y_2324_MidtermProject.ChoiceWindow"
+﻿<Window x:Class="_2Y_2324_MidtermProject.DeleteWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2Y_2324_MidtermProject"
         mc:Ignorable="d"
-        Title="Add Window" Height="100" Width="200">
+        Title="DeleteWindow" Height="100" Width="200">
     <Window.Resources>
         <Style x:Key="BtnStyle" TargetType="Button">
             <Setter Property="Width" Value="100"/>
@@ -19,9 +19,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}"
-                   BorderBrush="{TemplateBinding BorderBrush}"
-                   BorderThickness="{TemplateBinding BorderThickness}"
-                   CornerRadius="10">
+               BorderBrush="{TemplateBinding BorderBrush}"
+               BorderThickness="{TemplateBinding BorderThickness}"
+               CornerRadius="10">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -34,10 +34,10 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Images/bg.png"/>
         </Grid.Background>
-        <TextBlock FontFamily="verdana" Text="What would you like to add?" Margin="14 10 0 0"/>
+        <TextBlock FontFamily="verdana" Text="Are you sure you would like to delete this item?" Margin="14 10 0 0"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
-            <Button FontSize="13" FontFamily="verdana" Content="Pet" Width="50" Margin="5" Style="{StaticResource BtnStyle}" Click="Button_Click"/>
-            <Button FontSize="13" FontFamily="verdana" Content="Supply" Width="50" Margin="5" Style="{StaticResource BtnStyle}" Click="Button_Click_1"/>
+            <Button FontSize="13" FontFamily="verdana" Content="Yes" Width="50" Margin="5" Style="{StaticResource BtnStyle}" Click="Button_Click"/>
+            <Button FontSize="13" FontFamily="verdana" Content="No" Width="50" Margin="5" Style="{StaticResource BtnStyle}" Click="Button_Click_1"/>
         </StackPanel>
     </Grid>
 </Window>

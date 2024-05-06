@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace _2Y_2324_MidtermProject
 {
@@ -24,6 +27,7 @@ namespace _2Y_2324_MidtermProject
         DataClasses1DataContext _dbConn = null;
         bool flag = false;
         string _selector;
+        string _loggedIn;
 
         public MainWindow()
         {
@@ -42,24 +46,14 @@ namespace _2Y_2324_MidtermProject
 
                 if (selectResults.Count() == 1)
                 {
-                    //MessageBox.Show("Username exists");
                     foreach (Login s in selectResults)
                     {
                         if (s.Login_Pass == txtPass.Text)
                         {
                             string messageString = $"Login complete.";
                             messageString += $" Welcome {s.Login_Name}!";
-
+                            Login(s.Login_ID);
                             MessageBox.Show(messageString);
-                            //Log tlog = new Log();
-                            //tlog.
-                            //s.LoginDate = DateTime.Now;
-
-                            //tblLog tlog = new tblLog();
-                            //tlog.LoginID = s.LoginID;
-                            //tlog.LogDate = (DateTime)s.LoginDate;
-
-                            //_dbConn.tblLogs.InsertOnSubmit(tlog);
                             flag = true;
                             break;
                         }
@@ -75,7 +69,20 @@ namespace _2Y_2324_MidtermProject
                 txtPass.Text = null;
                 txtUser.Text = null;
             }
+        }
 
+        private void Login(string LoginID)
+        {
+            IQueryable<Staff> selectResults = from s in _dbConn.Staffs
+                                              where s.Login_ID == LoginID
+                                              select s;
+
+
+            Staff staff = selectResults.FirstOrDefault();
+            if (staff != null)
+            {
+                _loggedIn = staff.Staff_ID;
+            }
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
@@ -86,8 +93,8 @@ namespace _2Y_2324_MidtermProject
 
         private void GetPetData(int age, string type)
         {
+            lvPets.Items.Clear();
             IQueryable<Pet> selectResults = null;
-
             if (age == 1)
             {
                 selectResults = from s in _dbConn.Pets
@@ -100,22 +107,37 @@ namespace _2Y_2324_MidtermProject
                                 where s.Pet_Age >= age && s.Pet_Type == type
                                 select s;
             }
-
-            foreach (Pet p in selectResults)
+            if (selectResults.Count() >= 1)
             {
-                lvPets.Items.Add(new { Column1 = p.Pet_Name, Column2 = p.Pet_Age, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender });
+                foreach (Pet p in selectResults)
+                {
+                    lvPets.Items.Add(new { Column1 = p.Pet_Name, Column2 = p.Pet_Age, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender });
+                }
             }
         }
 
         private void GetSupplyData(string type)
         {
-            IQueryable<Supply> selectResults = from s in _dbConn.Supplies
-                                               where s.Supply_Type == type
-                                               select s;
-
-            foreach (Supply s in selectResults)
+            lvSupplies.Items.Clear();
+            IQueryable<Supply> selectResults = null;
+            if (type == "Dog Food" || type == "Dog Toy")
             {
-                lvSupplies.Items.Add(new { Column1 = s.Supply_Name, Column2 = s.Supply_Quantity, Column3 = s.Supply_Type });
+                selectResults = from s in _dbConn.Supplies
+                                where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy"
+                                select s;
+            }
+            else if (type == "Cat Food" || type == "Cat Toy")
+            {
+                selectResults = from s in _dbConn.Supplies
+                                where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy"
+                                select s;
+            }
+            if (selectResults.Count() >= 1)
+            {
+                foreach (Supply s in selectResults)
+                {
+                    lvSupplies.Items.Add(new { Column1 = s.Supply_Name, Column2 = s.Supply_Quantity, Column3 = s.Supply_Type });
+                }
             }
         }
 
@@ -123,19 +145,22 @@ namespace _2Y_2324_MidtermProject
         {
             lvPets.Items.Clear();
             lvSupplies.Items.Clear();
+            lvCustomer.Items.Clear();
             pnlCategory.Visibility = Visibility.Visible;
+            pnlCustomerList.Visibility = Visibility.Collapsed;
+            pnlCustomerInfo.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Collapsed;
             pnlInformation.Visibility = Visibility.Collapsed;
             pnlPetInfo.Visibility = Visibility.Collapsed;
             pnlSupplyInfo.Visibility = Visibility.Collapsed;
             lvPets.Visibility = Visibility.Collapsed;
             lvSupplies.Visibility = Visibility.Collapsed;
-
         }
 
         private void btnPuppy_Click(object sender, RoutedEventArgs e)
         {
             GetPetData(1, "Dog");
+            _selector = "pet";
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvPets.Visibility = Visibility.Visible;
@@ -144,6 +169,7 @@ namespace _2Y_2324_MidtermProject
         private void btnDog_Click(object sender, RoutedEventArgs e)
         {
             GetPetData(2, "Dog");
+            _selector = "pet";
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvPets.Visibility = Visibility.Visible;
@@ -151,7 +177,8 @@ namespace _2Y_2324_MidtermProject
 
         private void btnDogSupply_Click(object sender, RoutedEventArgs e)
         {
-            GetSupplyData("Dog Supply");
+            GetSupplyData("Dog Food");
+            _selector = "supply";
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvSupplies.Visibility = Visibility.Visible;
@@ -160,6 +187,7 @@ namespace _2Y_2324_MidtermProject
         private void btnKitten_Click(object sender, RoutedEventArgs e)
         {
             GetPetData(1, "Cat");
+            _selector = "pet";
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvPets.Visibility = Visibility.Visible;
@@ -168,6 +196,7 @@ namespace _2Y_2324_MidtermProject
         private void btnCat_Click(object sender, RoutedEventArgs e)
         {
             GetPetData(2, "Cat");
+            _selector = "pet";
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvPets.Visibility = Visibility.Visible;
@@ -175,7 +204,8 @@ namespace _2Y_2324_MidtermProject
 
         private void btnCatSupply_Click(object sender, RoutedEventArgs e)
         {
-            GetSupplyData("Cat Supply");
+            GetSupplyData("Cat Food");
+            _selector = "supply";
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvSupplies.Visibility = Visibility.Visible;
@@ -183,12 +213,11 @@ namespace _2Y_2324_MidtermProject
 
         private void lvPets_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            _selector = "pet";
-            txtInfoHead.Text = "Pet Information";
-            btnBack2Inv.Visibility = Visibility.Visible;
-            btnBack2Category3.Visibility = Visibility.Collapsed;
             if (lvPets.SelectedItem != null)
             {
+                txtInfoHead.Text = "Pet Information";
+                btnBack2Inv.Visibility = Visibility.Visible;
+                btnBack2Category3.Visibility = Visibility.Collapsed;
                 dynamic selectedItem = lvPets.SelectedItem;
                 string name = selectedItem.Column1;
 
@@ -243,17 +272,17 @@ namespace _2Y_2324_MidtermProject
                             break;
                     }
                 }
+                ChangePetImages();
             }
         }
 
         private void lvSupplies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            _selector = "supply";
-            txtInfoHead.Text = "Supply Information";
-            btnBack2Inv.Visibility = Visibility.Visible;
-            btnBack2Category3.Visibility = Visibility.Collapsed;
             if (lvSupplies.SelectedItem != null)
             {
+                txtInfoHead.Text = "Supply Information";
+                btnBack2Inv.Visibility = Visibility.Visible;
+                btnBack2Category3.Visibility = Visibility.Collapsed;
                 dynamic selectedItem = lvSupplies.SelectedItem;
                 string name = selectedItem.Column1;
 
@@ -273,14 +302,21 @@ namespace _2Y_2324_MidtermProject
 
                     switch (s.Supply_Type)
                     {
-                        case "Dog Supply":
+                        case "Dog Food":
                             cbSupplyType.SelectedIndex = 0;
                             break;
-                        case "Cat Supply":
+                        case "Dog Toy":
                             cbSupplyType.SelectedIndex = 1;
+                            break;
+                        case "Cat Food":
+                            cbSupplyType.SelectedIndex = 2;
+                            break;
+                        case "Cat Toy":
+                            cbSupplyType.SelectedIndex = 3;
                             break;
                     }
                 }
+                ChangeSupplyImages();
             }
         }
 
@@ -329,8 +365,8 @@ namespace _2Y_2324_MidtermProject
 
         private string GeneratePetID(string highestID)
         {
-            int num = int.Parse(highestID.Substring(3)); 
-            num++; 
+            int num = int.Parse(highestID.Substring(3));
+            num++;
             return "PET" + num.ToString("D3");
         }
 
@@ -359,6 +395,7 @@ namespace _2Y_2324_MidtermProject
                 pnlInformation.Visibility = Visibility.Visible;
                 pnlPetInfo.Visibility = Visibility.Visible;
                 pnlCategory.Visibility = Visibility.Collapsed;
+                ClearTBCB();
             }
             else
             {
@@ -366,6 +403,7 @@ namespace _2Y_2324_MidtermProject
                 pnlInformation.Visibility = Visibility.Visible;
                 pnlSupplyInfo.Visibility = Visibility.Visible;
                 pnlCategory.Visibility = Visibility.Collapsed;
+                ClearTBCB();
             }
             btnBack2Inv.Visibility = Visibility.Collapsed;
             btnBack2Category3.Visibility = Visibility.Visible;
@@ -433,7 +471,7 @@ namespace _2Y_2324_MidtermProject
 
             if (npet.Pet_Name != null)
             {
-                if(npet.Pet_Age != -1)
+                if (npet.Pet_Age != -1)
                 {
                     _dbConn.SubmitChanges();
                     MessageBox.Show("Succesfully added pet!");
@@ -457,10 +495,16 @@ namespace _2Y_2324_MidtermProject
             switch (cbSupplyType.SelectedIndex)
             {
                 case 0:
-                    nsupply.Supply_Type = "Dog Supply";
+                    nsupply.Supply_Type = "Dog Food";
                     break;
                 case 1:
-                    nsupply.Supply_Type = "Cat Supply";
+                    nsupply.Supply_Type = "Dog Toy";
+                    break;
+                case 2:
+                    nsupply.Supply_Type = "Cat Food";
+                    break;
+                case 3:
+                    nsupply.Supply_Type = "Cat Toy";
                     break;
                 default:
                     nsupply.Supply_Type = "None";
@@ -492,6 +536,235 @@ namespace _2Y_2324_MidtermProject
             txtSupplyName.Text = "";
             txtSupplyQty.Text = "";
             cbSupplyType.SelectedIndex = -1;
+        }
+        private void cbPetBreed_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ChangePetImages();
+        }
+
+        private void ChangePetImages()
+        {
+            string path = "/Images/BlankImage.png";
+
+            if (CheckNum() == 1)
+            {
+                switch (cbPetBreed.SelectedIndex)
+                {
+                    case 0:
+                        path = "/Images/PuppyGoldenRetriever.png";
+                        break;
+                    case 1:
+                        path = "/Images/PuppyShitzu.png";
+                        break;
+                    case 2:
+                        path = "/Images/KittenSiamese.png";
+                        break;
+                    case 3:
+                        path = "/Images/KittenPersian.png";
+                        break;
+                }
+            }
+            else if (CheckNum() >= 2)
+            {
+
+                switch (cbPetBreed.SelectedIndex)
+                {
+                    case 0:
+                        path = "/Images/AdultGoldenRetriever.png";
+                        break;
+                    case 1:
+                        path = "/Images/AdultShitzu.png";
+                        break;
+                    case 2:
+                        path = "/Images/AdultSiamese.png";
+                        break;
+                    case 3:
+                        path = "/Images/AdultPersian.png";
+                        break;
+                }
+            }
+
+            imgPet.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+        }
+
+        private void ChangeSupplyImages()
+        {
+            string path = "/Images/BlankImage.png";
+            switch (cbSupplyType.SelectedIndex)
+            {
+                case 0:
+                    path = "/Images/DogFood.png";
+                    break;
+                case 1:
+                    path = "/Images/DogToy.png";
+                    break;
+                case 2:
+                    path = "/Images/CatFood.png";
+                    break;
+                case 3:
+                    path = "/Images/CatToy.png";
+                    break;
+            }
+            imgSupply.Source = new BitmapImage(new Uri(path, UriKind.Relative));
+        }
+
+        private int CheckNum()
+        {
+            if (int.TryParse(txtPetAge.Text, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        private void cbSupplyType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ChangeSupplyImages();
+        }
+
+        private string GetStaffName(string StaffID)
+        {
+            IQueryable<Staff> selectResults = selectResults = from s in _dbConn.Staffs
+                                                              where s.Staff_ID == StaffID
+                                                              select s;
+            Staff staff = selectResults.FirstOrDefault();
+            if (staff != null)
+            {
+                return staff.StaffName;
+            }
+            return null;
+        }
+
+        private void GetCustData()
+        {
+            IQueryable<Customer> selectResults = selectResults = from s in _dbConn.Customers
+                                                                 select s;
+            foreach (Customer c in selectResults)
+            {
+                lvCustomer.Items.Add(new { Column1 = c.Customer_Name, Column2 = c.Customer_Number, Column3 = c.Customer_Email, Column4 = GetStaffName(c.Staff_ID) });
+            }
+        }
+
+        private void btnCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            GetCustData();
+            pnlCategory.Visibility = Visibility.Collapsed;
+            pnlCustomerList.Visibility = Visibility.Visible;
+            lvCustomer.Visibility = Visibility.Visible;
+        }
+
+        private void lvCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (lvCustomer.SelectedItem != null)
+            {
+                dynamic selectedItem = lvCustomer.SelectedItem;
+                string name = selectedItem.Column1;
+
+                IQueryable<Customer> selectResults = from s in _dbConn.Customers
+                                                     where s.Customer_Name == name
+                                                     select s;
+
+                pnlInventory.Visibility = Visibility.Collapsed;
+                pnlCustomerList.Visibility = Visibility.Collapsed;
+                lvCustomer.Visibility = Visibility.Collapsed;
+                pnlCustomerInfo.Visibility = Visibility.Visible;
+
+                foreach (Customer s in selectResults)
+                {
+                    txtCustName.Text = s.Customer_Name;
+                    txtCustSex.Text = s.Customer_Sex;
+                    txtCustAge.Text = s.Customer_Age.ToString();
+                    txtCustNum.Text = s.Customer_Number.ToString();
+                    txtCustEmail.Text = s.Customer_Email;
+                }
+            }
+        }
+
+        private void Delete(ListView lv, string ID, string categ, int age, string ptype, string stype)
+        {
+            dynamic selectedItem = lv.SelectedItem;
+            string name = selectedItem.Column1;
+            DeleteWindow newWin = new DeleteWindow();
+            bool? dialogResult = newWin.ShowDialog();
+
+            if (dialogResult.HasValue && dialogResult.Value)
+            {
+                if (categ == "pet")
+                {
+                    var toDelete = _dbConn.Pets.FirstOrDefault(s => s.Pet_ID == ID);
+                    _dbConn.Pets.DeleteOnSubmit(toDelete);
+                }
+                else if (categ == "supply")
+                {
+                    var toDelete = _dbConn.Supplies.FirstOrDefault(s => s.Supply_ID == ID);
+                    _dbConn.Supplies.DeleteOnSubmit(toDelete);
+                }
+                else if (categ == "cust")
+                {
+                    var toDelete = _dbConn.Customers.FirstOrDefault(s => s.Customer_ID == ID);
+                    _dbConn.Customers.DeleteOnSubmit(toDelete);
+                }
+
+                _dbConn.SubmitChanges();
+                switch (categ)
+                {
+                    case "pet":
+                        GetPetData(age, ptype);
+                        break;
+                    case "supply":
+                        GetSupplyData(stype);
+                        break;
+                }
+            }
+        }
+
+        private void btnAddCust_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDeleteCust_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (lvPets.SelectedItem != null || lvSupplies.SelectedItem != null)
+            {
+                if (_selector == "pet")
+                {
+                    dynamic selectedItem = lvPets.SelectedItem;
+                    string name = selectedItem.Column1;
+                    IQueryable<Pet> selectResults = from s in _dbConn.Pets
+                                                    where s.Pet_Name == name
+                                                    select s;
+                    Pet temp = selectResults.FirstOrDefault();
+                    int age = temp.Pet_Age;
+                    string ptype = temp.Pet_Type;
+                    string selectedID = temp.Pet_ID;
+                    Delete(lvPets, selectedID, "pet", age, ptype, "none");
+                }
+                else if (_selector == "supply")
+                {
+                    dynamic selectedItem = lvSupplies.SelectedItem;
+                    string name = selectedItem.Column1;
+                    IQueryable<Supply> selectResults = from s in _dbConn.Supplies
+                                                    where s.Supply_Name == name
+                                                    select s;
+                    Supply temp = selectResults.FirstOrDefault();
+                    string stype = temp.Supply_Type;
+                    string selectedID = temp.Supply_ID;
+                    Delete(lvSupplies, selectedID, "supply", -1, "none", stype);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nothing selected. Please try again.");
+            }
         }
     }
 }

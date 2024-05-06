@@ -30,18 +30,24 @@ namespace _2Y_2324_MidtermProject
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertLogin(Login instance);
-    partial void UpdateLogin(Login instance);
-    partial void DeleteLogin(Login instance);
-    partial void InsertLog(Log instance);
-    partial void UpdateLog(Log instance);
-    partial void DeleteLog(Log instance);
     partial void InsertAvail(Avail instance);
     partial void UpdateAvail(Avail instance);
     partial void DeleteAvail(Avail instance);
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
+    partial void InsertLogin(Login instance);
+    partial void UpdateLogin(Login instance);
+    partial void DeleteLogin(Login instance);
+    partial void InsertLog(Log instance);
+    partial void UpdateLog(Log instance);
+    partial void DeleteLog(Log instance);
+    partial void InsertOrder(Order instance);
+    partial void UpdateOrder(Order instance);
+    partial void DeleteOrder(Order instance);
+    partial void InsertPet(Pet instance);
+    partial void UpdatePet(Pet instance);
+    partial void DeletePet(Pet instance);
     partial void InsertStaff(Staff instance);
     partial void UpdateStaff(Staff instance);
     partial void DeleteStaff(Staff instance);
@@ -51,12 +57,6 @@ namespace _2Y_2324_MidtermProject
     partial void InsertStaffStatus(StaffStatus instance);
     partial void UpdateStaffStatus(StaffStatus instance);
     partial void DeleteStaffStatus(StaffStatus instance);
-    partial void InsertOrder(Order instance);
-    partial void UpdateOrder(Order instance);
-    partial void DeleteOrder(Order instance);
-    partial void InsertPet(Pet instance);
-    partial void UpdatePet(Pet instance);
-    partial void DeletePet(Pet instance);
     partial void InsertSupply(Supply instance);
     partial void UpdateSupply(Supply instance);
     partial void DeleteSupply(Supply instance);
@@ -92,6 +92,22 @@ namespace _2Y_2324_MidtermProject
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<Avail> Avails
+		{
+			get
+			{
+				return this.GetTable<Avail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Customer> Customers
+		{
+			get
+			{
+				return this.GetTable<Customer>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Login> Logins
 		{
 			get
@@ -108,19 +124,19 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		public System.Data.Linq.Table<Avail> Avails
+		public System.Data.Linq.Table<Order> Orders
 		{
 			get
 			{
-				return this.GetTable<Avail>();
+				return this.GetTable<Order>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Customer> Customers
+		public System.Data.Linq.Table<Pet> Pets
 		{
 			get
 			{
-				return this.GetTable<Customer>();
+				return this.GetTable<Pet>();
 			}
 		}
 		
@@ -148,344 +164,11 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		public System.Data.Linq.Table<Order> Orders
-		{
-			get
-			{
-				return this.GetTable<Order>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Pet> Pets
-		{
-			get
-			{
-				return this.GetTable<Pet>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Supply> Supplies
 		{
 			get
 			{
 				return this.GetTable<Supply>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Login")]
-	public partial class Login : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Login_ID;
-		
-		private string _Login_Name;
-		
-		private string _Login_Pass;
-		
-		private EntitySet<Log> _Logs;
-		
-		private EntitySet<Staff> _Staffs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnLogin_IDChanging(string value);
-    partial void OnLogin_IDChanged();
-    partial void OnLogin_NameChanging(string value);
-    partial void OnLogin_NameChanged();
-    partial void OnLogin_PassChanging(string value);
-    partial void OnLogin_PassChanged();
-    #endregion
-		
-		public Login()
-		{
-			this._Logs = new EntitySet<Log>(new Action<Log>(this.attach_Logs), new Action<Log>(this.detach_Logs));
-			this._Staffs = new EntitySet<Staff>(new Action<Staff>(this.attach_Staffs), new Action<Staff>(this.detach_Staffs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Login_ID
-		{
-			get
-			{
-				return this._Login_ID;
-			}
-			set
-			{
-				if ((this._Login_ID != value))
-				{
-					this.OnLogin_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Login_ID = value;
-					this.SendPropertyChanged("Login_ID");
-					this.OnLogin_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Login_Name
-		{
-			get
-			{
-				return this._Login_Name;
-			}
-			set
-			{
-				if ((this._Login_Name != value))
-				{
-					this.OnLogin_NameChanging(value);
-					this.SendPropertyChanging();
-					this._Login_Name = value;
-					this.SendPropertyChanged("Login_Name");
-					this.OnLogin_NameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_Pass", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Login_Pass
-		{
-			get
-			{
-				return this._Login_Pass;
-			}
-			set
-			{
-				if ((this._Login_Pass != value))
-				{
-					this.OnLogin_PassChanging(value);
-					this.SendPropertyChanging();
-					this._Login_Pass = value;
-					this.SendPropertyChanged("Login_Pass");
-					this.OnLogin_PassChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Log", Storage="_Logs", ThisKey="Login_ID", OtherKey="Login_ID")]
-		public EntitySet<Log> Logs
-		{
-			get
-			{
-				return this._Logs;
-			}
-			set
-			{
-				this._Logs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Staff", Storage="_Staffs", ThisKey="Login_ID", OtherKey="Login_ID")]
-		public EntitySet<Staff> Staffs
-		{
-			get
-			{
-				return this._Staffs;
-			}
-			set
-			{
-				this._Staffs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Logs(Log entity)
-		{
-			this.SendPropertyChanging();
-			entity.Login = this;
-		}
-		
-		private void detach_Logs(Log entity)
-		{
-			this.SendPropertyChanging();
-			entity.Login = null;
-		}
-		
-		private void attach_Staffs(Staff entity)
-		{
-			this.SendPropertyChanging();
-			entity.Login = this;
-		}
-		
-		private void detach_Staffs(Staff entity)
-		{
-			this.SendPropertyChanging();
-			entity.Login = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Logs")]
-	public partial class Log : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Log_ID;
-		
-		private string _Login_ID;
-		
-		private System.DateTime _Log_Date;
-		
-		private EntityRef<Login> _Login;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnLog_IDChanging(string value);
-    partial void OnLog_IDChanged();
-    partial void OnLogin_IDChanging(string value);
-    partial void OnLogin_IDChanged();
-    partial void OnLog_DateChanging(System.DateTime value);
-    partial void OnLog_DateChanged();
-    #endregion
-		
-		public Log()
-		{
-			this._Login = default(EntityRef<Login>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Log_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Log_ID
-		{
-			get
-			{
-				return this._Log_ID;
-			}
-			set
-			{
-				if ((this._Log_ID != value))
-				{
-					this.OnLog_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Log_ID = value;
-					this.SendPropertyChanged("Log_ID");
-					this.OnLog_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Login_ID
-		{
-			get
-			{
-				return this._Login_ID;
-			}
-			set
-			{
-				if ((this._Login_ID != value))
-				{
-					if (this._Login.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLogin_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Login_ID = value;
-					this.SendPropertyChanged("Login_ID");
-					this.OnLogin_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Log_Date", DbType="Date NOT NULL")]
-		public System.DateTime Log_Date
-		{
-			get
-			{
-				return this._Log_Date;
-			}
-			set
-			{
-				if ((this._Log_Date != value))
-				{
-					this.OnLog_DateChanging(value);
-					this.SendPropertyChanging();
-					this._Log_Date = value;
-					this.SendPropertyChanged("Log_Date");
-					this.OnLog_DateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Log", Storage="_Login", ThisKey="Login_ID", OtherKey="Login_ID", IsForeignKey=true)]
-		public Login Login
-		{
-			get
-			{
-				return this._Login.Entity;
-			}
-			set
-			{
-				Login previousValue = this._Login.Entity;
-				if (((previousValue != value) 
-							|| (this._Login.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Login.Entity = null;
-						previousValue.Logs.Remove(this);
-					}
-					this._Login.Entity = value;
-					if ((value != null))
-					{
-						value.Logs.Add(this);
-						this._Login_ID = value.Login_ID;
-					}
-					else
-					{
-						this._Login_ID = default(string);
-					}
-					this.SendPropertyChanged("Login");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -904,6 +587,968 @@ namespace _2Y_2324_MidtermProject
 		{
 			this.SendPropertyChanging();
 			entity.Customer = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Login")]
+	public partial class Login : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Login_ID;
+		
+		private string _Login_Name;
+		
+		private string _Login_Pass;
+		
+		private EntitySet<Log> _Logs;
+		
+		private EntitySet<Staff> _Staffs;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLogin_IDChanging(string value);
+    partial void OnLogin_IDChanged();
+    partial void OnLogin_NameChanging(string value);
+    partial void OnLogin_NameChanged();
+    partial void OnLogin_PassChanging(string value);
+    partial void OnLogin_PassChanged();
+    #endregion
+		
+		public Login()
+		{
+			this._Logs = new EntitySet<Log>(new Action<Log>(this.attach_Logs), new Action<Log>(this.detach_Logs));
+			this._Staffs = new EntitySet<Staff>(new Action<Staff>(this.attach_Staffs), new Action<Staff>(this.detach_Staffs));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Login_ID
+		{
+			get
+			{
+				return this._Login_ID;
+			}
+			set
+			{
+				if ((this._Login_ID != value))
+				{
+					this.OnLogin_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Login_ID = value;
+					this.SendPropertyChanged("Login_ID");
+					this.OnLogin_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Login_Name
+		{
+			get
+			{
+				return this._Login_Name;
+			}
+			set
+			{
+				if ((this._Login_Name != value))
+				{
+					this.OnLogin_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Login_Name = value;
+					this.SendPropertyChanged("Login_Name");
+					this.OnLogin_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_Pass", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Login_Pass
+		{
+			get
+			{
+				return this._Login_Pass;
+			}
+			set
+			{
+				if ((this._Login_Pass != value))
+				{
+					this.OnLogin_PassChanging(value);
+					this.SendPropertyChanging();
+					this._Login_Pass = value;
+					this.SendPropertyChanged("Login_Pass");
+					this.OnLogin_PassChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Log", Storage="_Logs", ThisKey="Login_ID", OtherKey="Login_ID")]
+		public EntitySet<Log> Logs
+		{
+			get
+			{
+				return this._Logs;
+			}
+			set
+			{
+				this._Logs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Staff", Storage="_Staffs", ThisKey="Login_ID", OtherKey="Login_ID")]
+		public EntitySet<Staff> Staffs
+		{
+			get
+			{
+				return this._Staffs;
+			}
+			set
+			{
+				this._Staffs.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Logs(Log entity)
+		{
+			this.SendPropertyChanging();
+			entity.Login = this;
+		}
+		
+		private void detach_Logs(Log entity)
+		{
+			this.SendPropertyChanging();
+			entity.Login = null;
+		}
+		
+		private void attach_Staffs(Staff entity)
+		{
+			this.SendPropertyChanging();
+			entity.Login = this;
+		}
+		
+		private void detach_Staffs(Staff entity)
+		{
+			this.SendPropertyChanging();
+			entity.Login = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Logs")]
+	public partial class Log : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Log_ID;
+		
+		private string _Login_ID;
+		
+		private System.DateTime _Log_Date;
+		
+		private EntityRef<Login> _Login;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnLog_IDChanging(string value);
+    partial void OnLog_IDChanged();
+    partial void OnLogin_IDChanging(string value);
+    partial void OnLogin_IDChanged();
+    partial void OnLog_DateChanging(System.DateTime value);
+    partial void OnLog_DateChanged();
+    #endregion
+		
+		public Log()
+		{
+			this._Login = default(EntityRef<Login>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Log_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Log_ID
+		{
+			get
+			{
+				return this._Log_ID;
+			}
+			set
+			{
+				if ((this._Log_ID != value))
+				{
+					this.OnLog_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Log_ID = value;
+					this.SendPropertyChanged("Log_ID");
+					this.OnLog_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Login_ID
+		{
+			get
+			{
+				return this._Login_ID;
+			}
+			set
+			{
+				if ((this._Login_ID != value))
+				{
+					if (this._Login.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLogin_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Login_ID = value;
+					this.SendPropertyChanged("Login_ID");
+					this.OnLogin_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Log_Date", DbType="Date NOT NULL")]
+		public System.DateTime Log_Date
+		{
+			get
+			{
+				return this._Log_Date;
+			}
+			set
+			{
+				if ((this._Log_Date != value))
+				{
+					this.OnLog_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Log_Date = value;
+					this.SendPropertyChanged("Log_Date");
+					this.OnLog_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Log", Storage="_Login", ThisKey="Login_ID", OtherKey="Login_ID", IsForeignKey=true)]
+		public Login Login
+		{
+			get
+			{
+				return this._Login.Entity;
+			}
+			set
+			{
+				Login previousValue = this._Login.Entity;
+				if (((previousValue != value) 
+							|| (this._Login.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Login.Entity = null;
+						previousValue.Logs.Remove(this);
+					}
+					this._Login.Entity = value;
+					if ((value != null))
+					{
+						value.Logs.Add(this);
+						this._Login_ID = value.Login_ID;
+					}
+					else
+					{
+						this._Login_ID = default(string);
+					}
+					this.SendPropertyChanged("Login");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
+	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Order_ID;
+		
+		private string _Staff_ID;
+		
+		private string _Customer_ID;
+		
+		private string _Pet_ID;
+		
+		private string _Supply_ID;
+		
+		private System.DateTime _Order_Date;
+		
+		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<Pet> _Pet;
+		
+		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Supply> _Supply;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOrder_IDChanging(string value);
+    partial void OnOrder_IDChanged();
+    partial void OnStaff_IDChanging(string value);
+    partial void OnStaff_IDChanged();
+    partial void OnCustomer_IDChanging(string value);
+    partial void OnCustomer_IDChanged();
+    partial void OnPet_IDChanging(string value);
+    partial void OnPet_IDChanged();
+    partial void OnSupply_IDChanging(string value);
+    partial void OnSupply_IDChanged();
+    partial void OnOrder_DateChanging(System.DateTime value);
+    partial void OnOrder_DateChanged();
+    #endregion
+		
+		public Order()
+		{
+			this._Customer = default(EntityRef<Customer>);
+			this._Pet = default(EntityRef<Pet>);
+			this._Staff = default(EntityRef<Staff>);
+			this._Supply = default(EntityRef<Supply>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Order_ID
+		{
+			get
+			{
+				return this._Order_ID;
+			}
+			set
+			{
+				if ((this._Order_ID != value))
+				{
+					this.OnOrder_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Order_ID = value;
+					this.SendPropertyChanged("Order_ID");
+					this.OnOrder_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Staff_ID
+		{
+			get
+			{
+				return this._Staff_ID;
+			}
+			set
+			{
+				if ((this._Staff_ID != value))
+				{
+					if (this._Staff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStaff_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Staff_ID = value;
+					this.SendPropertyChanged("Staff_ID");
+					this.OnStaff_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Customer_ID
+		{
+			get
+			{
+				return this._Customer_ID;
+			}
+			set
+			{
+				if ((this._Customer_ID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomer_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Customer_ID = value;
+					this.SendPropertyChanged("Customer_ID");
+					this.OnCustomer_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_ID", DbType="Char(10)")]
+		public string Pet_ID
+		{
+			get
+			{
+				return this._Pet_ID;
+			}
+			set
+			{
+				if ((this._Pet_ID != value))
+				{
+					if (this._Pet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPet_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_ID = value;
+					this.SendPropertyChanged("Pet_ID");
+					this.OnPet_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_ID", DbType="Char(10)")]
+		public string Supply_ID
+		{
+			get
+			{
+				return this._Supply_ID;
+			}
+			set
+			{
+				if ((this._Supply_ID != value))
+				{
+					if (this._Supply.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSupply_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Supply_ID = value;
+					this.SendPropertyChanged("Supply_ID");
+					this.OnSupply_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_Date", DbType="Date NOT NULL")]
+		public System.DateTime Order_Date
+		{
+			get
+			{
+				return this._Order_Date;
+			}
+			set
+			{
+				if ((this._Order_Date != value))
+				{
+					this.OnOrder_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Order_Date = value;
+					this.SendPropertyChanged("Order_Date");
+					this.OnOrder_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Customer", ThisKey="Customer_ID", OtherKey="Customer_ID", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Customer_ID = value.Customer_ID;
+					}
+					else
+					{
+						this._Customer_ID = default(string);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Pet", ThisKey="Pet_ID", OtherKey="Pet_ID", IsForeignKey=true)]
+		public Pet Pet
+		{
+			get
+			{
+				return this._Pet.Entity;
+			}
+			set
+			{
+				Pet previousValue = this._Pet.Entity;
+				if (((previousValue != value) 
+							|| (this._Pet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Pet.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Pet.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Pet_ID = value.Pet_ID;
+					}
+					else
+					{
+						this._Pet_ID = default(string);
+					}
+					this.SendPropertyChanged("Pet");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Staff", ThisKey="Staff_ID", OtherKey="Staff_ID", IsForeignKey=true)]
+		public Staff Staff
+		{
+			get
+			{
+				return this._Staff.Entity;
+			}
+			set
+			{
+				Staff previousValue = this._Staff.Entity;
+				if (((previousValue != value) 
+							|| (this._Staff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Staff.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Staff.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Staff_ID = value.Staff_ID;
+					}
+					else
+					{
+						this._Staff_ID = default(string);
+					}
+					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Supply", ThisKey="Supply_ID", OtherKey="Supply_ID", IsForeignKey=true)]
+		public Supply Supply
+		{
+			get
+			{
+				return this._Supply.Entity;
+			}
+			set
+			{
+				Supply previousValue = this._Supply.Entity;
+				if (((previousValue != value) 
+							|| (this._Supply.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Supply.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Supply.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Supply_ID = value.Supply_ID;
+					}
+					else
+					{
+						this._Supply_ID = default(string);
+					}
+					this.SendPropertyChanged("Supply");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Pets")]
+	public partial class Pet : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Pet_ID;
+		
+		private string _Avail_ID;
+		
+		private string _Pet_Name;
+		
+		private string _Pet_Type;
+		
+		private string _Pet_Breed;
+		
+		private int _Pet_Age;
+		
+		private string _Pet_DOB;
+		
+		private string _Pet_Gender;
+		
+		private EntitySet<Order> _Orders;
+		
+		private EntityRef<Avail> _Avail;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPet_IDChanging(string value);
+    partial void OnPet_IDChanged();
+    partial void OnAvail_IDChanging(string value);
+    partial void OnAvail_IDChanged();
+    partial void OnPet_NameChanging(string value);
+    partial void OnPet_NameChanged();
+    partial void OnPet_TypeChanging(string value);
+    partial void OnPet_TypeChanged();
+    partial void OnPet_BreedChanging(string value);
+    partial void OnPet_BreedChanged();
+    partial void OnPet_AgeChanging(int value);
+    partial void OnPet_AgeChanged();
+    partial void OnPet_DOBChanging(string value);
+    partial void OnPet_DOBChanged();
+    partial void OnPet_GenderChanging(string value);
+    partial void OnPet_GenderChanged();
+    #endregion
+		
+		public Pet()
+		{
+			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
+			this._Avail = default(EntityRef<Avail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Pet_ID
+		{
+			get
+			{
+				return this._Pet_ID;
+			}
+			set
+			{
+				if ((this._Pet_ID != value))
+				{
+					this.OnPet_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_ID = value;
+					this.SendPropertyChanged("Pet_ID");
+					this.OnPet_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avail_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Avail_ID
+		{
+			get
+			{
+				return this._Avail_ID;
+			}
+			set
+			{
+				if ((this._Avail_ID != value))
+				{
+					if (this._Avail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAvail_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Avail_ID = value;
+					this.SendPropertyChanged("Avail_ID");
+					this.OnAvail_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Pet_Name
+		{
+			get
+			{
+				return this._Pet_Name;
+			}
+			set
+			{
+				if ((this._Pet_Name != value))
+				{
+					this.OnPet_NameChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_Name = value;
+					this.SendPropertyChanged("Pet_Name");
+					this.OnPet_NameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Type", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Pet_Type
+		{
+			get
+			{
+				return this._Pet_Type;
+			}
+			set
+			{
+				if ((this._Pet_Type != value))
+				{
+					this.OnPet_TypeChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_Type = value;
+					this.SendPropertyChanged("Pet_Type");
+					this.OnPet_TypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Breed", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Pet_Breed
+		{
+			get
+			{
+				return this._Pet_Breed;
+			}
+			set
+			{
+				if ((this._Pet_Breed != value))
+				{
+					this.OnPet_BreedChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_Breed = value;
+					this.SendPropertyChanged("Pet_Breed");
+					this.OnPet_BreedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Age", DbType="Int NOT NULL")]
+		public int Pet_Age
+		{
+			get
+			{
+				return this._Pet_Age;
+			}
+			set
+			{
+				if ((this._Pet_Age != value))
+				{
+					this.OnPet_AgeChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_Age = value;
+					this.SendPropertyChanged("Pet_Age");
+					this.OnPet_AgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_DOB", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Pet_DOB
+		{
+			get
+			{
+				return this._Pet_DOB;
+			}
+			set
+			{
+				if ((this._Pet_DOB != value))
+				{
+					this.OnPet_DOBChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_DOB = value;
+					this.SendPropertyChanged("Pet_DOB");
+					this.OnPet_DOBChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Gender", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string Pet_Gender
+		{
+			get
+			{
+				return this._Pet_Gender;
+			}
+			set
+			{
+				if ((this._Pet_Gender != value))
+				{
+					this.OnPet_GenderChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_Gender = value;
+					this.SendPropertyChanged("Pet_Gender");
+					this.OnPet_GenderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Orders", ThisKey="Pet_ID", OtherKey="Pet_ID")]
+		public EntitySet<Order> Orders
+		{
+			get
+			{
+				return this._Orders;
+			}
+			set
+			{
+				this._Orders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avail_Pet", Storage="_Avail", ThisKey="Avail_ID", OtherKey="Avail_ID", IsForeignKey=true)]
+		public Avail Avail
+		{
+			get
+			{
+				return this._Avail.Entity;
+			}
+			set
+			{
+				Avail previousValue = this._Avail.Entity;
+				if (((previousValue != value) 
+							|| (this._Avail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Avail.Entity = null;
+						previousValue.Pets.Remove(this);
+					}
+					this._Avail.Entity = value;
+					if ((value != null))
+					{
+						value.Pets.Add(this);
+						this._Avail_ID = value.Avail_ID;
+					}
+					else
+					{
+						this._Avail_ID = default(string);
+					}
+					this.SendPropertyChanged("Avail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pet = this;
+		}
+		
+		private void detach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Pet = null;
 		}
 	}
 	
@@ -1493,651 +2138,6 @@ namespace _2Y_2324_MidtermProject
 		{
 			this.SendPropertyChanging();
 			entity.StaffStatus = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
-	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Order_ID;
-		
-		private string _Staff_ID;
-		
-		private string _Customer_ID;
-		
-		private string _Pet_ID;
-		
-		private string _Supply_ID;
-		
-		private System.DateTime _Order_Date;
-		
-		private EntityRef<Customer> _Customer;
-		
-		private EntityRef<Staff> _Staff;
-		
-		private EntityRef<Pet> _Pet;
-		
-		private EntityRef<Supply> _Supply;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnOrder_IDChanging(string value);
-    partial void OnOrder_IDChanged();
-    partial void OnStaff_IDChanging(string value);
-    partial void OnStaff_IDChanged();
-    partial void OnCustomer_IDChanging(string value);
-    partial void OnCustomer_IDChanged();
-    partial void OnPet_IDChanging(string value);
-    partial void OnPet_IDChanged();
-    partial void OnSupply_IDChanging(string value);
-    partial void OnSupply_IDChanged();
-    partial void OnOrder_DateChanging(System.DateTime value);
-    partial void OnOrder_DateChanged();
-    #endregion
-		
-		public Order()
-		{
-			this._Customer = default(EntityRef<Customer>);
-			this._Staff = default(EntityRef<Staff>);
-			this._Pet = default(EntityRef<Pet>);
-			this._Supply = default(EntityRef<Supply>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Order_ID
-		{
-			get
-			{
-				return this._Order_ID;
-			}
-			set
-			{
-				if ((this._Order_ID != value))
-				{
-					this.OnOrder_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Order_ID = value;
-					this.SendPropertyChanged("Order_ID");
-					this.OnOrder_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Staff_ID
-		{
-			get
-			{
-				return this._Staff_ID;
-			}
-			set
-			{
-				if ((this._Staff_ID != value))
-				{
-					if (this._Staff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStaff_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Staff_ID = value;
-					this.SendPropertyChanged("Staff_ID");
-					this.OnStaff_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Customer_ID
-		{
-			get
-			{
-				return this._Customer_ID;
-			}
-			set
-			{
-				if ((this._Customer_ID != value))
-				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomer_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Customer_ID = value;
-					this.SendPropertyChanged("Customer_ID");
-					this.OnCustomer_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_ID", DbType="Char(10)")]
-		public string Pet_ID
-		{
-			get
-			{
-				return this._Pet_ID;
-			}
-			set
-			{
-				if ((this._Pet_ID != value))
-				{
-					if (this._Pet.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPet_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_ID = value;
-					this.SendPropertyChanged("Pet_ID");
-					this.OnPet_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_ID", DbType="Char(10)")]
-		public string Supply_ID
-		{
-			get
-			{
-				return this._Supply_ID;
-			}
-			set
-			{
-				if ((this._Supply_ID != value))
-				{
-					if (this._Supply.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSupply_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Supply_ID = value;
-					this.SendPropertyChanged("Supply_ID");
-					this.OnSupply_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_Date", DbType="Date NOT NULL")]
-		public System.DateTime Order_Date
-		{
-			get
-			{
-				return this._Order_Date;
-			}
-			set
-			{
-				if ((this._Order_Date != value))
-				{
-					this.OnOrder_DateChanging(value);
-					this.SendPropertyChanging();
-					this._Order_Date = value;
-					this.SendPropertyChanged("Order_Date");
-					this.OnOrder_DateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Customer", ThisKey="Customer_ID", OtherKey="Customer_ID", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Customer_ID = value.Customer_ID;
-					}
-					else
-					{
-						this._Customer_ID = default(string);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Staff", ThisKey="Staff_ID", OtherKey="Staff_ID", IsForeignKey=true)]
-		public Staff Staff
-		{
-			get
-			{
-				return this._Staff.Entity;
-			}
-			set
-			{
-				Staff previousValue = this._Staff.Entity;
-				if (((previousValue != value) 
-							|| (this._Staff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Staff.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Staff.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Staff_ID = value.Staff_ID;
-					}
-					else
-					{
-						this._Staff_ID = default(string);
-					}
-					this.SendPropertyChanged("Staff");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Pet", ThisKey="Pet_ID", OtherKey="Pet_ID", IsForeignKey=true)]
-		public Pet Pet
-		{
-			get
-			{
-				return this._Pet.Entity;
-			}
-			set
-			{
-				Pet previousValue = this._Pet.Entity;
-				if (((previousValue != value) 
-							|| (this._Pet.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pet.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Pet.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Pet_ID = value.Pet_ID;
-					}
-					else
-					{
-						this._Pet_ID = default(string);
-					}
-					this.SendPropertyChanged("Pet");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Supply", ThisKey="Supply_ID", OtherKey="Supply_ID", IsForeignKey=true)]
-		public Supply Supply
-		{
-			get
-			{
-				return this._Supply.Entity;
-			}
-			set
-			{
-				Supply previousValue = this._Supply.Entity;
-				if (((previousValue != value) 
-							|| (this._Supply.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Supply.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Supply.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Supply_ID = value.Supply_ID;
-					}
-					else
-					{
-						this._Supply_ID = default(string);
-					}
-					this.SendPropertyChanged("Supply");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Pets")]
-	public partial class Pet : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Pet_ID;
-		
-		private string _Avail_ID;
-		
-		private string _Pet_Name;
-		
-		private string _Pet_Type;
-		
-		private string _Pet_Breed;
-		
-		private int _Pet_Age;
-		
-		private string _Pet_DOB;
-		
-		private string _Pet_Gender;
-		
-		private EntitySet<Order> _Orders;
-		
-		private EntityRef<Avail> _Avail;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPet_IDChanging(string value);
-    partial void OnPet_IDChanged();
-    partial void OnAvail_IDChanging(string value);
-    partial void OnAvail_IDChanged();
-    partial void OnPet_NameChanging(string value);
-    partial void OnPet_NameChanged();
-    partial void OnPet_TypeChanging(string value);
-    partial void OnPet_TypeChanged();
-    partial void OnPet_BreedChanging(string value);
-    partial void OnPet_BreedChanged();
-    partial void OnPet_AgeChanging(int value);
-    partial void OnPet_AgeChanged();
-    partial void OnPet_DOBChanging(string value);
-    partial void OnPet_DOBChanged();
-    partial void OnPet_GenderChanging(string value);
-    partial void OnPet_GenderChanged();
-    #endregion
-		
-		public Pet()
-		{
-			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
-			this._Avail = default(EntityRef<Avail>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Pet_ID
-		{
-			get
-			{
-				return this._Pet_ID;
-			}
-			set
-			{
-				if ((this._Pet_ID != value))
-				{
-					this.OnPet_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_ID = value;
-					this.SendPropertyChanged("Pet_ID");
-					this.OnPet_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Avail_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Avail_ID
-		{
-			get
-			{
-				return this._Avail_ID;
-			}
-			set
-			{
-				if ((this._Avail_ID != value))
-				{
-					if (this._Avail.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAvail_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Avail_ID = value;
-					this.SendPropertyChanged("Avail_ID");
-					this.OnAvail_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Pet_Name
-		{
-			get
-			{
-				return this._Pet_Name;
-			}
-			set
-			{
-				if ((this._Pet_Name != value))
-				{
-					this.OnPet_NameChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_Name = value;
-					this.SendPropertyChanged("Pet_Name");
-					this.OnPet_NameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Type", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Pet_Type
-		{
-			get
-			{
-				return this._Pet_Type;
-			}
-			set
-			{
-				if ((this._Pet_Type != value))
-				{
-					this.OnPet_TypeChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_Type = value;
-					this.SendPropertyChanged("Pet_Type");
-					this.OnPet_TypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Breed", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Pet_Breed
-		{
-			get
-			{
-				return this._Pet_Breed;
-			}
-			set
-			{
-				if ((this._Pet_Breed != value))
-				{
-					this.OnPet_BreedChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_Breed = value;
-					this.SendPropertyChanged("Pet_Breed");
-					this.OnPet_BreedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Age", DbType="Int NOT NULL")]
-		public int Pet_Age
-		{
-			get
-			{
-				return this._Pet_Age;
-			}
-			set
-			{
-				if ((this._Pet_Age != value))
-				{
-					this.OnPet_AgeChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_Age = value;
-					this.SendPropertyChanged("Pet_Age");
-					this.OnPet_AgeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_DOB", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Pet_DOB
-		{
-			get
-			{
-				return this._Pet_DOB;
-			}
-			set
-			{
-				if ((this._Pet_DOB != value))
-				{
-					this.OnPet_DOBChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_DOB = value;
-					this.SendPropertyChanged("Pet_DOB");
-					this.OnPet_DOBChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_Gender", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
-		public string Pet_Gender
-		{
-			get
-			{
-				return this._Pet_Gender;
-			}
-			set
-			{
-				if ((this._Pet_Gender != value))
-				{
-					this.OnPet_GenderChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_Gender = value;
-					this.SendPropertyChanged("Pet_Gender");
-					this.OnPet_GenderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Orders", ThisKey="Pet_ID", OtherKey="Pet_ID")]
-		public EntitySet<Order> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Avail_Pet", Storage="_Avail", ThisKey="Avail_ID", OtherKey="Avail_ID", IsForeignKey=true)]
-		public Avail Avail
-		{
-			get
-			{
-				return this._Avail.Entity;
-			}
-			set
-			{
-				Avail previousValue = this._Avail.Entity;
-				if (((previousValue != value) 
-							|| (this._Avail.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Avail.Entity = null;
-						previousValue.Pets.Remove(this);
-					}
-					this._Avail.Entity = value;
-					if ((value != null))
-					{
-						value.Pets.Add(this);
-						this._Avail_ID = value.Avail_ID;
-					}
-					else
-					{
-						this._Avail_ID = default(string);
-					}
-					this.SendPropertyChanged("Avail");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pet = this;
-		}
-		
-		private void detach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Pet = null;
 		}
 	}
 	

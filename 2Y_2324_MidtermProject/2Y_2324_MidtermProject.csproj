@@ -60,6 +60,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DeleteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,6 +79,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteWindow.xaml.cs">
+      <DependentUpon>DeleteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -129,6 +136,31 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PuppyGoldenRetriever.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AdultGoldenRetriever.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\AdultPersian.png" />
+    <Resource Include="Images\AdultShitzu.png" />
+    <Resource Include="Images\AdultSiamese.png" />
+    <Resource Include="Images\KittenPersian.png" />
+    <Resource Include="Images\KittenSiamese.png" />
+    <Resource Include="Images\PuppyShitzu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BlankImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CatToy.png" />
+    <Resource Include="Images\DogToy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CatSupply.png" />
+    <Resource Include="Images\DogSupply.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

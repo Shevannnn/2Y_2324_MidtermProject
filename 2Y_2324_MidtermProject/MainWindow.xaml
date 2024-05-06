@@ -112,12 +112,12 @@
         </StackPanel>
 
 
-        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
+        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 60 0" Width="110" Height="30" Text="Categories" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
                 <Button x:Name="btnAdd" Margin="0 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FF62E09C" Content="Add" Style="{StaticResource BtnStyle}" Click="btnAdd_Click"/>
-                <Button x:Name="btnCustomer" Margin="5 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FF80DFFF" Content="Customer" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
+                <Button x:Name="btnCustomer" Margin="5 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FF80DFFF" Content="Customer" Style="{StaticResource BtnStyle}" Click="btnCustomer_Click"/>
                 <Button x:Name="btnLogout" Margin="5 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FFFA7171" Content="Logout" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
             </StackPanel>
             <StackPanel Margin="50 10 50 10" Orientation="Horizontal">
@@ -128,7 +128,7 @@
                     <Image Source="/Images/DogAdult.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
                 <Button x:Name="btnDogSupply" Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnDogSupply_Click" >
-                    <Image Source="/Images/DogFood.png" Stretch="Uniform" Width="120" Height="120"/>
+                    <Image Source="/Images/DogSupply.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
             </StackPanel>
 
@@ -140,12 +140,12 @@
                     <Image Source="/Images/Cat.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
                 <Button x:Name="btnCatSupply" Margin="30 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnCatSupply_Click">
-                    <Image Source="/Images/CatFood.png" Stretch="Uniform" Width="120" Height="120"/>
+                    <Image Source="/Images/CatSupply.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel x:Name="pnlInventory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlInventory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Inventory" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -171,7 +171,7 @@
                 </ListView.View>
             </ListView>
             <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-                <Button Margin="290 0 0 0" Width="80" Height="20" Content="Delete" Style="{StaticResource BtnStyle2}" />
+                <Button x:Name="btnDelete" Margin="290 0 0 0" Width="80" Height="20" Content="Delete" Style="{StaticResource BtnStyle2}" Click="btnDelete_Click" />
             </StackPanel>
         </StackPanel>
 
@@ -181,7 +181,7 @@
                 <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Customers" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
                 <Button x:Name="btnBack2Category2" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Category_Click" />
             </StackPanel>
-            <ListView x:Name="lvCustomer" Margin="0,0,0,0" Width="406" Height="310"  MouseDoubleClick="lvPets_MouseDoubleClick" >
+            <ListView x:Name="lvCustomer" Margin="0,0,0,0" Width="406" Height="310"  MouseDoubleClick="lvCustomer_MouseDoubleClick" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
@@ -192,8 +192,8 @@
                 </ListView.View>
             </ListView>
             <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-                <Button Margin="240 0 0 0" Width="80" Height="20" Content="Add" Style="{StaticResource BtnStyle1}" />
-                <Button Margin="20 0 0 0" Width="80" Height="20" Content="Delete" Style="{StaticResource BtnStyle2}" />
+                <Button x:Name="btnAddCust" Margin="240 0 0 0" Width="80" Height="20" Content="Add" Style="{StaticResource BtnStyle1}" Click="btnAddCust_Click" />
+                <Button x:Name="btnDeleteCust" Margin="20 0 0 0" Width="80" Height="20" Content="Delete" Style="{StaticResource BtnStyle2}" Click="btnDeleteCust_Click" />
             </StackPanel>
 
         </StackPanel>
@@ -209,7 +209,8 @@
             <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed"  >
                 <StackPanel Orientation="Vertical" >
                     <TextBlock Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="White" Width="70"/>
-                    <Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>
+                    <Image x:Name="imgPet" Source="/Images/BlankImage.png" Margin="100 0 0 0" Width="200" Height="200"/>
+                    <!--<Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>-->
                 </StackPanel>
          
                 <StackPanel Margin= "50 27 0 0"  Orientation="Vertical" >
@@ -227,7 +228,7 @@
                         <TextBox x:Name="txtPetAge" Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
                     </StackPanel>
                     <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Breed" FontFamily="verdana" Background="Transparent"  />
-                    <ComboBox x:Name="cbPetBreed" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20">
+                    <ComboBox x:Name="cbPetBreed" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20" SelectionChanged="cbPetBreed_SelectionChanged">
                         <ComboBoxItem Content="Golden Retriever"/>
                         <ComboBoxItem Content="Shih Tzu"/>
                         <ComboBoxItem Content="Siamese"/>
@@ -251,15 +252,18 @@
             <StackPanel x:Name="pnlSupplyInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed" >
                 <StackPanel Orientation="Vertical" >
                     <TextBlock Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="White" Width="70"/>
-                    <Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>
+                    <Image x:Name="imgSupply" Source="/Images/BlankImage.png" Margin="100 0 0 0" Width="200" Height="200"/>
+                    <!--<Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>-->
                 </StackPanel>
                 <StackPanel Margin= "50 30 0 0"  Orientation="Vertical" >
                     <TextBlock Margin="0 -10 0 0" HorizontalAlignment="Center" Text=" Product Name" FontFamily="verdana" Background="#FFD2EBFF"  />
                     <TextBox x:Name="txtSupplyName" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Product Type" FontFamily="verdana" Background="#FFD2EBFF"  />
-                    <ComboBox x:Name="cbSupplyType" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20">
-                        <ComboBoxItem Content="Dog Supply"/>
-                        <ComboBoxItem Content="Cat Supply"/>
+                    <ComboBox x:Name="cbSupplyType" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="200" Height="20" SelectionChanged="cbSupplyType_SelectionChanged">
+                        <ComboBoxItem Content="Dog Food"/>
+                        <ComboBoxItem Content="Dog Toy"/>
+                        <ComboBoxItem Content="Cat Food"/>
+                        <ComboBoxItem Content="Cat Toy"/>
                     </ComboBox>
                     <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Quantity" FontFamily="verdana" Background="#FFD2EBFF"/>
                     <TextBox x:Name="txtSupplyQty" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
@@ -268,43 +272,29 @@
             </StackPanel>
         </StackPanel>
 
-
-
-        <!--asd-->
-        <StackPanel x:Name="pnlCustomer" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlCustomerInfo" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 150 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 130 0" Width="225" Height="30" Text="Customer Information" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
-                <Button Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Background="{TemplateBinding Background}" 
-                         BorderBrush="{TemplateBinding BorderBrush}" 
-                         BorderThickness="{TemplateBinding BorderThickness}" 
-                         CornerRadius="10">
-                                <!-- Adjust the CornerRadius as needed -->
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                <Button x:Name="btnBack2Category4" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Category_Click"/>
+
             </StackPanel>
             <StackPanel Margin="0 30 0 0" Orientation="Horizontal" >
                 <StackPanel Margin="120 40 0 0" Orientation="Vertical">
                     <TextBlock Margin="0 -10 0 0" FontSize="15" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="Transparent"  />
-                    <TextBox Margin="0 0 0 0" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
+                    <TextBox x:Name="txtCustName" Margin="0 0 0 0" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
                         <TextBlock Margin="20 0 0 0" FontSize="15" HorizontalAlignment="Center" Text="Gender" FontFamily="verdana" Background="Transparent"  />
                         <TextBlock Margin="63 0 0 0" FontSize="15" HorizontalAlignment="Center" Text="Age" FontFamily="verdana" Background="Transparent"  />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="94" Height="20"  />
-                        <TextBox Margin="12 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="94" Height="20"  />
+                        <TextBox x:Name="txtCustSex" Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="94" Height="20"  />
+                        <TextBox x:Name="txtCustAge" Margin="12 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="94" Height="20"  />
                     </StackPanel>
                     <TextBlock Margin="0 5 0 0" FontSize="15" HorizontalAlignment="Center" Text="Contact Number" FontFamily="verdana" Background="Transparent"  />
-                    <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
+                    <TextBox x:Name="txtCustNum" Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <TextBlock Margin="0 5 0 0" FontSize="15" HorizontalAlignment="Center" Text="Email Address" FontFamily="verdana" Background="Transparent"  />
-                    <TextBox Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"/>
+                    <TextBox x:Name="txtCustEmail" Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"/>
                     <Button Margin="0 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}"/>
 
                 </StackPanel>
