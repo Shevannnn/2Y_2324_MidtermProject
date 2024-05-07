@@ -29,6 +29,10 @@ namespace _2Y_2324_MidtermProject
         bool flag = false;
         string _selector;
         string _loggedIn;
+        string _mode;
+        string _buyPetID;
+        string _buySupplyID;
+        string _buying;
 
         public MainWindow()
         {
@@ -110,24 +114,41 @@ namespace _2Y_2324_MidtermProject
         {
             lvPets.Items.Clear();
             IQueryable<Pet> selectResults = null;
-            if (age == 1)
+            if (_mode == "buy")
             {
-                selectResults = from s in _dbConn.Pets
-                                where s.Pet_Age <= 1 && s.Pet_Type == type /*&& s.Avail_ID == "AVL001"*/
-                                select s;
+                if (age == 1)
+                {
+                    selectResults = from s in _dbConn.Pets
+                                    where s.Pet_Age <= 1 && s.Pet_Type == type && s.Avail_ID.Trim() == "AVL001"
+                                    select s;
+                }
+                else
+                {
+                    selectResults = from s in _dbConn.Pets
+                                    where s.Pet_Age >= age && s.Pet_Type == type && s.Avail_ID.Trim() == "AVL001"
+                                    select s;
+                }
             }
             else
             {
-                selectResults = from s in _dbConn.Pets
-                                where s.Pet_Age >= age && s.Pet_Type == type /*&& s.Avail_ID == "AVL001"*/
-                                select s;
+                if (age == 1)
+                {
+                    selectResults = from s in _dbConn.Pets
+                                    where s.Pet_Age <= 1 && s.Pet_Type == type /*&& s.Avail_ID == "AVL001"*/
+                                    select s;
+                }
+                else
+                {
+                    selectResults = from s in _dbConn.Pets
+                                    where s.Pet_Age >= age && s.Pet_Type == type /*&& s.Avail_ID == "AVL001"*/
+                                    select s;
+                }
             }
             if (selectResults.Count() >= 1)
             {
                 foreach (Pet p in selectResults)
                 {
                     lvPets.Items.Add(new { Column1 = p.Pet_ID, Column2 = p.Pet_Name, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender, Column5 = GetAvail(p.Avail_ID) });
-
                 }
             }
         }
@@ -136,18 +157,37 @@ namespace _2Y_2324_MidtermProject
         {
             lvSupplies.Items.Clear();
             IQueryable<Supply> selectResults = null;
-            if (type == "Dog Food" || type == "Dog Toy")
+            if (_mode == "buy")
             {
-                selectResults = from s in _dbConn.Supplies
-                                where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy" /*&& s.Avail_ID == "AVL001"*/
-                                select s;
+                if (type == "Dog Food" || type == "Dog Toy")
+                {
+                    selectResults = from s in _dbConn.Supplies
+                                    where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy" && s.Avail_ID == "AVL001"
+                                    select s;
+                }
+                else if (type == "Cat Food" || type == "Cat Toy")
+                {
+                    selectResults = from s in _dbConn.Supplies
+                                    where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy" && s.Avail_ID == "AVL001"
+                                    select s;
+                }
             }
-            else if (type == "Cat Food" || type == "Cat Toy")
+            else
             {
-                selectResults = from s in _dbConn.Supplies
-                                where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy" /*&& s.Avail_ID == "AVL001"*/
-                                select s;
+                if (type == "Dog Food" || type == "Dog Toy")
+                {
+                    selectResults = from s in _dbConn.Supplies
+                                    where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy" /*&& s.Avail_ID == "AVL001"*/
+                                    select s;
+                }
+                else if (type == "Cat Food" || type == "Cat Toy")
+                {
+                    selectResults = from s in _dbConn.Supplies
+                                    where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy" /*&& s.Avail_ID == "AVL001"*/
+                                    select s;
+                }
             }
+
             if (selectResults.Count() >= 1)
             {
                 foreach (Supply s in selectResults)
@@ -236,6 +276,7 @@ namespace _2Y_2324_MidtermProject
                 btnBack2Category3.Visibility = Visibility.Collapsed;
                 dynamic selectedItem = lvPets.SelectedItem;
                 string id = selectedItem.Column1;
+                _buyPetID = id;
 
                 IQueryable<Pet> selectResults = from s in _dbConn.Pets
                                                 where s.Pet_ID == id
@@ -314,6 +355,7 @@ namespace _2Y_2324_MidtermProject
                 btnBack2Category3.Visibility = Visibility.Collapsed;
                 dynamic selectedItem = lvSupplies.SelectedItem;
                 string id = selectedItem.Column1;
+                _buySupplyID = id;
 
                 IQueryable<Supply> selectResults = from s in _dbConn.Supplies
                                                    where s.Supply_ID == id
@@ -369,6 +411,8 @@ namespace _2Y_2324_MidtermProject
             pnlInformation.Visibility = Visibility.Collapsed;
             pnlPetInfo.Visibility = Visibility.Collapsed;
             pnlSupplyInfo.Visibility = Visibility.Collapsed;
+            btnNewPet.Visibility = Visibility.Collapsed;
+            btnNewSupply.Visibility = Visibility.Collapsed;
 
             switch (_selector)
             {
@@ -402,8 +446,15 @@ namespace _2Y_2324_MidtermProject
         private string GetPetID()
         {
             var highestPet = _dbConn.Pets.OrderByDescending(p => p.Pet_ID).FirstOrDefault();
+            if (highestPet != null)
+            {
+                return highestPet.Pet_ID;
+            }
 
-            return highestPet.Pet_ID;
+            else
+            {
+                return "PET000";
+            }
         }
 
         private string GeneratePetID(string highestID)
@@ -417,7 +468,15 @@ namespace _2Y_2324_MidtermProject
         {
             var highestSupply = _dbConn.Supplies.OrderByDescending(p => p.Supply_ID).FirstOrDefault();
 
-            return highestSupply.Supply_ID;
+            if (highestSupply != null)
+            {
+                return highestSupply.Supply_ID;
+            }
+
+            else
+            {
+                return "SUP000";
+            }
         }
         private string GenerateSupplyID(string highestID)
         {
@@ -437,6 +496,7 @@ namespace _2Y_2324_MidtermProject
                 txtInfoHead.Text = "Pet Information";
                 pnlInformation.Visibility = Visibility.Visible;
                 pnlPetInfo.Visibility = Visibility.Visible;
+                btnNewPet.Visibility = Visibility.Visible;
                 pnlCategory.Visibility = Visibility.Collapsed;
                 ClearTBCB();
             }
@@ -445,6 +505,7 @@ namespace _2Y_2324_MidtermProject
                 txtInfoHead.Text = "Supply Information";
                 pnlInformation.Visibility = Visibility.Visible;
                 pnlSupplyInfo.Visibility = Visibility.Visible;
+                btnNewSupply.Visibility = Visibility.Visible;
                 pnlCategory.Visibility = Visibility.Collapsed;
                 ClearTBCB();
             }
@@ -741,6 +802,8 @@ namespace _2Y_2324_MidtermProject
                             cbCustSex.SelectedIndex = -1;
                             break;
                     }
+                    _buying = s.Customer_ID;
+                    GetOrderData(s.Customer_ID);
                 }
             }
         }
@@ -748,14 +811,22 @@ namespace _2Y_2324_MidtermProject
         private string GetCustID()
         {
             var highestCust = _dbConn.Customers.OrderByDescending(p => p.Customer_ID).FirstOrDefault();
-            return highestCust.Customer_ID;
+            if (highestCust != null)
+            {
+                return highestCust.Customer_ID;
+            }
+
+            else
+            {
+                return "CUST000";
+            }
         }
 
         private string GenerateCustID(string highestID)
         {
-            int num = int.Parse(highestID.Substring(3));
+            int num = int.Parse(highestID.Substring(4));
             num++;
-            return "SUP" + num.ToString("D3");
+            return "CUST" + num.ToString("D3");
         }
 
         private void btnAddCust_Click(object sender, RoutedEventArgs e)
@@ -829,6 +900,7 @@ namespace _2Y_2324_MidtermProject
         {
             Customer ncust = new Customer();
             ncust.Customer_ID = GenerateCustID(GetCustID());
+            ncust.Staff_ID = _loggedIn;
             ncust.Customer_Name = txtCustName.Text;
             ncust.Customer_Email = txtCustEmail.Text;
 
@@ -860,13 +932,86 @@ namespace _2Y_2324_MidtermProject
                 {
                     _dbConn.Customers.InsertOnSubmit(ncust);
                     _dbConn.SubmitChanges();
-                    MessageBox.Show("Succesfully added supply!");
+                    MessageBox.Show("Succesfully added customer!");
                     ClearTBCB();
                 }
             }
             else
             {
                 MessageBox.Show("Must input all details.");
+            }
+        }
+
+        private void btnBuy_Click(object sender, RoutedEventArgs e)
+        {
+            lvPets.Items.Clear();
+            lvSupplies.Items.Clear();
+            lvCustomer.Items.Clear();
+            pnlCategory.Visibility = Visibility.Visible;
+            pnlCustomerList.Visibility = Visibility.Collapsed;
+            pnlCustomerInfo.Visibility = Visibility.Collapsed;
+            pnlInventory.Visibility = Visibility.Collapsed;
+            pnlInformation.Visibility = Visibility.Collapsed;
+            pnlPetInfo.Visibility = Visibility.Collapsed;
+            pnlSupplyInfo.Visibility = Visibility.Collapsed;
+            lvPets.Visibility = Visibility.Collapsed;
+            lvSupplies.Visibility = Visibility.Collapsed;
+
+            btnAdd.Visibility = Visibility.Collapsed;
+            btnCustomer.Visibility = Visibility.Collapsed;
+            btnLogout.Visibility = Visibility.Collapsed;
+            btnAdoptorBuy.Visibility = Visibility.Collapsed;
+            btnPetPurchase.Visibility = Visibility.Visible;
+
+            _mode = "buy";
+        }
+
+        private void btnPetPurchase_Click(object sender, RoutedEventArgs e)
+        {
+            IQueryable<Pet> selectResults = from s in _dbConn.Pets
+                                            where s.Pet_Name == _buyPetID
+                                            select s;
+            Order norder = new Order();
+            norder.Order_ID = GenerateOrderID(GetOrderID());
+            norder.Staff_ID = _loggedIn;
+            norder.Customer_ID = _buying;
+            norder.Pet_ID = _buyPetID;
+            norder.Order_Date = DateTime.Now.ToString("yyyy-MM-dd");
+            norder.Quantity = 1;
+            _dbConn.Orders.InsertOnSubmit(norder);
+            _dbConn.SubmitChanges();
+        }
+
+
+        private string GetOrderID()
+        {
+            var highestID = _dbConn.Orders.OrderByDescending(p => p.Order_ID).FirstOrDefault();
+
+            if (highestID != null)
+            {
+                return highestID.Order_ID;
+            }
+            else
+            {
+                return "ORD000";
+            }
+        }
+
+        private string GenerateOrderID(string highestID)
+        {
+            int num = int.Parse(highestID.Substring(3));
+            num++;
+            return "ORD" + num.ToString("D3");
+        }
+
+        public void GetOrderData(string CustID)
+        {
+            IQueryable<Order> selectResults = selectResults = from s in _dbConn.Orders
+                                                              where s.Customer_ID == CustID
+                                                                 select s;
+            foreach (Order o in selectResults)
+            {
+                lvPurchases.Items.Add(new { Column1 = o.Pet_ID, Column2 = o.Quantity, Column3 = GetStaffName(o.Staff_ID) });
             }
         }
     }

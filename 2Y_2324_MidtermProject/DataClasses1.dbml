@@ -38,20 +38,6 @@
       <Association Name="Login_Log" Member="Login" ThisKey="Login_ID" OtherKey="Login_ID" Type="Login" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Orders" Member="Orders">
-    <Type Name="Order">
-      <Column Name="Order_ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Staff_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Customer_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Pet_ID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="Supply_ID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
-      <Column Name="Order_Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Association Name="Customer_Order" Member="Customer" ThisKey="Customer_ID" OtherKey="Customer_ID" Type="Customer" IsForeignKey="true" />
-      <Association Name="Pet_Order" Member="Pet" ThisKey="Pet_ID" OtherKey="Pet_ID" Type="Pet" IsForeignKey="true" />
-      <Association Name="Staff_Order" Member="Staff" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Staff" IsForeignKey="true" />
-      <Association Name="Supply_Order" Member="Supply" ThisKey="Supply_ID" OtherKey="Supply_ID" Type="Supply" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Pets" Member="Pets">
     <Type Name="Pet">
       <Column Name="Pet_ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -104,6 +90,21 @@
       <Column Name="Supply_Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Supply_Order" Member="Orders" ThisKey="Supply_ID" OtherKey="Supply_ID" Type="Order" />
       <Association Name="Avail_Supply" Member="Avail" ThisKey="Avail_ID" OtherKey="Avail_ID" Type="Avail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Order">
+      <Column Name="Order_ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Staff_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Customer_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Pet_ID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Supply_ID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Order_Date" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Customer_Order" Member="Customer" ThisKey="Customer_ID" OtherKey="Customer_ID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Staff_Order" Member="Staff" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Staff" IsForeignKey="true" />
+      <Association Name="Pet_Order" Member="Pet" ThisKey="Pet_ID" OtherKey="Pet_ID" Type="Pet" IsForeignKey="true" />
+      <Association Name="Supply_Order" Member="Supply" ThisKey="Supply_ID" OtherKey="Supply_ID" Type="Supply" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

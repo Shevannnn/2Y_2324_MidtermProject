@@ -42,9 +42,6 @@ namespace _2Y_2324_MidtermProject
     partial void InsertLog(Log instance);
     partial void UpdateLog(Log instance);
     partial void DeleteLog(Log instance);
-    partial void InsertOrder(Order instance);
-    partial void UpdateOrder(Order instance);
-    partial void DeleteOrder(Order instance);
     partial void InsertPet(Pet instance);
     partial void UpdatePet(Pet instance);
     partial void DeletePet(Pet instance);
@@ -60,6 +57,9 @@ namespace _2Y_2324_MidtermProject
     partial void InsertSupply(Supply instance);
     partial void UpdateSupply(Supply instance);
     partial void DeleteSupply(Supply instance);
+    partial void InsertOrder(Order instance);
+    partial void UpdateOrder(Order instance);
+    partial void DeleteOrder(Order instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -124,14 +124,6 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		public System.Data.Linq.Table<Order> Orders
-		{
-			get
-			{
-				return this.GetTable<Order>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Pet> Pets
 		{
 			get
@@ -169,6 +161,14 @@ namespace _2Y_2324_MidtermProject
 			get
 			{
 				return this.GetTable<Supply>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Order> Orders
+		{
+			get
+			{
+				return this.GetTable<Order>();
 			}
 		}
 	}
@@ -882,352 +882,6 @@ namespace _2Y_2324_MidtermProject
 						this._Login_ID = default(string);
 					}
 					this.SendPropertyChanged("Login");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
-	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Order_ID;
-		
-		private string _Staff_ID;
-		
-		private string _Customer_ID;
-		
-		private string _Pet_ID;
-		
-		private string _Supply_ID;
-		
-		private System.DateTime _Order_Date;
-		
-		private EntityRef<Customer> _Customer;
-		
-		private EntityRef<Pet> _Pet;
-		
-		private EntityRef<Staff> _Staff;
-		
-		private EntityRef<Supply> _Supply;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnOrder_IDChanging(string value);
-    partial void OnOrder_IDChanged();
-    partial void OnStaff_IDChanging(string value);
-    partial void OnStaff_IDChanged();
-    partial void OnCustomer_IDChanging(string value);
-    partial void OnCustomer_IDChanged();
-    partial void OnPet_IDChanging(string value);
-    partial void OnPet_IDChanged();
-    partial void OnSupply_IDChanging(string value);
-    partial void OnSupply_IDChanged();
-    partial void OnOrder_DateChanging(System.DateTime value);
-    partial void OnOrder_DateChanged();
-    #endregion
-		
-		public Order()
-		{
-			this._Customer = default(EntityRef<Customer>);
-			this._Pet = default(EntityRef<Pet>);
-			this._Staff = default(EntityRef<Staff>);
-			this._Supply = default(EntityRef<Supply>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Order_ID
-		{
-			get
-			{
-				return this._Order_ID;
-			}
-			set
-			{
-				if ((this._Order_ID != value))
-				{
-					this.OnOrder_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Order_ID = value;
-					this.SendPropertyChanged("Order_ID");
-					this.OnOrder_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Staff_ID
-		{
-			get
-			{
-				return this._Staff_ID;
-			}
-			set
-			{
-				if ((this._Staff_ID != value))
-				{
-					if (this._Staff.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStaff_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Staff_ID = value;
-					this.SendPropertyChanged("Staff_ID");
-					this.OnStaff_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Customer_ID
-		{
-			get
-			{
-				return this._Customer_ID;
-			}
-			set
-			{
-				if ((this._Customer_ID != value))
-				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCustomer_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Customer_ID = value;
-					this.SendPropertyChanged("Customer_ID");
-					this.OnCustomer_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_ID", DbType="Char(10)")]
-		public string Pet_ID
-		{
-			get
-			{
-				return this._Pet_ID;
-			}
-			set
-			{
-				if ((this._Pet_ID != value))
-				{
-					if (this._Pet.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnPet_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Pet_ID = value;
-					this.SendPropertyChanged("Pet_ID");
-					this.OnPet_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_ID", DbType="Char(10)")]
-		public string Supply_ID
-		{
-			get
-			{
-				return this._Supply_ID;
-			}
-			set
-			{
-				if ((this._Supply_ID != value))
-				{
-					if (this._Supply.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSupply_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Supply_ID = value;
-					this.SendPropertyChanged("Supply_ID");
-					this.OnSupply_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_Date", DbType="Date NOT NULL")]
-		public System.DateTime Order_Date
-		{
-			get
-			{
-				return this._Order_Date;
-			}
-			set
-			{
-				if ((this._Order_Date != value))
-				{
-					this.OnOrder_DateChanging(value);
-					this.SendPropertyChanging();
-					this._Order_Date = value;
-					this.SendPropertyChanged("Order_Date");
-					this.OnOrder_DateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Customer", ThisKey="Customer_ID", OtherKey="Customer_ID", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Customer_ID = value.Customer_ID;
-					}
-					else
-					{
-						this._Customer_ID = default(string);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Pet", ThisKey="Pet_ID", OtherKey="Pet_ID", IsForeignKey=true)]
-		public Pet Pet
-		{
-			get
-			{
-				return this._Pet.Entity;
-			}
-			set
-			{
-				Pet previousValue = this._Pet.Entity;
-				if (((previousValue != value) 
-							|| (this._Pet.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Pet.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Pet.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Pet_ID = value.Pet_ID;
-					}
-					else
-					{
-						this._Pet_ID = default(string);
-					}
-					this.SendPropertyChanged("Pet");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Staff", ThisKey="Staff_ID", OtherKey="Staff_ID", IsForeignKey=true)]
-		public Staff Staff
-		{
-			get
-			{
-				return this._Staff.Entity;
-			}
-			set
-			{
-				Staff previousValue = this._Staff.Entity;
-				if (((previousValue != value) 
-							|| (this._Staff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Staff.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Staff.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Staff_ID = value.Staff_ID;
-					}
-					else
-					{
-						this._Staff_ID = default(string);
-					}
-					this.SendPropertyChanged("Staff");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Supply", ThisKey="Supply_ID", OtherKey="Supply_ID", IsForeignKey=true)]
-		public Supply Supply
-		{
-			get
-			{
-				return this._Supply.Entity;
-			}
-			set
-			{
-				Supply previousValue = this._Supply.Entity;
-				if (((previousValue != value) 
-							|| (this._Supply.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Supply.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Supply.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Supply_ID = value.Supply_ID;
-					}
-					else
-					{
-						this._Supply_ID = default(string);
-					}
-					this.SendPropertyChanged("Supply");
 				}
 			}
 		}
@@ -2365,6 +2019,376 @@ namespace _2Y_2324_MidtermProject
 		{
 			this.SendPropertyChanging();
 			entity.Supply = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Orders")]
+	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Order_ID;
+		
+		private string _Staff_ID;
+		
+		private string _Customer_ID;
+		
+		private string _Pet_ID;
+		
+		private string _Supply_ID;
+		
+		private string _Order_Date;
+		
+		private System.Nullable<int> _Quantity;
+		
+		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<Staff> _Staff;
+		
+		private EntityRef<Pet> _Pet;
+		
+		private EntityRef<Supply> _Supply;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnOrder_IDChanging(string value);
+    partial void OnOrder_IDChanged();
+    partial void OnStaff_IDChanging(string value);
+    partial void OnStaff_IDChanged();
+    partial void OnCustomer_IDChanging(string value);
+    partial void OnCustomer_IDChanged();
+    partial void OnPet_IDChanging(string value);
+    partial void OnPet_IDChanged();
+    partial void OnSupply_IDChanging(string value);
+    partial void OnSupply_IDChanged();
+    partial void OnOrder_DateChanging(string value);
+    partial void OnOrder_DateChanged();
+    partial void OnQuantityChanging(System.Nullable<int> value);
+    partial void OnQuantityChanged();
+    #endregion
+		
+		public Order()
+		{
+			this._Customer = default(EntityRef<Customer>);
+			this._Staff = default(EntityRef<Staff>);
+			this._Pet = default(EntityRef<Pet>);
+			this._Supply = default(EntityRef<Supply>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Order_ID
+		{
+			get
+			{
+				return this._Order_ID;
+			}
+			set
+			{
+				if ((this._Order_ID != value))
+				{
+					this.OnOrder_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Order_ID = value;
+					this.SendPropertyChanged("Order_ID");
+					this.OnOrder_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Staff_ID
+		{
+			get
+			{
+				return this._Staff_ID;
+			}
+			set
+			{
+				if ((this._Staff_ID != value))
+				{
+					if (this._Staff.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStaff_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Staff_ID = value;
+					this.SendPropertyChanged("Staff_ID");
+					this.OnStaff_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Customer_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Customer_ID
+		{
+			get
+			{
+				return this._Customer_ID;
+			}
+			set
+			{
+				if ((this._Customer_ID != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCustomer_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Customer_ID = value;
+					this.SendPropertyChanged("Customer_ID");
+					this.OnCustomer_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Pet_ID", DbType="Char(10)")]
+		public string Pet_ID
+		{
+			get
+			{
+				return this._Pet_ID;
+			}
+			set
+			{
+				if ((this._Pet_ID != value))
+				{
+					if (this._Pet.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPet_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Pet_ID = value;
+					this.SendPropertyChanged("Pet_ID");
+					this.OnPet_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Supply_ID", DbType="Char(10)")]
+		public string Supply_ID
+		{
+			get
+			{
+				return this._Supply_ID;
+			}
+			set
+			{
+				if ((this._Supply_ID != value))
+				{
+					if (this._Supply.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSupply_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Supply_ID = value;
+					this.SendPropertyChanged("Supply_ID");
+					this.OnSupply_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Order_Date", DbType="VarChar(50)")]
+		public string Order_Date
+		{
+			get
+			{
+				return this._Order_Date;
+			}
+			set
+			{
+				if ((this._Order_Date != value))
+				{
+					this.OnOrder_DateChanging(value);
+					this.SendPropertyChanging();
+					this._Order_Date = value;
+					this.SendPropertyChanged("Order_Date");
+					this.OnOrder_DateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
+		public System.Nullable<int> Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Order", Storage="_Customer", ThisKey="Customer_ID", OtherKey="Customer_ID", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Customer_ID = value.Customer_ID;
+					}
+					else
+					{
+						this._Customer_ID = default(string);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Staff", ThisKey="Staff_ID", OtherKey="Staff_ID", IsForeignKey=true)]
+		public Staff Staff
+		{
+			get
+			{
+				return this._Staff.Entity;
+			}
+			set
+			{
+				Staff previousValue = this._Staff.Entity;
+				if (((previousValue != value) 
+							|| (this._Staff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Staff.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Staff.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Staff_ID = value.Staff_ID;
+					}
+					else
+					{
+						this._Staff_ID = default(string);
+					}
+					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Pet", ThisKey="Pet_ID", OtherKey="Pet_ID", IsForeignKey=true)]
+		public Pet Pet
+		{
+			get
+			{
+				return this._Pet.Entity;
+			}
+			set
+			{
+				Pet previousValue = this._Pet.Entity;
+				if (((previousValue != value) 
+							|| (this._Pet.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Pet.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Pet.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Pet_ID = value.Pet_ID;
+					}
+					else
+					{
+						this._Pet_ID = default(string);
+					}
+					this.SendPropertyChanged("Pet");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Supply_Order", Storage="_Supply", ThisKey="Supply_ID", OtherKey="Supply_ID", IsForeignKey=true)]
+		public Supply Supply
+		{
+			get
+			{
+				return this._Supply.Entity;
+			}
+			set
+			{
+				Supply previousValue = this._Supply.Entity;
+				if (((previousValue != value) 
+							|| (this._Supply.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Supply.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Supply.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Supply_ID = value.Supply_ID;
+					}
+					else
+					{
+						this._Supply_ID = default(string);
+					}
+					this.SendPropertyChanged("Supply");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

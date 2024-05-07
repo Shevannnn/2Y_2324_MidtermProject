@@ -102,7 +102,7 @@
             <ImageBrush ImageSource="/Images/bg.png"/>
         </Grid.Background>
         
-        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="Visible">
             <Image Source="/Images/Animalexpress Logo.png" Margin="0" Width="385" Height="224"/>
             <TextBlock Text="Username" FontSize="15" Margin="0 -15 115 -5" Width="77" HorizontalAlignment="Center" FontFamily="verdana" />
             <TextBox x:Name="txtUser" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontFamily="verdana" FontSize="13" Margin="0 5 0 0" Style="{StaticResource TxtBoxStyle}"/>
@@ -116,9 +116,9 @@
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 60 0" Width="110" Height="30" Text="Categories" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
-                <Button x:Name="btnAdd" Margin="0 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FF62E09C" Content="Add" Style="{StaticResource BtnStyle}" Click="btnAdd_Click"/>
-                <Button x:Name="btnCustomer" Margin="5 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FF80DFFF" Content="Customer" Style="{StaticResource BtnStyle}" Click="btnCustomer_Click"/>
-                <Button x:Name="btnLogout" Margin="5 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FFFA7171" Content="Logout" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
+                <Button x:Name="btnAdd" Visibility="Visible" Margin="0 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FF62E09C" Content="Add" Style="{StaticResource BtnStyle}" Click="btnAdd_Click"/>
+                <Button x:Name="btnCustomer" Visibility="Visible" Margin="5 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FF80DFFF" Content="Customer" Style="{StaticResource BtnStyle}" Click="btnCustomer_Click"/>
+                <Button x:Name="btnLogout" Visibility="Visible" Margin="5 -2 0 0" FontSize="12" Width="60" Height="25" Background="#FFFA7171" Content="Logout" Style="{StaticResource BtnStyle}" Click="btnLogout_Click"/>
             </StackPanel>
             <StackPanel Margin="50 10 50 10" Orientation="Horizontal">
                 <Button x:Name="btnPuppy" Margin="55 0 0 0" Height="130" Width="130" Background="white" BorderBrush="black" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnPuppy_Click" >
@@ -174,7 +174,7 @@
                 </ListView.View>
             </ListView>
             <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-                <Button x:Name="btnAdopted" Margin="290 0 0 0" Width="80" Height="20" Content="?" Style="{StaticResource BtnStyle2}" Click="btnDelete_Click" />
+                <Button x:Name="btnAdoptorBuy" Visibility="Visible" Margin="290 0 0 0" Width="80" Height="20" Content="?" Style="{StaticResource BtnStyle2}" Click="btnDelete_Click" />
             </StackPanel>
         </StackPanel>
 
@@ -261,7 +261,7 @@
                         <TextBox x:Name="txtPetDob" Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
                     </StackPanel>
                     <Button Visibility="Collapsed" x:Name="btnNewPet" Margin="0 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" FontSize="13" BorderBrush="Transparent" Width="90" Height="20" Style="{StaticResource BtnStyle}" Click="btnNewPet_Click" />
-                    <Button Visibility="Collapsed" x:Name="btnPurchase" Margin="0 10 0 0" Content="Purchase" FontFamily="verdana" Background="#FFFFAE80" FontSize="13" BorderBrush="Transparent" Width="90" Height="20" Style="{StaticResource BtnStyle}"  />
+                    <Button Visibility="Collapsed" x:Name="btnPetPurchase" Margin="0 10 0 0" Content="Purchase" FontFamily="verdana" Background="#FFFFAE80" FontSize="13" BorderBrush="Transparent" Width="90" Height="20" Style="{StaticResource BtnStyle}" Click="btnPetPurchase_Click"  />
                 </StackPanel>
                 
             </StackPanel>
@@ -331,21 +331,19 @@
                     <Button x:Name="btnNewCust" Visibility="Collapsed" Click="btnNewCust_Click" Margin="0 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}"/>
 
                 </StackPanel>
-
                 <StackPanel Orientation="Vertical">
                     <TextBlock Margin="134 20 0 0" FontSize="15" Text="Purchases"  />
-                    <ListView Name="Purchases" Margin="40,0,0,0" Width="250" Height="160"  >
+                    <ListView Name="lvPurchases" Margin="40,0,0,0" Width="250" Height="160"  >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
                                 <GridViewColumn Header="Qty" Width="50" DisplayMemberBinding="{Binding Column2}" />
                                 <GridViewColumn Header="Staff" Width="100" DisplayMemberBinding="{Binding Column3}" />
-                                <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Column4}" />
+                                <!--<GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Column4}" />-->
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <Button Margin="40 20 0 0" Width="90" Height="20" Content="Purchase" Style="{StaticResource BtnStyle}" />
-
+                    <Button x:Name="btnBuy" Margin="40 20 0 0" Width="90" Height="20" Content="Purchase" Style="{StaticResource BtnStyle}" Click="btnBuy_Click" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
