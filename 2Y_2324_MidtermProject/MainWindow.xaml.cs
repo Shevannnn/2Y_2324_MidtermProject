@@ -551,7 +551,14 @@ namespace _2Y_2324_MidtermProject
             txtSupplyName.Text = "";
             txtSupplyQty.Text = "";
             cbSupplyType.SelectedIndex = -1;
+
+            txtCustName.Text = "";
+            txtCustAge.Text = "";
+            txtCustNum.Text = "";
+            txtCustEmail.Text = "";
+            cbCustSex.SelectedIndex = -1;
         }
+
         private void cbPetBreed_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ChangePetImages();
@@ -690,22 +697,47 @@ namespace _2Y_2324_MidtermProject
                 foreach (Customer s in selectResults)
                 {
                     txtCustName.Text = s.Customer_Name;
-                    txtCustSex.Text = s.Customer_Sex;
                     txtCustAge.Text = s.Customer_Age.ToString();
                     txtCustNum.Text = s.Customer_Number.ToString();
                     txtCustEmail.Text = s.Customer_Email;
+
+                    switch (s.Customer_Sex)
+                    {
+                        case "Male":
+                            cbCustSex.SelectedIndex = 0;
+                            break;
+                        case "Female":
+                            cbCustSex.SelectedIndex = 1;
+                            break;
+                        default:
+                            cbCustSex.SelectedIndex = -1;
+                            break;
+                    }
                 }
             }
         }
 
-        private void btnAddCust_Click(object sender, RoutedEventArgs e)
+        private string GetCustID()
         {
-
+            var highestCust = _dbConn.Customers.OrderByDescending(p => p.Customer_ID).FirstOrDefault();
+            return highestCust.Customer_ID;
         }
 
-        private void btnDeleteCust_Click(object sender, RoutedEventArgs e)
+        private string GenerateCustID(string highestID)
         {
+            int num = int.Parse(highestID.Substring(3));
+            num++;
+            return "SUP" + num.ToString("D3");
+        }
 
+        private void btnAddCust_Click(object sender, RoutedEventArgs e)
+        {
+            ClearTBCB();
+            pnlCustomerInfo.Visibility= Visibility.Collapsed;
+            pnlCustomerList.Visibility= Visibility.Collapsed;
+            lvCustomer.Visibility= Visibility.Collapsed;
+            pnlCustomerInfo.Visibility=Visibility.Visible;
+            btnNewCust.Visibility=Visibility.Visible;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -762,6 +794,51 @@ namespace _2Y_2324_MidtermProject
                 }
 
 
+            }
+        }
+
+        private void btnNewCust_Click(object sender, RoutedEventArgs e)
+        {
+            Customer ncust = new Customer();
+            ncust.Customer_ID = GenerateCustID(GetCustID());
+            ncust.Customer_Name = txtCustName.Text;
+            ncust.Customer_Email = txtCustEmail.Text;
+
+            if (!string.IsNullOrWhiteSpace(txtCustAge.Text))
+            {
+                ncust.Customer_Age = GetNum(txtCustAge);
+            }
+            if (!string.IsNullOrWhiteSpace(txtCustAge.Text))
+            {
+                ncust.Customer_Number = GetNum(txtCustNum);
+            }
+
+            switch (cbCustSex.SelectedIndex)
+            {
+                case 0:
+                    ncust.Customer_Sex = "Male";
+                    break;
+                case 1:
+                    ncust.Customer_Sex = "Female";
+                    break;
+                default:
+                    ncust.Customer_Sex = "Undefined";
+                    break;
+            }
+
+            if (ncust.Customer_Name != null)
+            {
+                if (ncust.Customer_Age != -1 && ncust.Customer_Number != -1)
+                {
+                    _dbConn.Customers.InsertOnSubmit(ncust);
+                    _dbConn.SubmitChanges();
+                    MessageBox.Show("Succesfully added supply!");
+                    ClearTBCB();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Must input all details.");
             }
         }
     }
