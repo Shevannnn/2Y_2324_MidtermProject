@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -91,6 +92,20 @@ namespace _2Y_2324_MidtermProject
             pnlCategory.Visibility = Visibility.Collapsed;
         }
 
+        private string GetAvail(string ID)
+        {
+            IQueryable<Avail> selectResults = from s in _dbConn.Avails
+                                              where s.Avail_ID == ID
+                                              select s;
+
+            Avail temp = selectResults.FirstOrDefault();
+            if (temp != null)
+            {
+                return temp.Avail_Desc;
+            }
+            return null;
+        }
+
         private void GetPetData(int age, string type)
         {
             lvPets.Items.Clear();
@@ -98,20 +113,20 @@ namespace _2Y_2324_MidtermProject
             if (age == 1)
             {
                 selectResults = from s in _dbConn.Pets
-                                where s.Pet_Age <= 1 && s.Pet_Type == type
+                                where s.Pet_Age <= 1 && s.Pet_Type == type && s.Avail_ID == "AVL001"
                                 select s;
             }
             else
             {
                 selectResults = from s in _dbConn.Pets
-                                where s.Pet_Age >= age && s.Pet_Type == type
+                                where s.Pet_Age >= age && s.Pet_Type == type && s.Avail_ID == "AVL001"
                                 select s;
             }
             if (selectResults.Count() >= 1)
             {
                 foreach (Pet p in selectResults)
                 {
-                    lvPets.Items.Add(new { Column1 = p.Pet_Name, Column2 = p.Pet_Age, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender });
+                    lvPets.Items.Add(new { Column1 = p.Pet_Name, Column2 = p.Pet_Age, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender, Column5 = GetAvail(p.Avail_ID) });
                 }
             }
         }
@@ -123,20 +138,20 @@ namespace _2Y_2324_MidtermProject
             if (type == "Dog Food" || type == "Dog Toy")
             {
                 selectResults = from s in _dbConn.Supplies
-                                where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy"
+                                where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy" && s.Avail_ID == "AVL001"
                                 select s;
             }
             else if (type == "Cat Food" || type == "Cat Toy")
             {
                 selectResults = from s in _dbConn.Supplies
-                                where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy"
+                                where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy" && s.Avail_ID == "AVL001"
                                 select s;
             }
             if (selectResults.Count() >= 1)
             {
                 foreach (Supply s in selectResults)
                 {
-                    lvSupplies.Items.Add(new { Column1 = s.Supply_Name, Column2 = s.Supply_Quantity, Column3 = s.Supply_Type });
+                    lvSupplies.Items.Add(new { Column1 = s.Supply_Name, Column2 = s.Supply_Quantity, Column3 = s.Supply_Type, Column4 = GetAvail(s.Avail_ID) });
                 }
             }
         }
@@ -683,44 +698,6 @@ namespace _2Y_2324_MidtermProject
             }
         }
 
-        private void Delete(ListView lv, string ID, string categ, int age, string ptype, string stype)
-        {
-            dynamic selectedItem = lv.SelectedItem;
-            string name = selectedItem.Column1;
-            DeleteWindow newWin = new DeleteWindow();
-            bool? dialogResult = newWin.ShowDialog();
-
-            if (dialogResult.HasValue && dialogResult.Value)
-            {
-                if (categ == "pet")
-                {
-                    var toDelete = _dbConn.Pets.FirstOrDefault(s => s.Pet_ID == ID);
-                    _dbConn.Pets.DeleteOnSubmit(toDelete);
-                }
-                else if (categ == "supply")
-                {
-                    var toDelete = _dbConn.Supplies.FirstOrDefault(s => s.Supply_ID == ID);
-                    _dbConn.Supplies.DeleteOnSubmit(toDelete);
-                }
-                else if (categ == "cust")
-                {
-                    var toDelete = _dbConn.Customers.FirstOrDefault(s => s.Customer_ID == ID);
-                    _dbConn.Customers.DeleteOnSubmit(toDelete);
-                }
-
-                _dbConn.SubmitChanges();
-                switch (categ)
-                {
-                    case "pet":
-                        GetPetData(age, ptype);
-                        break;
-                    case "supply":
-                        GetSupplyData(stype);
-                        break;
-                }
-            }
-        }
-
         private void btnAddCust_Click(object sender, RoutedEventArgs e)
         {
 
@@ -733,37 +710,58 @@ namespace _2Y_2324_MidtermProject
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (lvPets.SelectedItem != null || lvSupplies.SelectedItem != null)
+            DeleteWindow newWin = new DeleteWindow();
+            bool? dialogResult = newWin.ShowDialog();
+
+            if (dialogResult.HasValue && dialogResult.Value)
             {
-                if (_selector == "pet")
+                if (lvPets.SelectedItem != null || lvSupplies.SelectedItem != null)
                 {
-                    dynamic selectedItem = lvPets.SelectedItem;
-                    string name = selectedItem.Column1;
-                    IQueryable<Pet> selectResults = from s in _dbConn.Pets
-                                                    where s.Pet_Name == name
-                                                    select s;
-                    Pet temp = selectResults.FirstOrDefault();
-                    int age = temp.Pet_Age;
-                    string ptype = temp.Pet_Type;
-                    string selectedID = temp.Pet_ID;
-                    Delete(lvPets, selectedID, "pet", age, ptype, "none");
+                    int age = 0;
+                    string ptype = "";
+                    string stype = "";
+
+                    if (_selector == "pet")
+                    {
+                        dynamic selectedItem = lvPets.SelectedItem;
+                        string name = selectedItem.Column1;
+                        IQueryable<Pet> selectResults = from s in _dbConn.Pets
+                                                        where s.Pet_Name == name
+                                                        select s;
+                        Pet temp = selectResults.FirstOrDefault();
+                        age = temp.Pet_Age;
+                        ptype = temp.Pet_Type;
+                        temp.Avail_ID = "AVL002";
+                    }
+                    else if (_selector == "supply")
+                    {
+                        dynamic selectedItem = lvSupplies.SelectedItem;
+                        string name = selectedItem.Column1;
+                        IQueryable<Supply> selectResults = from s in _dbConn.Supplies
+                                                           where s.Supply_Name == name
+                                                           select s;
+                        Supply temp = selectResults.FirstOrDefault();
+                        stype = temp.Supply_Type;
+                        temp.Avail_ID = "AVL003";
+                    }
+
+                    _dbConn.SubmitChanges();
+                    switch (_selector)
+                    {
+                        case "pet":
+                            GetPetData(age, ptype);
+                            break;
+                        case "supply":
+                            GetSupplyData(stype);
+                            break;
+                    }
                 }
-                else if (_selector == "supply")
+                else
                 {
-                    dynamic selectedItem = lvSupplies.SelectedItem;
-                    string name = selectedItem.Column1;
-                    IQueryable<Supply> selectResults = from s in _dbConn.Supplies
-                                                    where s.Supply_Name == name
-                                                    select s;
-                    Supply temp = selectResults.FirstOrDefault();
-                    string stype = temp.Supply_Type;
-                    string selectedID = temp.Supply_ID;
-                    Delete(lvSupplies, selectedID, "supply", -1, "none", stype);
+                    MessageBox.Show("Nothing selected. Please try again.");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Nothing selected. Please try again.");
+
+
             }
         }
     }
