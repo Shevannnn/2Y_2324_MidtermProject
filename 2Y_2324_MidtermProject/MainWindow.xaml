@@ -283,7 +283,7 @@
 
             </StackPanel>
             <StackPanel Margin="0 30 0 0" Orientation="Horizontal" >
-                <StackPanel Margin="120 40 0 0" Orientation="Vertical">
+                <StackPanel Margin="90 40 0 0" Orientation="Vertical">
                     <TextBlock Margin="0 -10 0 0" FontSize="15" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="Transparent"  />
                     <TextBox x:Name="txtCustName" Margin="0 0 0 0" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
@@ -307,29 +307,33 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
-                    <ListView Name="Purchases" Margin="40,30,0,0" Width="205" Height="150"  >
+                    <TextBlock Margin="142 20 0 0" Text="Purchases"  />
+                    <ListView Name="Purchases" Margin="40,0,0,0" Width="250" Height="150"  >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Purchases" Width="200" DisplayMemberBinding="{Binding Column1}" />
+                                <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
+                                <GridViewColumn Header="Qty" Width="50" DisplayMemberBinding="{Binding Column2}" />
+                                <GridViewColumn Header="Staff" Width="100" DisplayMemberBinding="{Binding Column3}" />
+                                <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Column4}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
                     <StackPanel>
-                        <TextBlock Text="Category" FontFamily="verdana" Margin="115 7 0 0"  />
+                        <TextBlock Text="Category" FontFamily="verdana" Margin="140 7 0 0"  />
                         <ComboBox Margin="42 3 0 0" Width="150" >
                         </ComboBox>
                         <StackPanel x:Name="petType" Visibility="Collapsed">
-                            <TextBlock Margin="130 3 0 0" Text="Type" />
+                            <TextBlock Margin="154 3 0 0" Text="Type" />
                             <ComboBox Margin="42 3 0 0" Width="150" >
                             </ComboBox>
                         </StackPanel>
                         <StackPanel x:Name="supplyType" Orientation="Vertical" Visibility="Collapsed" >
                             <StackPanel Orientation="Horizontal" >
-                                <TextBlock Text="Type" Margin="83 3 0 0"/>
+                                <TextBlock Text="Type" Margin="106 3 0 0"/>
                                 <TextBlock Text="Qty"  Margin="69 3 0 0"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  >
-                                <ComboBox Margin="56 3 0 0" Width="80"  >
+                                <ComboBox Margin="78 3 0 0" Width="80"  >
                                 </ComboBox>
                                 <TextBox Margin="12 3 0 0" FontFamily="verdana" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" />
                             </StackPanel>
