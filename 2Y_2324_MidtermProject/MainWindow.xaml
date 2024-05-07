@@ -112,7 +112,7 @@
         </StackPanel>
 
 
-        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
+        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 60 0" Width="110" Height="30" Text="Categories" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -201,7 +201,7 @@
 
         </StackPanel>
 
-        <StackPanel x:Name="pnlInformation" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlInformation" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 180 0" Width="100" Height="43"/>
                 <TextBlock x:Name="txtInfoHead" Margin="-20 0 0 0" Width="200" Height="30" Text="insert text" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -209,9 +209,21 @@
                 <Button x:Name="btnBack2Category3" Visibility="Collapsed" Margin="130 0 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Category_Click" />
             </StackPanel>
            
-            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed"  >
+            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Visible"  >
                 <StackPanel Orientation="Vertical" >
-                    <TextBlock x:Name="txtAvail" Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="Green" Width="70"/>
+                    <Button x:Name="txtAvail" Margin="100 0 0 5" Content="?" FontFamily="verdana" HorizontalContentAlignment="Center" BorderThickness="0" Background="LightGreen" Height="20" Width="100" FontSize="15">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" 
+                                     BorderBrush="{TemplateBinding BorderBrush}" 
+                                     BorderThickness="{TemplateBinding BorderThickness}" 
+                                     CornerRadius="10">
+                                    <!-- Adjust the CornerRadius as needed -->
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                     <Image x:Name="imgPet" Source="/Images/BlankImage.png" Margin="100 0 0 0" Width="200" Height="200"/>
                     <!--<Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>-->
                 </StackPanel>
@@ -248,7 +260,7 @@
                         </ComboBox>
                         <TextBox x:Name="txtPetDob" Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
                     </StackPanel>
-                    <Button x:Name="btnNewPet" Margin="0 10 0 0" Content="Add New" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}" Click="btnNewPet_Click" />
+                    <Button x:Name="btnNewPet" Margin="0 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" FontSize="13" BorderBrush="Transparent" Width="90" Height="20" Style="{StaticResource BtnStyle}" Click="btnNewPet_Click" />
                 </StackPanel>
             </StackPanel>
 
