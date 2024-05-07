@@ -194,14 +194,14 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+            <StackPanel Margin="56 10 0 0" Orientation="Horizontal">
                 <Button x:Name="btnAddCust" Margin="240 0 0 0" Width="80" Height="20" Content="Add" Style="{StaticResource BtnStyle1}" Click="btnAddCust_Click" />
                 <!--<Button x:Name="btnDeleteCust" Margin="20 0 0 0" Width="80" Height="20" Content="Delete" Style="{StaticResource BtnStyle2}" Click="btnDeleteCust_Click" />-->
             </StackPanel>
 
         </StackPanel>
 
-        <StackPanel x:Name="pnlInformation" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
+        <StackPanel x:Name="pnlInformation" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 180 0" Width="100" Height="43"/>
                 <TextBlock x:Name="txtInfoHead" Margin="-20 0 0 0" Width="200" Height="30" Text="insert text" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -209,7 +209,7 @@
                 <Button x:Name="btnBack2Category3" Visibility="Collapsed" Margin="130 0 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Category_Click" />
             </StackPanel>
            
-            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Visible"  >
+            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" >
                 <StackPanel Orientation="Vertical" >
                     <Button x:Name="txtAvail" Margin="100 0 0 5" Content="?" FontFamily="verdana" HorizontalContentAlignment="Center" BorderThickness="0" Background="LightGreen" Height="20" Width="100" FontSize="15">
                         <Button.Template>
@@ -260,8 +260,10 @@
                         </ComboBox>
                         <TextBox x:Name="txtPetDob" Margin="12 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
                     </StackPanel>
-                    <Button x:Name="btnNewPet" Margin="0 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" FontSize="13" BorderBrush="Transparent" Width="90" Height="20" Style="{StaticResource BtnStyle}" Click="btnNewPet_Click" />
+                    <Button Visibility="Collapsed" x:Name="btnNewPet" Margin="0 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" FontSize="13" BorderBrush="Transparent" Width="90" Height="20" Style="{StaticResource BtnStyle}" Click="btnNewPet_Click" />
+                    <Button Visibility="Collapsed" x:Name="btnPurchase" Margin="0 10 0 0" Content="Purchase" FontFamily="verdana" Background="#FFFFAE80" FontSize="13" BorderBrush="Transparent" Width="90" Height="20" Style="{StaticResource BtnStyle}"  />
                 </StackPanel>
+                
             </StackPanel>
 
             <StackPanel x:Name="pnlSupplyInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed" >
@@ -299,7 +301,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel x:Name="pnlCustomerInfo" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlCustomerInfo" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 150 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 130 0" Width="225" Height="30" Text="Customer Information" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -331,8 +333,8 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Margin="142 20 0 0" Text="Purchases"  />
-                    <ListView Name="Purchases" Margin="40,0,0,0" Width="250" Height="150"  >
+                    <TextBlock Margin="134 20 0 0" FontSize="15" Text="Purchases"  />
+                    <ListView Name="Purchases" Margin="40,0,0,0" Width="250" Height="160"  >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
@@ -342,36 +344,8 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-                    <StackPanel>
-                        <TextBlock Text="Category" FontFamily="verdana" Margin="140 7 0 0"  />
-                        <ComboBox Margin="42 3 0 0" Width="150" >
-                        </ComboBox>
-                        <StackPanel x:Name="petType" Visibility="Collapsed">
-                            <TextBlock Margin="154 3 0 0" Text="Type" />
-                            <ComboBox Margin="42 3 0 0" Width="150" >
-                                <ComboBoxItem Content="Puppy"/>
-                                <ComboBoxItem Content="Adult Dog"/>
-                                <ComboBoxItem Content="Dog Supply"/>
-                                <ComboBoxItem Content="Kitten"/>
-                                <ComboBoxItem Content="Adult Cat"/>
-                                <ComboBoxItem Content="Cat Supply"/>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel x:Name="supplyType" Orientation="Vertical" Visibility="Visible" > <!--if dog or cat is chosen-->
-                            <StackPanel Orientation="Horizontal" >
-                                <TextBlock Text="Type" Margin="106 3 0 0"/>
-                                <TextBlock Text="Qty"  Margin="69 3 0 0"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal"  >
-                                <ComboBox Margin="78 3 0 0" Width="80"  >
-                                    <ComboBoxItem Content="Puppy"/>
-                                    <ComboBoxItem Content="Adult Dog"/>
-                                </ComboBox>
-                                <TextBox Margin="12 3 0 0" FontFamily="verdana" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" />
-                            </StackPanel>
-                        </StackPanel>
-                        <Button x:Name="purchase" Margin="43 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Visibility="Collapsed" Style="{StaticResource BtnStyle}" />
-                    </StackPanel>
+                    <Button Margin="40 20 0 0" Width="90" Height="20" Content="Purchase" Style="{StaticResource BtnStyle}" />
+
                 </StackPanel>
             </StackPanel>
         </StackPanel>
