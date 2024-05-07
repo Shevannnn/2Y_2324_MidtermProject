@@ -372,7 +372,7 @@ namespace _2Y_2324_MidtermProject
                     switch (s.Avail_ID.Trim())
                     {
                         case "AVL001":
-                            txtAvailSupply.Content = "Avail";
+                            txtAvailSupply.Content = "Available";
                             txtAvail.Background = new SolidColorBrush(Colors.LightGreen);
                             break;
                         case "AVL003":
