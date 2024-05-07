@@ -126,7 +126,7 @@ namespace _2Y_2324_MidtermProject
             {
                 foreach (Pet p in selectResults)
                 {
-                    lvPets.Items.Add(new { Column1 = p.Pet_Name, Column2 = p.Pet_Age, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender, Column5 = GetAvail(p.Avail_ID) });
+                    lvPets.Items.Add(new { Column1 = p.Pet_ID, Column2 = p.Pet_Name, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender, Column5 = GetAvail(p.Avail_ID) });
 
                 }
             }
@@ -152,7 +152,7 @@ namespace _2Y_2324_MidtermProject
             {
                 foreach (Supply s in selectResults)
                 {
-                    lvSupplies.Items.Add(new { Column1 = s.Supply_Name, Column2 = s.Supply_Quantity, Column3 = s.Supply_Type, Column4 = GetAvail(s.Avail_ID) });
+                    lvSupplies.Items.Add(new { Column1 = s.Supply_ID, Column2 = s.Supply_Name, Column3 = s.Supply_Quantity, Column4 = s.Supply_Type, Column5 = GetAvail(s.Avail_ID) });
                 }
             }
         }
@@ -235,10 +235,10 @@ namespace _2Y_2324_MidtermProject
                 btnBack2Inv.Visibility = Visibility.Visible;
                 btnBack2Category3.Visibility = Visibility.Collapsed;
                 dynamic selectedItem = lvPets.SelectedItem;
-                string name = selectedItem.Column1;
+                string id = selectedItem.Column1;
 
                 IQueryable<Pet> selectResults = from s in _dbConn.Pets
-                                                where s.Pet_Name == name
+                                                where s.Pet_ID == id
                                                 select s;
 
                 pnlInventory.Visibility = Visibility.Collapsed;
@@ -288,16 +288,16 @@ namespace _2Y_2324_MidtermProject
                             break;
                     }
 
-                    if (p.Avail_ID == "AVL002")
-                    {
-                        txtAvail.Text = "Adopted";
-                        txtAvail.Foreground = new SolidColorBrush(Colors.OrangeRed);
-                    }
-                    else if (p.Avail_ID == "AVL001")
-                    {
-                        txtAvail.Text = "Available";
-                        txtAvail.Foreground = new SolidColorBrush(Colors.Green);
-                    }
+                    //if (p.Avail_ID == "AVL002")
+                    //{
+                    //    txtAvail.Text = "Adopted";
+                    //    txtAvail.Foreground = new SolidColorBrush(Colors.OrangeRed);
+                    //}
+                    //else if (p.Avail_ID == "AVL001")
+                    //{
+                    //    txtAvail.Text = "Available";
+                    //    txtAvail.Foreground = new SolidColorBrush(Colors.Green);
+                    //}
                 }
                 ChangePetImages();
             }
@@ -311,10 +311,10 @@ namespace _2Y_2324_MidtermProject
                 btnBack2Inv.Visibility = Visibility.Visible;
                 btnBack2Category3.Visibility = Visibility.Collapsed;
                 dynamic selectedItem = lvSupplies.SelectedItem;
-                string name = selectedItem.Column1;
+                string id = selectedItem.Column1;
 
                 IQueryable<Supply> selectResults = from s in _dbConn.Supplies
-                                                   where s.Supply_Name == name
+                                                   where s.Supply_ID == id
                                                    select s;
 
                 pnlInventory.Visibility = Visibility.Collapsed;
@@ -325,16 +325,21 @@ namespace _2Y_2324_MidtermProject
                     txtSupplyName.Text = s.Supply_Name;
                     txtSupplyQty.Text = s.Supply_Quantity.ToString();
 
-                    switch (s.Avail_ID)
-                    {
-                        case "AVL001":
-                            MessageBox.Show("test");
-                            txtAvailSupply.Text = "Avail";
-                            break;
-                        case "AVL003":
-                            txtAvailSupply.Text = "Not Available";
-                            break;
-                    }
+                    //MessageBox.Show(s.Avail_ID);
+
+                    //switch (s.Avail_ID)
+                    //{
+                    //    case "AVL001":
+                    //        MessageBox.Show("test");
+                    //        txtAvailSupply.Text = "Avail";
+                    //        txtAvail.Text = "testt";
+                    //        break;
+                    //    case "AVL003":
+                    //        MessageBox.Show("test");
+                    //        txtAvailSupply.Text = "Not Available";
+                    //        txtAvail.Text = "testt";
+                    //        break;
+                    //}
 
                     switch (s.Supply_Type)
                     {
