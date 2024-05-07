@@ -291,10 +291,10 @@ namespace _2Y_2324_MidtermProject
                     switch (p.Avail_ID.Trim())
                     {
                         case "AVL001":
-                            txtAvail.Text = "Avail";
+                            txtAvail.Text = "Available";
                             break;
                         case "AVL002":
-                            txtAvail.Text = "Not Available";
+                            txtAvail.Text = "Adopted";
                             break;
                     }
 
