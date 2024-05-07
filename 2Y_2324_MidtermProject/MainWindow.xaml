@@ -112,7 +112,7 @@
         </StackPanel>
 
 
-        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
+        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 60 0" Width="110" Height="30" Text="Categories" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -145,7 +145,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel x:Name="pnlInventory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlInventory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 200 0" Width="110" Height="30" Text="Inventory" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -154,21 +154,22 @@
             <ListView x:Name="lvPets" Margin="0,0,0,0" Width="504" Height="310" Visibility="Collapsed" MouseDoubleClick="lvPets_MouseDoubleClick" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
-                        <GridViewColumn Header="Age" Width="100" DisplayMemberBinding="{Binding Column2}" />
+                        <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Column1}" />
+                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column2}" />
                         <GridViewColumn Header="Breed" Width="100" DisplayMemberBinding="{Binding Column3}" />
                         <GridViewColumn Header="Gender" Width="100" DisplayMemberBinding="{Binding Column4}" />
                         <GridViewColumn Header="Availability" Width="100" DisplayMemberBinding="{Binding Column5}" />
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListView x:Name="lvSupplies" Margin="0,0,0,0" Width="400" Height="310" Visibility="Collapsed" MouseDoubleClick="lvSupplies_MouseDoubleClick" >
+            <ListView x:Name="lvSupplies" Margin="0,0,0,0" Width="504" Height="310" Visibility="Visible" MouseDoubleClick="lvSupplies_MouseDoubleClick" >
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column1}" />
-                        <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Column2}" />
-                        <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Column3}" />
-                        <GridViewColumn Header="Availability" Width="100" DisplayMemberBinding="{Binding Column4}" />
+                        <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding Column1}" />
+                        <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Column2}" />
+                        <GridViewColumn Header="Quantity" Width="100" DisplayMemberBinding="{Binding Column3}" />
+                        <GridViewColumn Header="Type" Width="100" DisplayMemberBinding="{Binding Column4}" />
+                        <GridViewColumn Header="Availability" Width="100" DisplayMemberBinding="{Binding Column5}" />
                     </GridView>
                 </ListView.View>
             </ListView>
