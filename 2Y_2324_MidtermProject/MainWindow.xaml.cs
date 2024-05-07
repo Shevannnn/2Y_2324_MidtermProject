@@ -113,13 +113,13 @@ namespace _2Y_2324_MidtermProject
             if (age == 1)
             {
                 selectResults = from s in _dbConn.Pets
-                                where s.Pet_Age <= 1 && s.Pet_Type == type && s.Avail_ID == "AVL001"
+                                where s.Pet_Age <= 1 && s.Pet_Type == type /*&& s.Avail_ID == "AVL001"*/
                                 select s;
             }
             else
             {
                 selectResults = from s in _dbConn.Pets
-                                where s.Pet_Age >= age && s.Pet_Type == type && s.Avail_ID == "AVL001"
+                                where s.Pet_Age >= age && s.Pet_Type == type /*&& s.Avail_ID == "AVL001"*/
                                 select s;
             }
             if (selectResults.Count() >= 1)
@@ -127,6 +127,7 @@ namespace _2Y_2324_MidtermProject
                 foreach (Pet p in selectResults)
                 {
                     lvPets.Items.Add(new { Column1 = p.Pet_Name, Column2 = p.Pet_Age, Column3 = p.Pet_Breed, Column4 = p.Pet_Gender, Column5 = GetAvail(p.Avail_ID) });
+
                 }
             }
         }
@@ -138,13 +139,13 @@ namespace _2Y_2324_MidtermProject
             if (type == "Dog Food" || type == "Dog Toy")
             {
                 selectResults = from s in _dbConn.Supplies
-                                where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy" && s.Avail_ID == "AVL001"
+                                where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy" /*&& s.Avail_ID == "AVL001"*/
                                 select s;
             }
             else if (type == "Cat Food" || type == "Cat Toy")
             {
                 selectResults = from s in _dbConn.Supplies
-                                where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy" && s.Avail_ID == "AVL001"
+                                where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy" /*&& s.Avail_ID == "AVL001"*/
                                 select s;
             }
             if (selectResults.Count() >= 1)
@@ -286,6 +287,17 @@ namespace _2Y_2324_MidtermProject
                             cbPetSex.SelectedIndex = 1;
                             break;
                     }
+
+                    if (p.Avail_ID == "AVL002")
+                    {
+                        txtAvail.Text = "Adopted";
+                        txtAvail.Foreground = new SolidColorBrush(Colors.OrangeRed);
+                    }
+                    else if (p.Avail_ID == "AVL001")
+                    {
+                        txtAvail.Text = "Available";
+                        txtAvail.Foreground = new SolidColorBrush(Colors.Green);
+                    }
                 }
                 ChangePetImages();
             }
@@ -307,13 +319,22 @@ namespace _2Y_2324_MidtermProject
 
                 pnlInventory.Visibility = Visibility.Collapsed;
                 lvSupplies.Visibility = Visibility.Collapsed;
-                pnlInformation.Visibility = Visibility.Visible;
-                pnlSupplyInfo.Visibility = Visibility.Visible;
 
                 foreach (Supply s in selectResults)
                 {
                     txtSupplyName.Text = s.Supply_Name;
                     txtSupplyQty.Text = s.Supply_Quantity.ToString();
+
+                    switch (s.Avail_ID)
+                    {
+                        case "AVL001":
+                            MessageBox.Show("test");
+                            txtAvailSupply.Text = "Avail";
+                            break;
+                        case "AVL003":
+                            txtAvailSupply.Text = "Not Available";
+                            break;
+                    }
 
                     switch (s.Supply_Type)
                     {
@@ -330,8 +351,12 @@ namespace _2Y_2324_MidtermProject
                             cbSupplyType.SelectedIndex = 3;
                             break;
                     }
+
+
                 }
                 ChangeSupplyImages();
+                pnlInformation.Visibility = Visibility.Visible;
+                pnlSupplyInfo.Visibility = Visibility.Visible;
             }
         }
 

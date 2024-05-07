@@ -112,7 +112,7 @@
         </StackPanel>
 
 
-        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlCategory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 205 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 60 0" Width="110" Height="30" Text="Categories" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
@@ -210,7 +210,7 @@
            
             <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed"  >
                 <StackPanel Orientation="Vertical" >
-                    <TextBlock Margin="100 0 0 5" Text="Available" FontFamily="verdana" TextAlignment="Center" Background="LightGreen" Width="70"/>
+                    <TextBlock x:Name="txtAvail" Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="Green" Width="70"/>
                     <Image x:Name="imgPet" Source="/Images/BlankImage.png" Margin="100 0 0 0" Width="200" Height="200"/>
                     <!--<Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>-->
                 </StackPanel>
@@ -253,7 +253,7 @@
 
             <StackPanel x:Name="pnlSupplyInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed" >
                 <StackPanel Orientation="Vertical" >
-                    <TextBlock Margin="100 0 0 5" Text="Available" FontFamily="verdana" TextAlignment="Center" Background="LightGreen" Width="70"/>
+                    <TextBlock x:Name="txtAvailSupply" Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="IndianRed" Width="70"/>
                     <Image x:Name="imgSupply" Source="/Images/BlankImage.png" Margin="100 0 0 0" Width="200" Height="200"/>
                     <!--<Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>-->
                 </StackPanel>
@@ -274,7 +274,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel x:Name="pnlCustomerInfo" Margin="20 20 20 20" Orientation="Vertical" Visibility="Visible">
+        <StackPanel x:Name="pnlCustomerInfo" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Images/Animalexpress Logo.png" Margin="-30 -10 150 0" Width="100" Height="43"/>
                 <TextBlock Margin="0 20 130 0" Width="225" Height="30" Text="Customer Information" TextAlignment="Center" FontSize="20" FontFamily="verdana"/>
