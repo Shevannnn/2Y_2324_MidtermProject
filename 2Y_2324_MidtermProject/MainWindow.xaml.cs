@@ -288,16 +288,16 @@ namespace _2Y_2324_MidtermProject
                             break;
                     }
 
-                    //if (p.Avail_ID == "AVL002")
-                    //{
-                    //    txtAvail.Text = "Adopted";
-                    //    txtAvail.Foreground = new SolidColorBrush(Colors.OrangeRed);
-                    //}
-                    //else if (p.Avail_ID == "AVL001")
-                    //{
-                    //    txtAvail.Text = "Available";
-                    //    txtAvail.Foreground = new SolidColorBrush(Colors.Green);
-                    //}
+                    switch (p.Avail_ID.Trim())
+                    {
+                        case "AVL001":
+                            txtAvail.Text = "Avail";
+                            break;
+                        case "AVL002":
+                            txtAvail.Text = "Not Available";
+                            break;
+                    }
+
                 }
                 ChangePetImages();
             }
@@ -324,22 +324,17 @@ namespace _2Y_2324_MidtermProject
                 {
                     txtSupplyName.Text = s.Supply_Name;
                     txtSupplyQty.Text = s.Supply_Quantity.ToString();
+                    //s.Avail_ID.Trim();
 
-                    //MessageBox.Show(s.Avail_ID);
-
-                    //switch (s.Avail_ID)
-                    //{
-                    //    case "AVL001":
-                    //        MessageBox.Show("test");
-                    //        txtAvailSupply.Text = "Avail";
-                    //        txtAvail.Text = "testt";
-                    //        break;
-                    //    case "AVL003":
-                    //        MessageBox.Show("test");
-                    //        txtAvailSupply.Text = "Not Available";
-                    //        txtAvail.Text = "testt";
-                    //        break;
-                    //}
+                    switch (s.Avail_ID.Trim())
+                    {
+                        case "AVL001":
+                            txtAvailSupply.Text = "Avail";
+                            break;
+                        case "AVL003":
+                            txtAvailSupply.Text = "Not Available";
+                            break;
+                    }
 
                     switch (s.Supply_Type)
                     {
