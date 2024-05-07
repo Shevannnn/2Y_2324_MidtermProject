@@ -291,10 +291,12 @@ namespace _2Y_2324_MidtermProject
                     switch (p.Avail_ID.Trim())
                     {
                         case "AVL001":
-                            txtAvail.Text = "Available";
+                            txtAvail.Content = "Available";
+                            txtAvail.Background = new SolidColorBrush(Colors.LightGreen);
                             break;
                         case "AVL002":
-                            txtAvail.Text = "Adopted";
+                            txtAvail.Content = "Adopted";
+                            txtAvail.Background = new SolidColorBrush(Colors.IndianRed);
                             break;
                     }
 
@@ -324,15 +326,16 @@ namespace _2Y_2324_MidtermProject
                 {
                     txtSupplyName.Text = s.Supply_Name;
                     txtSupplyQty.Text = s.Supply_Quantity.ToString();
-                    //s.Avail_ID.Trim();
 
                     switch (s.Avail_ID.Trim())
                     {
                         case "AVL001":
-                            txtAvailSupply.Text = "Avail";
+                            txtAvailSupply.Content = "Avail";
+                            txtAvail.Background = new SolidColorBrush(Colors.LightGreen);
                             break;
                         case "AVL003":
-                            txtAvailSupply.Text = "Not Available";
+                            txtAvailSupply.Content = "Unavailable";
+                            txtAvail.Background = new SolidColorBrush(Colors.IndianRed);
                             break;
                     }
 

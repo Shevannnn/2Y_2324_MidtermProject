@@ -266,7 +266,19 @@
 
             <StackPanel x:Name="pnlSupplyInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed" >
                 <StackPanel Orientation="Vertical" >
-                    <TextBox x:Name="txtAvailSupply" Margin="100 0 0 5" Text="?" FontFamily="verdana" TextAlignment="Center" Background="IndianRed" Width="70"/>
+                    <Button x:Name="txtAvailSupply" Margin="100 0 0 5" Content="?" FontFamily="verdana" HorizontalContentAlignment="Center" BorderThickness="0" Background="LightGreen" Height="20" Width="100" FontSize="15">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="{TemplateBinding Background}" 
+                                     BorderBrush="{TemplateBinding BorderBrush}" 
+                                     BorderThickness="{TemplateBinding BorderThickness}" 
+                                     CornerRadius="10">
+                                    <!-- Adjust the CornerRadius as needed -->
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                     <Image x:Name="imgSupply" Source="/Images/BlankImage.png" Margin="100 0 0 0" Width="200" Height="200"/>
                     <!--<Border Margin="100 0 0 0" BorderBrush="Black" BorderThickness="1" Height="200" Width="200"/>-->
                 </StackPanel>
@@ -337,15 +349,23 @@
                         <StackPanel x:Name="petType" Visibility="Collapsed">
                             <TextBlock Margin="154 3 0 0" Text="Type" />
                             <ComboBox Margin="42 3 0 0" Width="150" >
+                                <ComboBoxItem Content="Puppy"/>
+                                <ComboBoxItem Content="Adult Dog"/>
+                                <ComboBoxItem Content="Dog Supply"/>
+                                <ComboBoxItem Content="Kitten"/>
+                                <ComboBoxItem Content="Adult Cat"/>
+                                <ComboBoxItem Content="Cat Supply"/>
                             </ComboBox>
                         </StackPanel>
-                        <StackPanel x:Name="supplyType" Orientation="Vertical" Visibility="Collapsed" >
+                        <StackPanel x:Name="supplyType" Orientation="Vertical" Visibility="Visible" > <!--if dog or cat is chosen-->
                             <StackPanel Orientation="Horizontal" >
                                 <TextBlock Text="Type" Margin="106 3 0 0"/>
                                 <TextBlock Text="Qty"  Margin="69 3 0 0"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  >
                                 <ComboBox Margin="78 3 0 0" Width="80"  >
+                                    <ComboBoxItem Content="Puppy"/>
+                                    <ComboBoxItem Content="Adult Dog"/>
                                 </ComboBox>
                                 <TextBox Margin="12 3 0 0" FontFamily="verdana" FontSize="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Width="80" />
                             </StackPanel>
