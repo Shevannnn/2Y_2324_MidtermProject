@@ -102,7 +102,7 @@
             <ImageBrush ImageSource="/Images/bg.png"/>
         </Grid.Background>
         
-        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="Collapsed">
+        <StackPanel x:Name="pnlLogin" Margin="20" Orientation="Vertical" Visibility="Visible">
             <Image Source="/Images/Animalexpress Logo.png" Margin="0" Width="385" Height="224"/>
             <TextBlock Text="Username" FontSize="15" Margin="0 -15 115 -5" Width="77" HorizontalAlignment="Center" FontFamily="verdana" />
             <TextBox x:Name="txtUser" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontFamily="verdana" FontSize="13" Margin="0 5 0 0" Style="{StaticResource TxtBoxStyle}"/>
@@ -143,6 +143,7 @@
                     <Image Source="/Images/CatSupply.png" Stretch="Uniform" Width="120" Height="120"/>
                 </Button>
             </StackPanel>
+            <Button x:Name="btnEndPurchase" Margin="0 15 0 0" Width="115" Height="25" Content="Cancel Order" Style="{StaticResource BtnStyle2}" Visibility="Collapsed" Click="btnEndPurchase_Click"/>
         </StackPanel>
 
         <StackPanel x:Name="pnlInventory" Margin="20 20 20 20" Orientation="Vertical" Visibility="Collapsed">
@@ -174,7 +175,7 @@
                 </ListView.View>
             </ListView>
             <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
-                <Button x:Name="btnAdoptorBuy" Visibility="Visible" Margin="290 0 0 0" Width="80" Height="20" Content="?" Style="{StaticResource BtnStyle2}" Click="btnDelete_Click" />
+                <Button x:Name="btnAdoptorBuy" Visibility="Collapsed" Margin="250 0 0 0" Width="160" Height="20" Content="Set as unavailable" Style="{StaticResource BtnStyle2}" Click="btnDelete_Click" />
             </StackPanel>
         </StackPanel>
 
@@ -209,7 +210,7 @@
                 <Button x:Name="btnBack2Category3" Visibility="Collapsed" Margin="130 0 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Category_Click" />
             </StackPanel>
            
-            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal"  >
+            <StackPanel x:Name="pnlPetInfo" Margin="0 40 0 0" Orientation="Horizontal" Visibility="Collapsed"  >
                 <StackPanel Orientation="Vertical" >
                     <Button x:Name="txtAvail" Margin="100 0 0 5" Content="?" FontFamily="verdana" HorizontalContentAlignment="Center" BorderThickness="0" Background="LightGreen" Height="20" Width="100" FontSize="15">
                         <Button.Template>
@@ -296,7 +297,8 @@
                     </ComboBox>
                     <TextBlock Margin="0 5 0 0" HorizontalAlignment="Center" Text="Quantity" FontFamily="verdana" Background="#FFD2EBFF"/>
                     <TextBox x:Name="txtSupplyQty" Margin="0 0 0 0" FontFamily="verdana" Background="White" Width="94" Height="20"  />
-                    <Button x:Name="btnNewSupply" Margin="0 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}" Click="btnNewSupply_Click" />
+                    <Button Visibility="Collapsed" x:Name="btnNewSupply" Margin="0 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}" Click="btnNewSupply_Click" />
+                    <Button Visibility="Collapsed" x:Name="btnSupplyPurchase" Margin="0 10 0 0" Content="Purchase" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="80" Height="25" Style="{StaticResource BtnStyle}" Click="btnSupplyPurchase_Click" />
                 </StackPanel>
             </StackPanel>
         </StackPanel>
@@ -308,8 +310,8 @@
                 <Button x:Name="btnBack2Category4" Margin="0 -2 0 0" Width="60" Height="25" Background="#FFFFAE80" Content="Back" FontSize="15" FontFamily="vendara" BorderThickness="0" Style="{StaticResource BtnStyle}" Click="btnBack2Category_Click"/>
 
             </StackPanel>
-            <StackPanel Margin="0 30 0 0" Orientation="Horizontal" >
-                <StackPanel Margin="90 40 0 0" Orientation="Vertical">
+            <StackPanel Margin="0 30 0 0" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <StackPanel Margin="0 40 0 0"  Orientation="Vertical">
                     <TextBlock Margin="0 -10 0 0" FontSize="15" HorizontalAlignment="Center" Text="Name" FontFamily="verdana" Background="Transparent"  />
                     <TextBox x:Name="txtCustName" Margin="0 0 0 0" FontSize="13" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <StackPanel Margin="0 5 0 0" Orientation="Horizontal">
@@ -328,10 +330,10 @@
                     <TextBox x:Name="txtCustNum" Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"  />
                     <TextBlock Margin="0 5 0 0" FontSize="15" HorizontalAlignment="Center" Text="Email Address" FontFamily="verdana" Background="Transparent"  />
                     <TextBox x:Name="txtCustEmail" Margin="0 0 0 0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="verdana" Background="White" Width="200" Height="20"/>
-                    <Button x:Name="btnNewCust" Visibility="Collapsed" Click="btnNewCust_Click" Margin="0 10 0 0" Content="?" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}"/>
+                    <Button x:Name="btnNewCust" Visibility="Collapsed" Click="btnNewCust_Click" Margin="0 10 0 0" Content="Add" FontFamily="verdana" Background="#FFFFAE80" BorderBrush="Transparent" Width="70" Height="25" Style="{StaticResource BtnStyle}"/>
 
                 </StackPanel>
-                <StackPanel Orientation="Vertical">
+                <StackPanel x:Name="pnlPurchaseList" Orientation="Vertical" Visibility="Collapsed">
                     <TextBlock Margin="134 20 0 0" FontSize="15" Text="Purchases"  />
                     <ListView Name="lvPurchases" Margin="40,0,0,0" Width="250" Height="160" BorderThickness="0"  >
                         <ListView.View>

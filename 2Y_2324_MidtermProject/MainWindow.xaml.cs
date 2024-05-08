@@ -162,13 +162,13 @@ namespace _2Y_2324_MidtermProject
                 if (type == "Dog Food" || type == "Dog Toy")
                 {
                     selectResults = from s in _dbConn.Supplies
-                                    where s.Supply_Type == "Dog Food" || s.Supply_Type == "Dog Toy" && s.Avail_ID == "AVL001"
+                                    where s.Supply_Type == "Dog Food" && s.Avail_ID.Trim() == "AVL001" || s.Supply_Type == "Dog Toy" && s.Avail_ID.Trim() == "AVL001"
                                     select s;
                 }
                 else if (type == "Cat Food" || type == "Cat Toy")
                 {
                     selectResults = from s in _dbConn.Supplies
-                                    where s.Supply_Type == "Cat Food" || s.Supply_Type == "Cat Toy" && s.Avail_ID == "AVL001"
+                                    where s.Supply_Type == "Cat Food" && s.Avail_ID.Trim() == "AVL001" || s.Supply_Type == "Cat Toy" && s.Avail_ID.Trim() == "AVL001"
                                     select s;
                 }
             }
@@ -211,6 +211,11 @@ namespace _2Y_2324_MidtermProject
             pnlSupplyInfo.Visibility = Visibility.Collapsed;
             lvPets.Visibility = Visibility.Collapsed;
             lvSupplies.Visibility = Visibility.Collapsed;
+            btnAdoptorBuy.Visibility = Visibility.Collapsed;
+            btnNewPet.Visibility = Visibility.Collapsed;
+            btnNewSupply.Visibility = Visibility.Collapsed;
+            btnNewCust.Visibility = Visibility.Collapsed;
+            pnlPurchaseList.Visibility = Visibility.Collapsed;
         }
 
         private void btnPuppy_Click(object sender, RoutedEventArgs e)
@@ -238,6 +243,10 @@ namespace _2Y_2324_MidtermProject
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvSupplies.Visibility = Visibility.Visible;
+            if (_mode == "buy")
+                btnAdoptorBuy.Visibility = Visibility.Collapsed;
+            else
+                btnAdoptorBuy.Visibility = Visibility.Visible;
         }
 
         private void btnKitten_Click(object sender, RoutedEventArgs e)
@@ -265,6 +274,10 @@ namespace _2Y_2324_MidtermProject
             pnlCategory.Visibility = Visibility.Collapsed;
             pnlInventory.Visibility = Visibility.Visible;
             lvSupplies.Visibility = Visibility.Visible;
+            if (_mode == "buy")
+                btnAdoptorBuy.Visibility = Visibility.Collapsed;
+            else
+                btnAdoptorBuy.Visibility = Visibility.Visible;
         }
 
         private void lvPets_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -368,16 +381,20 @@ namespace _2Y_2324_MidtermProject
                 {
                     txtSupplyName.Text = s.Supply_Name;
                     txtSupplyQty.Text = s.Supply_Quantity.ToString();
+                    if (_mode == "buy")
+                    {
+                        txtSupplyQty.Text = "";
+                    }
 
                     switch (s.Avail_ID.Trim())
                     {
                         case "AVL001":
                             txtAvailSupply.Content = "Available";
-                            txtAvail.Background = new SolidColorBrush(Colors.LightGreen);
+                            txtAvailSupply.Background = new SolidColorBrush(Colors.LightGreen);
                             break;
                         case "AVL003":
                             txtAvailSupply.Content = "Unavailable";
-                            txtAvail.Background = new SolidColorBrush(Colors.IndianRed);
+                            txtAvailSupply.Background = new SolidColorBrush(Colors.IndianRed);
                             break;
                     }
 
@@ -396,9 +413,12 @@ namespace _2Y_2324_MidtermProject
                             cbSupplyType.SelectedIndex = 3;
                             break;
                     }
-
-
                 }
+                if (_mode == "buy")
+                {
+                    MessageBox.Show("Please input the quantity.");
+                }
+
                 ChangeSupplyImages();
                 pnlInformation.Visibility = Visibility.Visible;
                 pnlSupplyInfo.Visibility = Visibility.Visible;
@@ -782,6 +802,7 @@ namespace _2Y_2324_MidtermProject
                 pnlCustomerList.Visibility = Visibility.Collapsed;
                 lvCustomer.Visibility = Visibility.Collapsed;
                 pnlCustomerInfo.Visibility = Visibility.Visible;
+                pnlPurchaseList.Visibility = Visibility.Visible;
 
                 foreach (Customer s in selectResults)
                 {
@@ -867,9 +888,9 @@ namespace _2Y_2324_MidtermProject
                     else if (_selector == "supply")
                     {
                         dynamic selectedItem = lvSupplies.SelectedItem;
-                        string name = selectedItem.Column1;
+                        string id = selectedItem.Column1;
                         IQueryable<Supply> selectResults = from s in _dbConn.Supplies
-                                                           where s.Supply_Name == name
+                                                           where s.Supply_ID == id
                                                            select s;
                         Supply temp = selectResults.FirstOrDefault();
                         stype = temp.Supply_Type;
@@ -962,15 +983,71 @@ namespace _2Y_2324_MidtermProject
             btnLogout.Visibility = Visibility.Collapsed;
             btnAdoptorBuy.Visibility = Visibility.Collapsed;
             btnPetPurchase.Visibility = Visibility.Visible;
+            btnSupplyPurchase.Visibility = Visibility.Visible;
+            btnEndPurchase.Visibility = Visibility.Visible;
 
             _mode = "buy";
+        }
+
+        public void BringBack2CustInfo()
+        {
+
+            IQueryable<Customer> selectResults = from s in _dbConn.Customers
+                                                 where s.Customer_ID == _buying
+                                                 select s;
+
+            pnlCustomerInfo.Visibility = Visibility.Visible;
+            pnlInformation.Visibility = Visibility.Collapsed;
+            pnlPetInfo.Visibility = Visibility.Collapsed;
+            pnlSupplyInfo.Visibility = Visibility.Collapsed;
+
+            btnAdd.Visibility = Visibility.Visible;
+            btnCustomer.Visibility = Visibility.Visible;
+            btnLogout.Visibility = Visibility.Visible;
+            btnAdoptorBuy.Visibility = Visibility.Visible;
+            btnPetPurchase.Visibility = Visibility.Collapsed;
+            btnSupplyPurchase.Visibility = Visibility.Collapsed;
+            btnEndPurchase.Visibility = Visibility.Collapsed;
+            if (_mode == "buy")
+            {
+                pnlPurchaseList.Visibility = Visibility.Visible;
+                _mode = "";
+            }
+
+            foreach (Customer s in selectResults)
+            {
+                txtCustName.Text = s.Customer_Name;
+                txtCustAge.Text = s.Customer_Age.ToString();
+                txtCustNum.Text = s.Customer_Number.ToString();
+                txtCustEmail.Text = s.Customer_Email;
+
+                switch (s.Customer_Sex)
+                {
+                    case "Male":
+                        cbCustSex.SelectedIndex = 0;
+                        break;
+                    case "Female":
+                        cbCustSex.SelectedIndex = 1;
+                        break;
+                    default:
+                        cbCustSex.SelectedIndex = -1;
+                        break;
+                }
+                GetOrderData(s.Customer_ID);
+            }
         }
 
         private void btnPetPurchase_Click(object sender, RoutedEventArgs e)
         {
             IQueryable<Pet> selectResults = from s in _dbConn.Pets
-                                            where s.Pet_Name == _buyPetID
+                                            where s.Pet_ID == _buyPetID
                                             select s;
+            
+            foreach(Pet p in selectResults)
+            {
+                p.Avail_ID = "AVL002";
+            }
+            
             Order norder = new Order();
             norder.Order_ID = GenerateOrderID(GetOrderID());
             norder.Staff_ID = _loggedIn;
@@ -978,8 +1055,15 @@ namespace _2Y_2324_MidtermProject
             norder.Pet_ID = _buyPetID;
             norder.Order_Date = DateTime.Now.ToString("yyyy-MM-dd");
             norder.Quantity = 1;
+
             _dbConn.Orders.InsertOnSubmit(norder);
             _dbConn.SubmitChanges();
+
+
+            MessageBox.Show("Purchase complete!");
+
+            BringBack2CustInfo();
+            _mode = "";
         }
 
 
@@ -1006,13 +1090,95 @@ namespace _2Y_2324_MidtermProject
 
         public void GetOrderData(string CustID)
         {
+            lvPurchases.Items.Clear();
             IQueryable<Order> selectResults = selectResults = from s in _dbConn.Orders
                                                               where s.Customer_ID == CustID
                                                                  select s;
             foreach (Order o in selectResults)
             {
-                lvPurchases.Items.Add(new { Column1 = o.Pet_ID, Column2 = o.Quantity, Column3 = GetStaffName(o.Staff_ID) });
+                if (o.Pet_ID != null)
+                {
+                    lvPurchases.Items.Add(new { Column1 = GetPetName(o.Pet_ID), Column2 = o.Quantity, Column3 = GetStaffName(o.Staff_ID) });
+                }
+                else if (o.Supply != null)
+                {
+                    lvPurchases.Items.Add(new { Column1 = GetSupplyName(o.Supply_ID), Column2 = o.Quantity, Column3 = GetStaffName(o.Staff_ID) });
+                }
+
             }
+        }
+
+        private string GetPetName(string PetID)
+        {
+            IQueryable<Pet> selectResults = selectResults = from s in _dbConn.Pets
+                                                              where s.Pet_ID == PetID
+                                                              select s;
+            Pet pet = selectResults.FirstOrDefault();
+            if (pet != null)
+            {
+                return pet.Pet_Name;
+            }
+            return null;
+        }
+
+        private string GetSupplyName(string SupplyID)
+        {
+            IQueryable<Supply> selectResults = selectResults = from s in _dbConn.Supplies
+                                                            where s.Supply_ID == SupplyID
+                                                            select s;
+            Supply sup = selectResults.FirstOrDefault();
+            if (sup != null)
+            {
+                return sup.Supply_Name;
+            }
+            return null;
+        }
+
+        private void btnSupplyPurchase_Click(object sender, RoutedEventArgs e)
+        {
+            IQueryable<Supply> selectResults = from s in _dbConn.Supplies
+                                            where s.Supply_ID == _buySupplyID
+                                            select s;
+            int a = GetNum(txtSupplyQty);
+            int b = 0;
+            int c = 0;
+
+            foreach (Supply p in selectResults)
+            {
+                b = p.Supply_Quantity;
+                c = b - a;
+                if (c > 0)
+                {
+                    p.Supply_Quantity = c;
+                }
+                else
+                {
+                    p.Supply_Quantity = 0;
+                    p.Avail_ID = "AVL003";
+                }
+            }
+
+            Order norder = new Order();
+            norder.Order_ID = GenerateOrderID(GetOrderID());
+            norder.Staff_ID = _loggedIn;
+            norder.Customer_ID = _buying;
+            norder.Supply_ID = _buySupplyID;
+            norder.Order_Date = DateTime.Now.ToString("yyyy-MM-dd");
+            norder.Quantity = a;
+
+            _dbConn.Orders.InsertOnSubmit(norder);
+            _dbConn.SubmitChanges();
+
+            MessageBox.Show("Purchase complete!");
+
+            BringBack2CustInfo();
+            _mode = "";
+        }
+
+        private void btnEndPurchase_Click(object sender, RoutedEventArgs e)
+        {
+            pnlCategory.Visibility = Visibility.Collapsed;
+            BringBack2CustInfo();
         }
     }
 }

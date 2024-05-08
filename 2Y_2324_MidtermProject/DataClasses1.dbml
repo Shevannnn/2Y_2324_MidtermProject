@@ -52,21 +52,6 @@
       <Association Name="Avail_Pet" Member="Avail" ThisKey="Avail_ID" OtherKey="Avail_ID" Type="Avail" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Staff" Member="Staffs">
-    <Type Name="Staff">
-      <Column Name="Staff_ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="StaffRole_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="StaffStatus_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="Login_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
-      <Column Name="StaffName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Staff_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Staff_Customer" Member="Customers" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Customer" />
-      <Association Name="Staff_Order" Member="Orders" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Order" />
-      <Association Name="Login_Staff" Member="Login" ThisKey="Login_ID" OtherKey="Login_ID" Type="Login" IsForeignKey="true" />
-      <Association Name="StaffRole_Staff" Member="StaffRole" ThisKey="StaffRole_ID" OtherKey="StaffRole_ID" Type="StaffRole" IsForeignKey="true" />
-      <Association Name="StaffStatus_Staff" Member="StaffStatus" ThisKey="StaffStatus_ID" OtherKey="StaffStatus_ID" Type="StaffStatus" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.StaffRole" Member="StaffRoles">
     <Type Name="StaffRole">
       <Column Name="StaffRole_ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -102,9 +87,24 @@
       <Column Name="Order_Date" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Customer_Order" Member="Customer" ThisKey="Customer_ID" OtherKey="Customer_ID" Type="Customer" IsForeignKey="true" />
-      <Association Name="Staff_Order" Member="Staff" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Staff" IsForeignKey="true" />
       <Association Name="Pet_Order" Member="Pet" ThisKey="Pet_ID" OtherKey="Pet_ID" Type="Pet" IsForeignKey="true" />
       <Association Name="Supply_Order" Member="Supply" ThisKey="Supply_ID" OtherKey="Supply_ID" Type="Supply" IsForeignKey="true" />
+      <Association Name="Staff_Order" Member="Staff" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Staff" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Staff" Member="Staffs">
+    <Type Name="Staff">
+      <Column Name="Staff_ID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StaffRole_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="StaffStatus_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Login_ID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="StaffName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Staff_Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Staff_Customer" Member="Customers" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Customer" />
+      <Association Name="Staff_Order" Member="Orders" ThisKey="Staff_ID" OtherKey="Staff_ID" Type="Order" />
+      <Association Name="Login_Staff" Member="Login" ThisKey="Login_ID" OtherKey="Login_ID" Type="Login" IsForeignKey="true" />
+      <Association Name="StaffRole_Staff" Member="StaffRole" ThisKey="StaffRole_ID" OtherKey="StaffRole_ID" Type="StaffRole" IsForeignKey="true" />
+      <Association Name="StaffStatus_Staff" Member="StaffStatus" ThisKey="StaffStatus_ID" OtherKey="StaffStatus_ID" Type="StaffStatus" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

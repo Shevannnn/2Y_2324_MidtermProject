@@ -45,9 +45,6 @@ namespace _2Y_2324_MidtermProject
     partial void InsertPet(Pet instance);
     partial void UpdatePet(Pet instance);
     partial void DeletePet(Pet instance);
-    partial void InsertStaff(Staff instance);
-    partial void UpdateStaff(Staff instance);
-    partial void DeleteStaff(Staff instance);
     partial void InsertStaffRole(StaffRole instance);
     partial void UpdateStaffRole(StaffRole instance);
     partial void DeleteStaffRole(StaffRole instance);
@@ -60,6 +57,9 @@ namespace _2Y_2324_MidtermProject
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
+    partial void InsertStaff(Staff instance);
+    partial void UpdateStaff(Staff instance);
+    partial void DeleteStaff(Staff instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -132,14 +132,6 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		public System.Data.Linq.Table<Staff> Staffs
-		{
-			get
-			{
-				return this.GetTable<Staff>();
-			}
-		}
-		
 		public System.Data.Linq.Table<StaffRole> StaffRoles
 		{
 			get
@@ -169,6 +161,14 @@ namespace _2Y_2324_MidtermProject
 			get
 			{
 				return this.GetTable<Order>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Staff> Staffs
+		{
+			get
+			{
+				return this.GetTable<Staff>();
 			}
 		}
 	}
@@ -1206,367 +1206,6 @@ namespace _2Y_2324_MidtermProject
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Staff")]
-	public partial class Staff : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Staff_ID;
-		
-		private string _StaffRole_ID;
-		
-		private string _StaffStatus_ID;
-		
-		private string _Login_ID;
-		
-		private string _StaffName;
-		
-		private int _Staff_Number;
-		
-		private EntitySet<Customer> _Customers;
-		
-		private EntitySet<Order> _Orders;
-		
-		private EntityRef<Login> _Login;
-		
-		private EntityRef<StaffRole> _StaffRole;
-		
-		private EntityRef<StaffStatus> _StaffStatus;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnStaff_IDChanging(string value);
-    partial void OnStaff_IDChanged();
-    partial void OnStaffRole_IDChanging(string value);
-    partial void OnStaffRole_IDChanged();
-    partial void OnStaffStatus_IDChanging(string value);
-    partial void OnStaffStatus_IDChanged();
-    partial void OnLogin_IDChanging(string value);
-    partial void OnLogin_IDChanged();
-    partial void OnStaffNameChanging(string value);
-    partial void OnStaffNameChanged();
-    partial void OnStaff_NumberChanging(int value);
-    partial void OnStaff_NumberChanged();
-    #endregion
-		
-		public Staff()
-		{
-			this._Customers = new EntitySet<Customer>(new Action<Customer>(this.attach_Customers), new Action<Customer>(this.detach_Customers));
-			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
-			this._Login = default(EntityRef<Login>);
-			this._StaffRole = default(EntityRef<StaffRole>);
-			this._StaffStatus = default(EntityRef<StaffStatus>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Staff_ID
-		{
-			get
-			{
-				return this._Staff_ID;
-			}
-			set
-			{
-				if ((this._Staff_ID != value))
-				{
-					this.OnStaff_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Staff_ID = value;
-					this.SendPropertyChanged("Staff_ID");
-					this.OnStaff_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffRole_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string StaffRole_ID
-		{
-			get
-			{
-				return this._StaffRole_ID;
-			}
-			set
-			{
-				if ((this._StaffRole_ID != value))
-				{
-					if (this._StaffRole.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStaffRole_IDChanging(value);
-					this.SendPropertyChanging();
-					this._StaffRole_ID = value;
-					this.SendPropertyChanged("StaffRole_ID");
-					this.OnStaffRole_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffStatus_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string StaffStatus_ID
-		{
-			get
-			{
-				return this._StaffStatus_ID;
-			}
-			set
-			{
-				if ((this._StaffStatus_ID != value))
-				{
-					if (this._StaffStatus.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStaffStatus_IDChanging(value);
-					this.SendPropertyChanging();
-					this._StaffStatus_ID = value;
-					this.SendPropertyChanged("StaffStatus_ID");
-					this.OnStaffStatus_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
-		public string Login_ID
-		{
-			get
-			{
-				return this._Login_ID;
-			}
-			set
-			{
-				if ((this._Login_ID != value))
-				{
-					if (this._Login.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnLogin_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Login_ID = value;
-					this.SendPropertyChanged("Login_ID");
-					this.OnLogin_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string StaffName
-		{
-			get
-			{
-				return this._StaffName;
-			}
-			set
-			{
-				if ((this._StaffName != value))
-				{
-					this.OnStaffNameChanging(value);
-					this.SendPropertyChanging();
-					this._StaffName = value;
-					this.SendPropertyChanged("StaffName");
-					this.OnStaffNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_Number", DbType="Int NOT NULL")]
-		public int Staff_Number
-		{
-			get
-			{
-				return this._Staff_Number;
-			}
-			set
-			{
-				if ((this._Staff_Number != value))
-				{
-					this.OnStaff_NumberChanging(value);
-					this.SendPropertyChanging();
-					this._Staff_Number = value;
-					this.SendPropertyChanged("Staff_Number");
-					this.OnStaff_NumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Customer", Storage="_Customers", ThisKey="Staff_ID", OtherKey="Staff_ID")]
-		public EntitySet<Customer> Customers
-		{
-			get
-			{
-				return this._Customers;
-			}
-			set
-			{
-				this._Customers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Orders", ThisKey="Staff_ID", OtherKey="Staff_ID")]
-		public EntitySet<Order> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Staff", Storage="_Login", ThisKey="Login_ID", OtherKey="Login_ID", IsForeignKey=true)]
-		public Login Login
-		{
-			get
-			{
-				return this._Login.Entity;
-			}
-			set
-			{
-				Login previousValue = this._Login.Entity;
-				if (((previousValue != value) 
-							|| (this._Login.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Login.Entity = null;
-						previousValue.Staffs.Remove(this);
-					}
-					this._Login.Entity = value;
-					if ((value != null))
-					{
-						value.Staffs.Add(this);
-						this._Login_ID = value.Login_ID;
-					}
-					else
-					{
-						this._Login_ID = default(string);
-					}
-					this.SendPropertyChanged("Login");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StaffRole_Staff", Storage="_StaffRole", ThisKey="StaffRole_ID", OtherKey="StaffRole_ID", IsForeignKey=true)]
-		public StaffRole StaffRole
-		{
-			get
-			{
-				return this._StaffRole.Entity;
-			}
-			set
-			{
-				StaffRole previousValue = this._StaffRole.Entity;
-				if (((previousValue != value) 
-							|| (this._StaffRole.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._StaffRole.Entity = null;
-						previousValue.Staffs.Remove(this);
-					}
-					this._StaffRole.Entity = value;
-					if ((value != null))
-					{
-						value.Staffs.Add(this);
-						this._StaffRole_ID = value.StaffRole_ID;
-					}
-					else
-					{
-						this._StaffRole_ID = default(string);
-					}
-					this.SendPropertyChanged("StaffRole");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StaffStatus_Staff", Storage="_StaffStatus", ThisKey="StaffStatus_ID", OtherKey="StaffStatus_ID", IsForeignKey=true)]
-		public StaffStatus StaffStatus
-		{
-			get
-			{
-				return this._StaffStatus.Entity;
-			}
-			set
-			{
-				StaffStatus previousValue = this._StaffStatus.Entity;
-				if (((previousValue != value) 
-							|| (this._StaffStatus.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._StaffStatus.Entity = null;
-						previousValue.Staffs.Remove(this);
-					}
-					this._StaffStatus.Entity = value;
-					if ((value != null))
-					{
-						value.Staffs.Add(this);
-						this._StaffStatus_ID = value.StaffStatus_ID;
-					}
-					else
-					{
-						this._StaffStatus_ID = default(string);
-					}
-					this.SendPropertyChanged("StaffStatus");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Customers(Customer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Staff = this;
-		}
-		
-		private void detach_Customers(Customer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Staff = null;
-		}
-		
-		private void attach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Staff = this;
-		}
-		
-		private void detach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Staff = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.StaffRole")]
 	public partial class StaffRole : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2044,11 +1683,11 @@ namespace _2Y_2324_MidtermProject
 		
 		private EntityRef<Customer> _Customer;
 		
-		private EntityRef<Staff> _Staff;
-		
 		private EntityRef<Pet> _Pet;
 		
 		private EntityRef<Supply> _Supply;
+		
+		private EntityRef<Staff> _Staff;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2073,9 +1712,9 @@ namespace _2Y_2324_MidtermProject
 		public Order()
 		{
 			this._Customer = default(EntityRef<Customer>);
-			this._Staff = default(EntityRef<Staff>);
 			this._Pet = default(EntityRef<Pet>);
 			this._Supply = default(EntityRef<Supply>);
+			this._Staff = default(EntityRef<Staff>);
 			OnCreated();
 		}
 		
@@ -2269,40 +1908,6 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Staff", ThisKey="Staff_ID", OtherKey="Staff_ID", IsForeignKey=true)]
-		public Staff Staff
-		{
-			get
-			{
-				return this._Staff.Entity;
-			}
-			set
-			{
-				Staff previousValue = this._Staff.Entity;
-				if (((previousValue != value) 
-							|| (this._Staff.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Staff.Entity = null;
-						previousValue.Orders.Remove(this);
-					}
-					this._Staff.Entity = value;
-					if ((value != null))
-					{
-						value.Orders.Add(this);
-						this._Staff_ID = value.Staff_ID;
-					}
-					else
-					{
-						this._Staff_ID = default(string);
-					}
-					this.SendPropertyChanged("Staff");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Pet_Order", Storage="_Pet", ThisKey="Pet_ID", OtherKey="Pet_ID", IsForeignKey=true)]
 		public Pet Pet
 		{
@@ -2371,6 +1976,40 @@ namespace _2Y_2324_MidtermProject
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Staff", ThisKey="Staff_ID", OtherKey="Staff_ID", IsForeignKey=true)]
+		public Staff Staff
+		{
+			get
+			{
+				return this._Staff.Entity;
+			}
+			set
+			{
+				Staff previousValue = this._Staff.Entity;
+				if (((previousValue != value) 
+							|| (this._Staff.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Staff.Entity = null;
+						previousValue.Orders.Remove(this);
+					}
+					this._Staff.Entity = value;
+					if ((value != null))
+					{
+						value.Orders.Add(this);
+						this._Staff_ID = value.Staff_ID;
+					}
+					else
+					{
+						this._Staff_ID = default(string);
+					}
+					this.SendPropertyChanged("Staff");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2389,6 +2028,367 @@ namespace _2Y_2324_MidtermProject
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Staff")]
+	public partial class Staff : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _Staff_ID;
+		
+		private string _StaffRole_ID;
+		
+		private string _StaffStatus_ID;
+		
+		private string _Login_ID;
+		
+		private string _StaffName;
+		
+		private int _Staff_Number;
+		
+		private EntitySet<Customer> _Customers;
+		
+		private EntitySet<Order> _Orders;
+		
+		private EntityRef<Login> _Login;
+		
+		private EntityRef<StaffRole> _StaffRole;
+		
+		private EntityRef<StaffStatus> _StaffStatus;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnStaff_IDChanging(string value);
+    partial void OnStaff_IDChanged();
+    partial void OnStaffRole_IDChanging(string value);
+    partial void OnStaffRole_IDChanged();
+    partial void OnStaffStatus_IDChanging(string value);
+    partial void OnStaffStatus_IDChanged();
+    partial void OnLogin_IDChanging(string value);
+    partial void OnLogin_IDChanged();
+    partial void OnStaffNameChanging(string value);
+    partial void OnStaffNameChanged();
+    partial void OnStaff_NumberChanging(int value);
+    partial void OnStaff_NumberChanged();
+    #endregion
+		
+		public Staff()
+		{
+			this._Customers = new EntitySet<Customer>(new Action<Customer>(this.attach_Customers), new Action<Customer>(this.detach_Customers));
+			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
+			this._Login = default(EntityRef<Login>);
+			this._StaffRole = default(EntityRef<StaffRole>);
+			this._StaffStatus = default(EntityRef<StaffStatus>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_ID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Staff_ID
+		{
+			get
+			{
+				return this._Staff_ID;
+			}
+			set
+			{
+				if ((this._Staff_ID != value))
+				{
+					this.OnStaff_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Staff_ID = value;
+					this.SendPropertyChanged("Staff_ID");
+					this.OnStaff_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffRole_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string StaffRole_ID
+		{
+			get
+			{
+				return this._StaffRole_ID;
+			}
+			set
+			{
+				if ((this._StaffRole_ID != value))
+				{
+					if (this._StaffRole.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStaffRole_IDChanging(value);
+					this.SendPropertyChanging();
+					this._StaffRole_ID = value;
+					this.SendPropertyChanged("StaffRole_ID");
+					this.OnStaffRole_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffStatus_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string StaffStatus_ID
+		{
+			get
+			{
+				return this._StaffStatus_ID;
+			}
+			set
+			{
+				if ((this._StaffStatus_ID != value))
+				{
+					if (this._StaffStatus.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStaffStatus_IDChanging(value);
+					this.SendPropertyChanging();
+					this._StaffStatus_ID = value;
+					this.SendPropertyChanged("StaffStatus_ID");
+					this.OnStaffStatus_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Login_ID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string Login_ID
+		{
+			get
+			{
+				return this._Login_ID;
+			}
+			set
+			{
+				if ((this._Login_ID != value))
+				{
+					if (this._Login.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnLogin_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Login_ID = value;
+					this.SendPropertyChanged("Login_ID");
+					this.OnLogin_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StaffName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string StaffName
+		{
+			get
+			{
+				return this._StaffName;
+			}
+			set
+			{
+				if ((this._StaffName != value))
+				{
+					this.OnStaffNameChanging(value);
+					this.SendPropertyChanging();
+					this._StaffName = value;
+					this.SendPropertyChanged("StaffName");
+					this.OnStaffNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Staff_Number", DbType="Int NOT NULL")]
+		public int Staff_Number
+		{
+			get
+			{
+				return this._Staff_Number;
+			}
+			set
+			{
+				if ((this._Staff_Number != value))
+				{
+					this.OnStaff_NumberChanging(value);
+					this.SendPropertyChanging();
+					this._Staff_Number = value;
+					this.SendPropertyChanged("Staff_Number");
+					this.OnStaff_NumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Customer", Storage="_Customers", ThisKey="Staff_ID", OtherKey="Staff_ID")]
+		public EntitySet<Customer> Customers
+		{
+			get
+			{
+				return this._Customers;
+			}
+			set
+			{
+				this._Customers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Staff_Order", Storage="_Orders", ThisKey="Staff_ID", OtherKey="Staff_ID")]
+		public EntitySet<Order> Orders
+		{
+			get
+			{
+				return this._Orders;
+			}
+			set
+			{
+				this._Orders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Login_Staff", Storage="_Login", ThisKey="Login_ID", OtherKey="Login_ID", IsForeignKey=true)]
+		public Login Login
+		{
+			get
+			{
+				return this._Login.Entity;
+			}
+			set
+			{
+				Login previousValue = this._Login.Entity;
+				if (((previousValue != value) 
+							|| (this._Login.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Login.Entity = null;
+						previousValue.Staffs.Remove(this);
+					}
+					this._Login.Entity = value;
+					if ((value != null))
+					{
+						value.Staffs.Add(this);
+						this._Login_ID = value.Login_ID;
+					}
+					else
+					{
+						this._Login_ID = default(string);
+					}
+					this.SendPropertyChanged("Login");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StaffRole_Staff", Storage="_StaffRole", ThisKey="StaffRole_ID", OtherKey="StaffRole_ID", IsForeignKey=true)]
+		public StaffRole StaffRole
+		{
+			get
+			{
+				return this._StaffRole.Entity;
+			}
+			set
+			{
+				StaffRole previousValue = this._StaffRole.Entity;
+				if (((previousValue != value) 
+							|| (this._StaffRole.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StaffRole.Entity = null;
+						previousValue.Staffs.Remove(this);
+					}
+					this._StaffRole.Entity = value;
+					if ((value != null))
+					{
+						value.Staffs.Add(this);
+						this._StaffRole_ID = value.StaffRole_ID;
+					}
+					else
+					{
+						this._StaffRole_ID = default(string);
+					}
+					this.SendPropertyChanged("StaffRole");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="StaffStatus_Staff", Storage="_StaffStatus", ThisKey="StaffStatus_ID", OtherKey="StaffStatus_ID", IsForeignKey=true)]
+		public StaffStatus StaffStatus
+		{
+			get
+			{
+				return this._StaffStatus.Entity;
+			}
+			set
+			{
+				StaffStatus previousValue = this._StaffStatus.Entity;
+				if (((previousValue != value) 
+							|| (this._StaffStatus.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._StaffStatus.Entity = null;
+						previousValue.Staffs.Remove(this);
+					}
+					this._StaffStatus.Entity = value;
+					if ((value != null))
+					{
+						value.Staffs.Add(this);
+						this._StaffStatus_ID = value.StaffStatus_ID;
+					}
+					else
+					{
+						this._StaffStatus_ID = default(string);
+					}
+					this.SendPropertyChanged("StaffStatus");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Staff = this;
+		}
+		
+		private void detach_Customers(Customer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Staff = null;
+		}
+		
+		private void attach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Staff = this;
+		}
+		
+		private void detach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Staff = null;
 		}
 	}
 }
